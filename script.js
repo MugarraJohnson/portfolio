@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ── 7. Typewriter Effect ────────────────────────────────────────────────────
-  const words = ['web.', 'cloud.', 'future.', 'humans.', 'scale.'];
+  const words = ['impact.', 'agriculture.', 'East Africa.', 'good.', 'scale.'];
   const tw    = document.getElementById('typewriter');
   let wordIdx = 0, charIdx = 0, deleting = false, twTimeout;
 
