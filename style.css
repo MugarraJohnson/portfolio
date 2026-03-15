@@ -349,6 +349,8 @@ section { padding: 5.5rem 5%; position: relative; z-index: 1; }
   transform: scale(1);
   transition: opacity .28s ease, transform .28s ease, border-color .25s, box-shadow .25s;
 }
+
+
 .proj-card:hover {
   border-color: rgba(0,200,255,.28);
   transform: scale(1.02);
