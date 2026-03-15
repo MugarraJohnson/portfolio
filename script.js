@@ -90,17 +90,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* 6. Project filter — simple class toggle, no opacity tricks */
+  /* 6. Project filter — animated fade + scale
+     Sequence: visible → .hiding (fade out) → .hidden (display:none)
+               hidden  → remove .hidden (display:flex) → remove .hiding (fade in)
+  */
   var filterRow = document.getElementById('filter-row');
   if (filterRow) {
     filterRow.addEventListener('click', function (e) {
       var btn = e.target.closest('.filt');
       if (!btn) return;
 
-      /* Update active button */
-      document.querySelectorAll('.filt').forEach(function (b) {
-        b.classList.remove('active');
-      });
+      document.querySelectorAll('.filt').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
       var f = btn.getAttribute('data-f');
@@ -108,22 +108,53 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('.proj-card').forEach(function (card) {
         var cats = (card.getAttribute('data-cat') || '').split(' ');
         var match = (f === 'all' || cats.indexOf(f) !== -1);
-        card.style.display = match ? 'flex' : 'none';
+
+        if (match) {
+          /* Show: unhide → next frame remove .hiding so transition fires */
+          card.classList.remove('hidden');
+          /* Force reflow so browser registers display:flex before transition */
+          void card.offsetWidth;
+          card.classList.remove('hiding');
+        } else {
+          /* Hide: add .hiding (triggers CSS transition) → after 280ms set display:none */
+          card.classList.add('hiding');
+          setTimeout(function () { card.classList.add('hidden'); }, 290);
+        }
       });
     });
   }
 
 
-  /* 7. Contact form
-     ─────────────────────────────────────────────────────────────
-     Works in TWO ways:
-       A) When hosted online → submits via Formspree (silent, no page reload)
-       B) When opened locally as a file → opens your email client pre-filled
-     Either way the visitor's message reaches johnsonmugarra@yahoo.com
-     ─────────────────────────────────────────────────────────────
+  /* 7. Contact form — EmailJS (works on file:// AND when hosted)
+     ═══════════════════════════════════════════════════════════════
+     EmailJS uses your Gmail account to send emails directly from
+     the browser — no server needed. Works locally AND when hosted.
+
+     ONE-TIME SETUP (5 minutes, free — 200 emails/month):
+     ───────────────────────────────────────────────────────
+     1. Go to  https://www.emailjs.com  → Sign Up (free)
+     2. Dashboard → Email Services → Add New Service
+        → Choose Gmail → Connect your Gmail account → Copy the Service ID
+     3. Dashboard → Email Templates → Create New Template
+        Paste this as the template body:
+        ──────────────────────────────────
+        New message from your portfolio:
+
+        Name:    {{from_name}}
+        Email:   {{from_email}}
+        Subject: {{subject}}
+
+        {{message}}
+        ──────────────────────────────────
+        Set "To email" to:  johnsonmugarra@yahoo.com
+        Copy the Template ID
+     4. Dashboard → Account → Copy your Public Key
+     5. Paste the three values below:
+     ═══════════════════════════════════════════════════════════════
   */
-  var FORMSPREE_ID  = 'xpqyjjbq';
-  var CONTACT_EMAIL = 'johnsonmugarra@yahoo.com';
+  var EJS_SERVICE  = 'service_51t4hfn';   // e.g. 'service_abc123'
+  var EJS_TEMPLATE = 'template_tutr40i';  // e.g. 'template_xyz456'
+  var EJS_KEY      = 'i8KrO_W-JbnVbaLqL';   // e.g. 'AbCdEfGhIjKlMnOp'
 
   var form    = document.getElementById('contact-form');
   var sendBtn = document.getElementById('send-btn');
@@ -138,34 +169,33 @@ document.addEventListener('DOMContentLoaded', function () {
       var subject = (form.querySelector('[name="subject"]') || {}).value || 'Portfolio enquiry';
       var message = (form.querySelector('[name="message"]') || {}).value || '';
 
-      /* Validate */
       if (!name.trim() || !email.trim() || !message.trim()) {
         showMsg('error', '&#x26A0; Please fill in your name, email and message.');
         return;
       }
 
-      /* Disable button */
+      /* Check EmailJS is configured */
+      if (EJS_SERVICE === 'YOUR_SERVICE_ID') {
+        /* Not set up yet — open mail client as reliable fallback */
+        openMailto(name, email, subject, message);
+        return;
+      }
+
       if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending\u2026'; }
 
-      /* Try Formspree first */
-      var data = new FormData(form);
-
-      fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-        method:  'POST',
-        body:    data,
-        headers: { 'Accept': 'application/json' }
+      emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
+        from_name:  name,
+        from_email: email,
+        subject:    subject,
+        message:    message
+      }, EJS_KEY)
+      .then(function () {
+        showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
+        form.reset();
       })
-      .then(function (res) {
-        if (res.ok) {
-          showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
-          form.reset();
-        } else {
-          /* Server responded but with error — try mailto fallback */
-          openMailto(name, email, subject, message);
-        }
-      })
-      .catch(function () {
-        /* fetch blocked (local file, no internet, etc.) — use mailto */
+      .catch(function (err) {
+        console.error('EmailJS error:', err);
+        /* Graceful fallback to email client */
         openMailto(name, email, subject, message);
       })
       .finally(function () {
@@ -175,13 +205,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function openMailto(name, email, subject, message) {
-    /* Opens the visitor's email client pre-filled — works 100% locally */
     var body = 'From: ' + name + ' <' + email + '>\n\n' + message;
-    var mailto = 'mailto:' + CONTACT_EMAIL
-               + '?subject=' + encodeURIComponent(subject)
-               + '&body='    + encodeURIComponent(body);
-    window.location.href = mailto;
-    showMsg('success', '&#x2713; Your email client has opened with the message pre-filled. Just hit Send!');
+    window.location.href = 'mailto:johnsonmugarra@yahoo.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body='    + encodeURIComponent(body);
+    showMsg('success', '&#x2713; Your email client has opened — just hit Send!');
     form.reset();
   }
 

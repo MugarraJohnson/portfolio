@@ -341,18 +341,26 @@ section { padding: 5.5rem 5%; position: relative; z-index: 1; }
   grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem;
 }
-/* cards are ALWAYS visible — no opacity tricks */
 .proj-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; padding: 1.5rem;
   display: flex; flex-direction: column; gap: .85rem;
-  transition: border-color .25s, transform .25s, box-shadow .25s;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity .28s ease, transform .28s ease, border-color .25s, box-shadow .25s;
 }
 .proj-card:hover {
   border-color: rgba(0,200,255,.28);
-  transform: translateY(-3px);
+  transform: scale(1.02);
   box-shadow: 0 12px 32px rgba(0,0,0,.45);
 }
+/* .hiding = transitioning out */
+.proj-card.hiding {
+  opacity: 0 !important;
+  transform: scale(0.92) !important;
+  pointer-events: none;
+}
+/* .hidden = fully gone after transition */
 .proj-card.hidden { display: none; }
 
 .p-icon {

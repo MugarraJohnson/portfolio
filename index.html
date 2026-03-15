@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500@display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <!-- EmailJS SDK — enables sending email directly from the browser -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -489,7 +491,7 @@
           </div>
         </div>
 
-        <form class="contact-form" id="contact-form" novalidate method="POST" action="https://formspree.io/f/xnqldgvd">
+        <form class="contact-form" id="contact-form" novalidate>
           <div class="form-row">
             <div class="fg">
               <label for="fname">Name</label>
