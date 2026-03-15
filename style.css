@@ -150,9 +150,9 @@ nav {
 
 h1.hero-name {
   font-family: var(--syne);
-  font-size: clamp(2.6rem, 5.5vw, 5rem);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.12;
   letter-spacing: normal;
   margin-bottom: .55rem;
   text-align: left;
@@ -342,17 +342,18 @@ section { padding: 6rem 5%; position: relative; z-index: 1; }
 /* experience timeline */
 .timeline { display: flex; flex-direction: column; }
 .t-item {
-  display: grid; grid-template-columns: 68px 1fr;
+  display: grid; grid-template-columns: 58px 1fr;
   gap: 1rem; padding-bottom: 1.8rem; position: relative;
 }
 .t-item::before {
-  content: ''; position: absolute; left: 33px; top: 22px; bottom: 0;
+  content: ''; position: absolute; left: 4px; top: 22px; bottom: 0;
   width: 1px; background: var(--border);
 }
 .t-item:last-child::before { display: none; }
 .t-date { font-size: .68rem; color: var(--muted); text-align: right; padding-top: .15rem; line-height: 1.5; }
+.t-body { position: relative; padding-left: 1.4rem; }
 .t-dot {
-  position: absolute; left: 29px; top: 4px;
+  position: absolute; left: 0; top: 5px;
   width: 10px; height: 10px; border-radius: 50%; background: var(--cyan);
   box-shadow: 0 0 0 3px var(--navy2), 0 0 0 4px rgba(0,200,255,.25);
 }
@@ -549,7 +550,7 @@ footer {
   .proj-grid            { grid-template-columns: 1fr; }
   .form-row             { grid-template-columns: 1fr; }
   .metrics-grid         { grid-template-columns: 1fr 1fr; }
-  h1.hero-name { font-size: 2.4rem; letter-spacing: normal; }
+  h1.hero-name { font-size: 2rem; letter-spacing: normal; }
   .s-title      { font-size: 1.65rem; letter-spacing: normal; }
   section               { padding: 4rem 5%; }
 }
