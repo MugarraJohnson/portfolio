@@ -90,10 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* 6. Project filter — animated fade + scale
-     Sequence: visible → .hiding (fade out) → .hidden (display:none)
-               hidden  → remove .hidden (display:flex) → remove .hiding (fade in)
-  */
+  /* 6. Project filter — animated fade + scale both ways */
   var filterRow = document.getElementById('filter-row');
   if (filterRow) {
     filterRow.addEventListener('click', function (e) {
@@ -110,48 +107,28 @@ document.addEventListener('DOMContentLoaded', function () {
         var match = (f === 'all' || cats.indexOf(f) !== -1);
 
         if (match) {
-          /* Show: unhide → next frame remove .hiding so transition fires */
+          /* SHOW sequence:
+             1. Put card at opacity:0/shrunk while still display:none
+             2. Make it display:flex (remove .hidden)
+             3. Force browser to register the new display value (reflow)
+             4. Remove .hiding → CSS transition fires: opacity 0→1, scale 0.92→1  */
+          card.classList.add('hiding');
           card.classList.remove('hidden');
-          /* Force reflow so browser registers display:flex before transition */
-          void card.offsetWidth;
+          void card.offsetWidth;            /* <-- critical reflow */
           card.classList.remove('hiding');
         } else {
-          /* Hide: add .hiding (triggers CSS transition) → after 280ms set display:none */
+          /* HIDE sequence:
+             1. Add .hiding → CSS transition fires: opacity 1→0, scale 1→0.92
+             2. After transition completes (290ms) set display:none  */
           card.classList.add('hiding');
-          setTimeout(function () { card.classList.add('hidden'); }, 290);
+          setTimeout(function () {
+            card.classList.add('hidden');
+          }, 300);
         }
       });
     });
   }
 
-
-  /* 7. Contact form — EmailJS (works on file:// AND when hosted)
-     ═══════════════════════════════════════════════════════════════
-     EmailJS uses your Gmail account to send emails directly from
-     the browser — no server needed. Works locally AND when hosted.
-
-     ONE-TIME SETUP (5 minutes, free — 200 emails/month):
-     ───────────────────────────────────────────────────────
-     1. Go to  https://www.emailjs.com  → Sign Up (free)
-     2. Dashboard → Email Services → Add New Service
-        → Choose Gmail → Connect your Gmail account → Copy the Service ID
-     3. Dashboard → Email Templates → Create New Template
-        Paste this as the template body:
-        ──────────────────────────────────
-        New message from your portfolio:
-
-        Name:    {{from_name}}
-        Email:   {{from_email}}
-        Subject: {{subject}}
-
-        {{message}}
-        ──────────────────────────────────
-        Set "To email" to:  johnsonmugarra@yahoo.com
-        Copy the Template ID
-     4. Dashboard → Account → Copy your Public Key
-     5. Paste the three values below:
-     ═══════════════════════════════════════════════════════════════
-  */
   var EJS_SERVICE  = 'service_51t4hfn';   // e.g. 'service_abc123'
   var EJS_TEMPLATE = 'template_tutr40i';  // e.g. 'template_xyz456'
   var EJS_KEY      = 'i8KrO_W-JbnVbaLqL';   // e.g. 'AbCdEfGhIjKlMnOp'
