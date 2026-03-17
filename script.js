@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
   ─────────────────────────────────────────────────────────── */
   var EJS_SERVICE  = 'service_51t4hfn';
   var EJS_TEMPLATE = 'template_tutr40i';
-  var EJS_KEY      = 'i8KrO_W-JbnVbaLqL';
+  var EJS_KEY      = '3gv1KyCeWi6c2wo8K';
 
   var form    = document.getElementById('contact-form');
   var sendBtn = document.getElementById('send-btn');
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
   ─────────────────────────────────────────────────────────── */
   function openMailto(name, email, subject, message) {
     var body   = 'From: ' + name + ' <' + email + '>\n\n' + message;
-    var mailto = 'mailto:johnsonmugarra@yahoo.com'
+    var mailto = 'mailto:mugarrajohnson4@gmail.com'
                + '?subject=' + encodeURIComponent(subject)
                + '&body='    + encodeURIComponent(body);
 
