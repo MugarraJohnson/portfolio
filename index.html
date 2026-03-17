@@ -6,18 +6,23 @@
   <title>Johnson Mugarra — Data Scientist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500@display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <!-- EmailJS SDK — enables sending email directly from the browser -->
+  <!-- EmailJS SDK — must load before script.js -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
+  <!-- Background orbs — give the Tahoe glass depth -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
   <div id="progress-bar"></div>
 
-  <!-- ═══ NAV ═══════════════════════════════════════════════ -->
-  <nav>
-    <a href="#hero" class="nav-logo">JM<span>.</span></a>
+  <!-- ══ NAV ══════════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">JM<em>.</em></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -31,7 +36,6 @@
     </button>
   </nav>
 
-  <!-- Mobile overlay -->
   <div class="mob-menu" id="mob-menu">
     <button class="mob-close" id="mob-close">&#x2715;</button>
     <a href="#about">About</a>
@@ -41,27 +45,20 @@
     <a href="#contact">Contact</a>
   </div>
 
-  <!-- ═══ HERO ═══════════════════════════════════════════════ -->
+  <!-- ══ HERO ══════════════════════════════════════════════ -->
   <section id="hero">
     <div class="hero-inner container">
 
-      <!-- Left -->
       <div>
         <div class="hero-badge">Available for opportunities</div>
-
-        <h1 class="hero-name">
-          Johnson <em>Mugarra</em>
-        </h1>
-
+        <h1 class="hero-name">Johnson <em>Mugarra</em></h1>
         <p class="hero-role">Data Scientist &nbsp;/&nbsp; Research &amp; MEAL Specialist</p>
-
         <p class="hero-desc">
           Results-driven Data Scientist with <strong>6+ years</strong> deploying ML solutions,
-          predictive models, and automated ETL pipelines in agriculture, climate resilience,
-          and development contexts across East Africa. Turning complex data into evidence-based
-          strategies that move governments and international partners to act.
+          predictive models, and automated ETL pipelines across agriculture, climate resilience,
+          and development contexts in East Africa. Turning complex data into strategies that move
+          governments and international partners to act.
         </p>
-
         <div class="hero-btns">
           <a href="#projects" class="btn-primary">View my work &#x2192;</a>
           <a href="#contact"  class="btn-ghost">Get in touch</a>
@@ -74,16 +71,14 @@
           <div class="pic-ring"></div>
           <div class="pic-inner">
             <!--
-              YOUR PHOTO:
-              Put photo.jpg in the same folder as index.html.
-              The image below will load automatically.
-              If it fails to load the silhouette placeholder appears.
+              PHOTO: Place photo.jpg in the same folder as index.html.
+              Loads automatically. Placeholder shows if file not found.
             -->
             <img src="photo.jpg" alt="Johnson Mugarra"
                  onerror="this.style.display='none';document.getElementById('pic-ph').style.display='flex'">
             <div class="pic-ph" id="pic-ph" style="display:none">
               <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
-                   stroke="#6E8099" stroke-width="1.2">
+                   stroke="rgba(240,244,255,.3)" stroke-width="1.2">
                 <circle cx="12" cy="8" r="4"/>
                 <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
               </svg>
@@ -102,18 +97,35 @@
           Kampala, Uganda
         </p>
         <div class="p-chips">
-          <span class="chip">Python</span>
-          <span class="chip">ML / AI</span>
-          <span class="chip">Tableau</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">PMP</span>
+          <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">Python</span>
+          </a>
+          <a href="https://professionalprograms.mit.edu/blog/technology/machine-learning-vs-artificial-intelligence/" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">ML / AI</span>
+
+          </a>
+          <a href="https://www.tableau.com/" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">Tableau</span>
+          </a>
+          <a href="https://powerbi.microsoft.com/" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">Power BI</span>
+          </a>
+          <a href="https://www.coursera.org/google-career-certificates" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">Google Certified: PMP</span>
+          </a>
+          <a href="https://www.coursera.org/sas" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">SAS Certified: Statistical Business Analyst</span>
+          </a>
+          <a href="https://www.coursera.org/learn/predictive-modeling" target="_blank" rel="noopener noreferrer" class="c-link">
+            <span class="chip">Predictive Modeling</span>
+          </a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ═══ METRICS ═══════════════════════════════════════════ -->
+  <!-- ══ METRICS ═══════════════════════════════════════════ -->
   <div id="metrics">
     <div class="metrics-grid">
       <div class="metric">
@@ -135,7 +147,7 @@
     </div>
   </div>
 
-  <!-- ═══ ABOUT ══════════════════════════════════════════════ -->
+  <!-- ══ ABOUT ══════════════════════════════════════════════ -->
   <section id="about">
     <div class="container">
       <div class="s-label">About me</div>
@@ -145,74 +157,67 @@
 
         <div class="about-text">
           <p>
-              With a unique blend of technical expertise and development sector experience, I
-              specialise in <strong>transforming complex data into actionable insights that drive
-              real-world impact</strong>. My passion lies in leveraging <strong>machine learning and data science</strong>
-              to solve pressing challenges in agriculture, climate resilience, and international
-              development — empowering governments, NGOs, and communities across East Africa to
-              make informed decisions that improve lives.
+            I work at the intersection of <strong>machine learning, impact evaluation, and
+            development policy</strong>. Over six years I've designed and deployed
+            production-grade ML systems, automated ETL pipelines, and interactive dashboards
+            used by government ministries, USAID programmes, and international NGOs across
+            East Africa.
           </p>
           <p>
             At <strong>MAAIF / Makerere University</strong>, I engineered a climate-resilient
-            crop yield forecasting system powered by NASA POWER satellite data — achieving an
-            18% improvement in forecast accuracy and presenting findings directly to
-            the State Minister of Agriculture (MAAIF). 
-            At <strong>USAID SITES (DLH Corp &amp; SSS Inc.)</strong>
-            I conducted impact evaluation that compressed six-week analysis cycles
-            down to under 10 days across 12 concurrent initiatives.
+            crop yield forecasting system powered by NASA POWER satellite data &#x2014; achieving
+            an 18% improvement in forecast accuracy and presenting findings to the State Minister
+            of Agriculture. At <strong>USAID SITES (DLH Corp &amp; SSS Inc.)</strong> I
+            automated impact evaluation pipelines, cutting six-week cycles to under 10 days
+            across 12 concurrent initiatives.
           </p>
           <p>
-            I hold an <strong>M.Sc. in Data Science</strong> from MAHE India and am google certified
-            in PMP, Power BI, SAS Statistics, and Tableau. 
-            I am based in Kampala — available for
-            remote and international roles.
+            I hold an <strong>M.Sc. in Data Science</strong> from MAHE India and am certified
+            in PMP, Power BI, SAS Statistics, and Tableau. Based in Kampala &#x2014; available
+            for remote and international roles.
           </p>
-          <a href="#contact" class="btn-primary" style="margin-top:1.4rem;display:inline-flex">
+          <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-flex">
             Let's connect &#x2192;
           </a>
         </div>
 
-        <div >
+        <div>
           <div class="timeline">
 
             <div class="t-item">
               <div class="t-date">2025<br>Now</div>
               <div class="t-body">
-                <div class="t-line"></div>
-                <div class="t-dot"></div>
+                <div class="t-line"></div><div class="t-dot"></div>
                 <div class="t-role">Research &amp; Data Consultant</div>
                 <div class="t-org">Enimiro &#x2014; Kayunga, Uganda (Hybrid)</div>
-                <div class="t-desc">Leading research &amp; data analysis for effective implementation to cause impact; improved effectiveness 60&#x2013;80%.</div>
+                <div class="t-desc">Leading research &amp; data analysis; improved programme effectiveness 60&#x2013;80%.</div>
               </div>
             </div>
 
             <div class="t-item">
               <div class="t-date">2025<br>Now</div>
               <div class="t-body">
-                <div class="t-line"></div>
-                <div class="t-dot"></div>
+                <div class="t-line"></div><div class="t-dot"></div>
                 <div class="t-role">Research &amp; MEAL Specialist</div>
                 <div class="t-org">CRC &#x2014; Banadir, Somalia (Remote)</div>
-                <div class="t-desc">Leading quantitative &amp; qualitative analysis for multi-sector humanitarian programs; improved effectiveness 20&#x2013;30%.</div>
+                <div class="t-desc">Quantitative &amp; qualitative analysis for multi-sector humanitarian programs; improved effectiveness 20&#x2013;30%.</div>
               </div>
             </div>
 
             <div class="t-item">
               <div class="t-date">2024<br>2025</div>
               <div class="t-body">
-                <div class="t-line"></div>
-                <div class="t-dot"></div>
+                <div class="t-line"></div><div class="t-dot"></div>
                 <div class="t-role">Data Scientist</div>
                 <div class="t-org">MAAIF &#x2013; VANEX, Makerere &amp; CRS</div>
-                <div class="t-desc">End-to-end ML forecasting; 18% MAE reduction; findings presented to President Museveni.</div>
+                <div class="t-desc">End-to-end ML forecasting; 18% MAE reduction; findings presented to Minister of Agriculture.</div>
               </div>
             </div>
 
             <div class="t-item">
               <div class="t-date">2023<br>2025</div>
               <div class="t-body">
-                <div class="t-line"></div>
-                <div class="t-dot"></div>
+                <div class="t-line"></div><div class="t-dot"></div>
                 <div class="t-role">Data Analyst &amp; Research Associate</div>
                 <div class="t-org">USAID-SITES &#x2014; DLH Corp / SSS Inc.</div>
                 <div class="t-desc">95%+ data reliability; automated pipelines; 80% faster evaluation cycles.</div>
@@ -225,7 +230,7 @@
                 <div class="t-dot"></div>
                 <div class="t-role">Data Analyst / Research Associate</div>
                 <div class="t-org">Bronkar (U) Limited</div>
-                <div class="t-desc">M&amp;E frameworks, mixed-methods analysis, and digital data tools across East Africa &amp; Sudan.</div>
+                <div class="t-desc">M&amp;E frameworks, mixed-methods analysis, digital tools across East Africa &amp; Sudan.</div>
               </div>
             </div>
 
@@ -236,15 +241,12 @@
     </div>
   </section>
 
-  <!-- ═══ PROJECTS ═══════════════════════════════════════════ -->
+  <!-- ══ PROJECTS ═══════════════════════════════════════════ -->
   <section id="projects">
     <div class="container">
       <div class="s-label">Selected Work</div>
       <h2 class="s-title">Projects that move the needle</h2>
-      <p class="s-sub">
-        Production systems and research tools delivering measurable outcomes in agriculture,
-        humanitarian response, and development analytics.
-      </p>
+      <p class="s-sub">Production systems and research tools delivering measurable outcomes in agriculture, humanitarian response, and development analytics.</p>
 
       <div class="filter-row" id="filter-row">
         <button class="filt active" data-f="all">All</button>
@@ -254,30 +256,22 @@
         <button class="filt" data-f="nlp">NLP / Automation</button>
       </div>
 
-      <!-- Project cards — always visible, no fade class -->
       <div class="proj-grid" id="proj-grid">
 
         <div class="proj-card" data-cat="ml engineering">
           <div class="p-icon">&#x1F33E;</div>
           <h3>Climate-Resilient Crop Yield Forecasting</h3>
-          <p>Full-stack time-series pipeline integrating NASA POWER API, satellite NDVI, and
-             soil data to forecast vanilla yields for Ugandan smallholders. Achieved
-             <strong>18% MAE reduction</strong> vs baseline with Prophet + hierarchical
-             reconciliation. Dashboard actively used by MAAIF extension officers.</p>
+          <p>Full-stack time-series pipeline integrating NASA POWER API, satellite NDVI, and soil data to forecast vanilla yields for Ugandan smallholders. Achieved <strong>18% MAE reduction</strong> vs baseline with Prophet + hierarchical reconciliation.</p>
           <div class="p-tags">
             <span class="ptag">Python</span><span class="ptag">Prophet</span>
-            <span class="ptag">NASA API</span><span class="ptag">Tableau</span>
-            <span class="ptag">Power BI</span>
+            <span class="ptag">NASA API</span><span class="ptag">Tableau</span><span class="ptag">Power BI</span>
           </div>
         </div>
 
         <div class="proj-card" data-cat="ml engineering analytics">
           <div class="p-icon">&#x2699;&#xFE0F;</div>
           <h3>Automated Impact Evaluation Pipeline</h3>
-          <p>Python + Airflow pipeline ingesting KoboToolbox/SurveyCTO surveys, applying
-             PSM &amp; DiD causal inference, and auto-generating Tableau reports. Reduced
-             evaluation cycle from <strong>6 weeks to under 10 days</strong> across 12
-             concurrent initiatives.</p>
+          <p>Python + Airflow pipeline ingesting KoboToolbox/SurveyCTO surveys, applying PSM &amp; DiD causal inference, and auto-generating Tableau reports. Reduced evaluation cycle from <strong>6 weeks to under 10 days</strong> across 12 concurrent initiatives.</p>
           <div class="p-tags">
             <span class="ptag">Python</span><span class="ptag">Airflow</span>
             <span class="ptag">PostgreSQL</span><span class="ptag">Power BI</span>
@@ -287,9 +281,7 @@
         <div class="proj-card" data-cat="analytics">
           <div class="p-icon">&#x1F5FA;&#xFE0F;</div>
           <h3>Geospatial Analytics &amp; Real-Time Mapping</h3>
-          <p>Advanced interactive dashboards combining ArcGIS and Power BI for real-time
-             decision support in East Africa development programs. Enabled <strong>15%
-             gains</strong> in operational efficiency for USAID SITES field teams.</p>
+          <p>Advanced interactive dashboards combining ArcGIS and Power BI for real-time decision support in East Africa development programs. Enabled <strong>15% gains</strong> in operational efficiency for USAID SITES field teams.</p>
           <div class="p-tags">
             <span class="ptag">ArcGIS</span><span class="ptag">Power BI</span>
             <span class="ptag">SQL</span><span class="ptag">Looker Studio</span>
@@ -299,9 +291,7 @@
         <div class="proj-card" data-cat="nlp ml">
           <div class="p-icon">&#x1F4AC;</div>
           <h3>NLP Sentiment Analysis</h3>
-          <p>Applied NLP techniques to conversational datasets to extract sentiment insights
-             supporting evidence-based decision-making in humanitarian programme monitoring
-             and community feedback analysis.</p>
+          <p>Applied NLP techniques to conversational datasets to extract sentiment insights supporting evidence-based decision-making in humanitarian programme monitoring and community feedback analysis.</p>
           <div class="p-tags">
             <span class="ptag">Python</span><span class="ptag">Scikit-Learn</span>
             <span class="ptag">NLTK</span><span class="ptag">NLP</span>
@@ -311,8 +301,7 @@
         <div class="proj-card" data-cat="nlp engineering">
           <div class="p-icon">&#x1F916;</div>
           <h3>Web Scraping &amp; Automation Framework</h3>
-          <p>Python + Selenium scripts for automated data ingestion, metadata embedding,
-             and structured CSV output at production scale.</p>
+          <p>Python + Selenium scripts for automated data ingestion, metadata embedding, and structured CSV output at production scale.</p>
           <div class="p-tags">
             <span class="ptag">Python</span><span class="ptag">Selenium</span>
             <span class="ptag">ETL</span><span class="ptag">Automation</span>
@@ -322,9 +311,7 @@
         <div class="proj-card" data-cat="analytics ml">
           <div class="p-icon">&#x1F4CA;</div>
           <h3>M&amp;E Analytics Dashboards &#x2014; USAID SITES</h3>
-          <p>Stakeholder-focused interactive dashboards enabling real-time programme
-             adjustments. Achieved <strong>95%+ data reliability</strong> for high-stakes
-             impact evaluations using rigorous SQL/Python cleaning pipelines.</p>
+          <p>Stakeholder-focused interactive dashboards enabling real-time programme adjustments. Achieved <strong>95%+ data reliability</strong> for high-stakes impact evaluations using rigorous SQL/Python cleaning pipelines.</p>
           <div class="p-tags">
             <span class="ptag">SQL</span><span class="ptag">Python</span>
             <span class="ptag">Tableau</span><span class="ptag">KoboToolbox</span>
@@ -335,7 +322,7 @@
     </div>
   </section>
 
-  <!-- ═══ SKILLS ═════════════════════════════════════════════ -->
+  <!-- ══ SKILLS ═════════════════════════════════════════════ -->
   <section id="skills">
     <div class="container">
       <div class="s-label">Technical Skills</div>
@@ -345,7 +332,6 @@
 
         <div id="skill-bars">
           <div class="sg-title">Programming &amp; ML</div>
-
           <div class="sk-row">
             <div class="sk-meta"><span class="sk-name">Python (ML / Data Science)</span><span class="sk-pct">95%</span></div>
             <div class="sk-track"><div class="sk-fill" data-w="95"></div></div>
@@ -364,7 +350,6 @@
           </div>
 
           <div class="sg-title">Analytics &amp; Engineering</div>
-
           <div class="sk-row">
             <div class="sk-meta"><span class="sk-name">Tableau / Power BI</span><span class="sk-pct">92%</span></div>
             <div class="sk-track"><div class="sk-fill" data-w="92"></div></div>
@@ -417,7 +402,7 @@
     </div>
   </section>
 
-  <!-- ═══ CERTIFICATIONS ══════════════════════════════════════ -->
+  <!-- ══ CERTIFICATIONS ══════════════════════════════════════ -->
   <section id="certs">
     <div class="container">
       <div class="s-label">Credentials</div>
@@ -427,51 +412,38 @@
       <div class="certs-grid">
         <div class="cert-card">
           <div class="c-icon">&#x1F3C5;</div>
-          <div>
-            <div class="c-name">Google Certified: Project Management Professional (PMP)</div>
-            <div class="c-issuer">Project Management Institute</div>
-          </div>
+          <div><div class="c-name">Google Certified: Project Management Professional (PMP)</div><div class="c-issuer">Project Management Institute</div></div>
         </div>
         <div class="cert-card">
           <div class="c-icon">&#x1F4CA;</div>
-          <div>
-            <div class="c-name">Microsoft Certified: Power BI Data Analyst Associate</div>
-            <div class="c-issuer">Microsoft</div>
-          </div>
+          <div><div class="c-name">Microsoft Certified: Power BI Data Analyst Associate</div><div class="c-issuer">Microsoft</div></div>
         </div>
         <div class="cert-card">
           <div class="c-icon">&#x1F4C8;</div>
-          <div>
-            <div class="c-name">SAS Certified Statistical Business Analyst</div>
-            <div class="c-issuer">SAS Institute</div>
-          </div>
+          <div><div class="c-name">SAS Certified: Statistical Business Analyst</div><div class="c-issuer">SAS Institute</div></div>
         </div>
         <div class="cert-card">
           <div class="c-icon">&#x1F535;</div>
-          <div>
-            <div class="c-name">Tableau Desktop Specialist</div>
-            <div class="c-issuer">Tableau / Salesforce</div>
-          </div>
+          <div><div class="c-name">Tableau Desktop Specialist</div><div class="c-issuer">Tableau / Salesforce</div></div>
         </div>
         <div class="cert-card">
-          <div class="c-icon">&#x1F393;</div>
-          <div>
-            <div class="c-name">M.Sc. Data Science</div>
-            <div class="c-issuer">Manipal Academy of Higher Education (MAHE), India &middot; 2022&#x2013;2024</div>
-          </div>
+          <a href="https://www.onlinemanipal.com/online-msc-data-science" target="_blank" rel="noopener" class="c-link">
+            <div class="c-icon">&#x1F393;</div>
+            <div><div class="c-name">M.Sc. Data Science</div><div class="c-issuer">Manipal Academy of Higher Education (MAHE), India &middot; 2022&#x2013;2024</div></div>
+          </a>
         </div>
         <div class="cert-card">
-          <div class="c-icon">&#x1F331;</div>
-          <div>
-            <div class="c-name">B.Sc. Agricultural Science</div>
-            <div class="c-issuer">Makerere University, Kampala &middot; 2016&#x2013;2021</div>
-          </div>
+          <a href="https://caes.mak.ac.ug/schools/school-of-agricultural-sciences/" target="_blank" rel="noopener" class="c-link">
+            <div class="c-icon">&#x1F3EB;</div>
+            <div><div class="c-name">B.Sc. Agricultural Science</div><div class="c-issuer">Makerere University, Kampala &middot; 2016&#x2013;2021</div></div>
+          </a>
+          
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ CONTACT ═════════════════════════════════════════════ -->
+  <!-- ══ CONTACT ════════════════════════════════════════════ -->
   <section id="contact">
     <div class="container">
       <div class="s-label">Get in touch</div>
@@ -479,7 +451,7 @@
 
       <div class="contact-layout">
 
-        <div >
+        <div>
           <p class="contact-intro">
             Open to Data Science roles, research collaborations, consulting engagements,
             and conversations about ML, impact evaluation, and development data.
@@ -488,7 +460,7 @@
           <div class="c-items">
             <a href="mailto:johnsonmugarra@yahoo.com" class="c-item">
               <div class="c-ico">&#x2709;</div>
-              <div><div class="c-lbl">Email</div><div class="c-val"><span class="__cf_email__" data-cfemail="244e4b4c4a574b4a49514345565645645d454c4b4b0a474b49">[email&#160;protected]</span></div></div>
+              <div><div class="c-lbl">Email</div><div class="c-val">johnsonmugarra@yahoo.com</div></div>
             </a>
             <a href="tel:+256777108405" class="c-item">
               <div class="c-ico">&#x1F4DE;</div>
@@ -525,18 +497,26 @@
             <textarea id="fmessage" name="message" rows="5" placeholder="Tell me about what you're working on&#x2026;"></textarea>
           </div>
           <button type="submit" class="btn-send" id="send-btn">Send message &#x2192;</button>
-          <div class="f-msg" id="f-msg">&#x2713; Message sent &#x2014; I'll get back to you soon!</div>
+          <div class="f-msg" id="f-msg"></div>
         </form>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ══════════════════════════════════════════════ -->
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
   <footer>
     <div class="foot-inner">
-      <span class="foot-logo">JM.</span>
+      <span class="foot-logo">JM<em>.</em></span>
       <span class="foot-copy">&copy; 2026 Johnson Mugarra. Built from scratch.</span>
       <div class="foot-links">
         <a href="#hero">Top &#x2191;</a>
-        <a href="/cdn-cgi/l/email-protection#fc969394928f939291899b9d8e8e9dbc859d949393d29f9391">Email</a
+        <a href="mailto:johnsonmugarra@yahoo.com">Email</a>
+        <a href="https://linkedin.com/in/johnsonmugarra" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

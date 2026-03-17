@@ -1,24 +1,55 @@
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════════════════════
    script.js — Johnson Mugarra Portfolio
-   ═══════════════════════════════════════ */
+   ═══════════════════════════════════════════════════ */
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ── 1. Scroll progress bar ─────────────────────────────── */
-  var bar = document.getElementById('progress-bar');
+  /* ── EmailJS ─────────────────────────────────────────────
+     Credentials — all three values come from your dashboard.
+
+     !! IMPORTANT — email not arriving? Check this in EmailJS:
+        Dashboard → Email Templates → template_tutr40i → Edit
+        Make sure "To Email" field is:  johnsonmugarra@yahoo.com
+        (NOT left blank or set to a dynamic variable)
+        Save the template and test again.
+  ─────────────────────────────────────────────────────── */
+  var EJS_SERVICE  = 'service_51t4hfn';
+  var EJS_TEMPLATE = 'template_tutr40i';
+  var EJS_KEY      = 'i8KrO_W-JbnVbaLqL';
+
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: EJS_KEY });
+  }
+
+
+  /* ── 1. Scroll progress ──────────────────────────────── */
+  var progressBar = document.getElementById('progress-bar');
   window.addEventListener('scroll', function () {
+    if (!progressBar) return;
     var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    if (bar) bar.style.width = pct + '%';
+    progressBar.style.width = Math.min(pct, 100) + '%';
   }, { passive: true });
 
 
-  /* ── 2. Mobile menu ─────────────────────────────────────── */
+  /* ── 2. Nav glass on scroll ──────────────────────────── */
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function () {
+    if (!navbar) return;
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+
+  /* ── 3. Mobile menu ──────────────────────────────────── */
   var ham    = document.getElementById('ham');
   var mmenu  = document.getElementById('mob-menu');
   var mclose = document.getElementById('mob-close');
-  if (ham)    ham.addEventListener('click',    function () { mmenu.classList.add('open'); });
-  if (mclose) mclose.addEventListener('click', function () { mmenu.classList.remove('open'); });
+  if (ham && mmenu) {
+    ham.addEventListener('click', function () { mmenu.classList.add('open'); });
+  }
+  if (mclose && mmenu) {
+    mclose.addEventListener('click', function () { mmenu.classList.remove('open'); });
+  }
   if (mmenu) {
     mmenu.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { mmenu.classList.remove('open'); });
@@ -26,29 +57,28 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* ── 3. Skill bars ──────────────────────────────────────── */
+  /* ── 4. Skill bars animate in ────────────────────────── */
   var skillSection = document.getElementById('skill-bars');
   if (skillSection) {
-    function animateBars() {
+    var animateBars = function () {
       skillSection.querySelectorAll('.sk-fill').forEach(function (fill) {
         fill.style.width = (fill.dataset.w || '0') + '%';
       });
-    }
+    };
     if ('IntersectionObserver' in window) {
-      var skObs = new IntersectionObserver(function (entries) {
+      new IntersectionObserver(function (entries, obs) {
         if (entries[0].isIntersecting) {
-          setTimeout(animateBars, 150);
-          skObs.unobserve(skillSection);
+          setTimeout(animateBars, 200);
+          obs.disconnect();
         }
-      }, { threshold: 0.15 });
-      skObs.observe(skillSection);
+      }, { threshold: 0.15 }).observe(skillSection);
     } else {
       animateBars();
     }
   }
 
 
-  /* ── 4. Metrics counter ─────────────────────────────────── */
+  /* ── 5. Metrics counter ──────────────────────────────── */
   function countUp(el, target, duration) {
     if (!el) return;
     var start = null;
@@ -67,41 +97,38 @@ document.addEventListener('DOMContentLoaded', function () {
   if (metricsEl) {
     var counted = false;
     if ('IntersectionObserver' in window) {
-      var mObs = new IntersectionObserver(function (entries) {
+      new IntersectionObserver(function (entries, obs) {
         if (entries[0].isIntersecting && !counted) {
           counted = true;
           countUp(document.getElementById('m1'), 18, 1500);
-          countUp(document.getElementById('m2'), 80, 1700);
+          countUp(document.getElementById('m2'), 80, 1800);
           countUp(document.getElementById('m3'), 95, 1600);
-          countUp(document.getElementById('m4'),  6, 1300);
-          mObs.disconnect();
+          countUp(document.getElementById('m4'),  6, 1200);
+          obs.disconnect();
         }
-      }, { threshold: 0.35 });
-      mObs.observe(metricsEl);
+      }, { threshold: 0.4 }).observe(metricsEl);
     } else {
-      document.getElementById('m1').textContent = '18';
-      document.getElementById('m2').textContent = '80';
-      document.getElementById('m3').textContent = '95';
-      document.getElementById('m4').textContent = '6';
+      ['m1','m2','m3','m4'].forEach(function (id, i) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = [18,80,95,6][i];
+      });
     }
   }
 
 
-  /* ── 5. Project filter ──────────────────────────────────────
-     FIX: track pending timeouts per card so rapid clicking
-     never leaves a card stuck invisible from an old timeout.
-  ─────────────────────────────────────────────────────────── */
+  /* ── 6. Project filter — spring animation ────────────────
+     Uses WeakMap to track per-card hide timers.
+     Rapid clicking cancels stale timers so no card
+     gets stuck invisible.
+  ─────────────────────────────────────────────────────── */
   var filterRow = document.getElementById('filter-row');
   if (filterRow) {
-
-    /* Store one timeout handle per card so we can cancel it */
     var hideTimers = new WeakMap();
 
     filterRow.addEventListener('click', function (e) {
       var btn = e.target.closest('.filt');
       if (!btn) return;
 
-      /* Update active button */
       document.querySelectorAll('.filt').forEach(function (b) {
         b.classList.remove('active');
       });
@@ -120,18 +147,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (match) {
-          /* SHOW: start from invisible, unhide, reflow, then fade in */
+          /* SHOW: set invisible state → unhide → reflow → spring in */
           card.classList.add('hiding');
           card.classList.remove('hidden');
-          void card.offsetWidth;          /* force reflow — critical */
+          void card.offsetWidth;         /* force reflow — critical */
           card.classList.remove('hiding');
         } else {
-          /* HIDE: fade out first, then set display:none after transition */
+          /* HIDE: spring out → display:none after transition */
           card.classList.add('hiding');
           var t = setTimeout(function () {
             card.classList.add('hidden');
             hideTimers.delete(card);
-          }, 300);
+          }, 360);
           hideTimers.set(card, t);
         }
       });
@@ -139,14 +166,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* ── 6. Contact form via EmailJS ────────────────────────────
-     Your real credentials are set below.
-     EmailJS sends directly from the browser — works locally
-     AND when hosted. No server needed.
-  ─────────────────────────────────────────────────────────── */
-  var EJS_SERVICE  = 'service_51t4hfn';
-  var EJS_TEMPLATE = 'template_tutr40i';
-  var EJS_KEY      = '3gv1KyCeWi6c2wo8K';
+  /* ── 7. Contact form — EmailJS with triple fallback ──────
+     Order of attempts:
+       1. EmailJS  (works on localhost:8080 and hosted)
+       2. Formspree (secondary fallback)
+       3. mailto hidden-link (never changes address bar)
+  ─────────────────────────────────────────────────────── */
+  var FORMSPREE_ID  = 'xpqyjjbq';
+  var CONTACT_EMAIL = 'johnsonmugarra@yahoo.com';
 
   var form    = document.getElementById('contact-form');
   var sendBtn = document.getElementById('send-btn');
@@ -156,71 +183,96 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var name    = (form.querySelector('[name="name"]')    || {}).value || '';
-      var email   = (form.querySelector('[name="email"]')   || {}).value || '';
-      var subject = (form.querySelector('[name="subject"]') || {}).value || 'Portfolio enquiry';
-      var message = (form.querySelector('[name="message"]') || {}).value || '';
+      var name    = form.querySelector('[name="name"]').value.trim();
+      var email   = form.querySelector('[name="email"]').value.trim();
+      var subject = (form.querySelector('[name="subject"]').value.trim()) || 'Portfolio enquiry';
+      var message = form.querySelector('[name="message"]').value.trim();
 
-      if (!name.trim() || !email.trim() || !message.trim()) {
+      if (!name || !email || !message) {
         showMsg('error', '&#x26A0; Please fill in your name, email and message.');
         return;
       }
 
-      if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Sending\u2026'; }
+      setBusy(true);
 
-      emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
-        from_name:  name,
-        from_email: email,
-        subject:    subject,
-        message:    message
-      }, EJS_KEY)
-      .then(function () {
-        showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
-        form.reset();
-      })
-      .catch(function (err) {
-        console.error('EmailJS error:', err);
-        /* FIX: use hidden <a> instead of window.location.href
-           so the page URL never changes */
-        openMailto(name, email, subject, message);
-      })
-      .finally(function () {
-        if (sendBtn) {
-          sendBtn.disabled = false;
-          sendBtn.textContent = 'Send message \u2192';
-        }
-      });
+      /* ── Try EmailJS first ── */
+      if (typeof emailjs !== 'undefined') {
+        emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
+          from_name:  name,
+          from_email: email,
+          reply_to:   email,
+          to_email:   CONTACT_EMAIL,
+          subject:    subject,
+          message:    message
+        })
+        .then(function (res) {
+          console.log('[EmailJS] success', res.status);
+          showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
+          form.reset();
+          setBusy(false);
+        })
+        .catch(function (err) {
+          console.warn('[EmailJS] failed, trying Formspree:', err);
+          tryFormspree(name, email, subject, message);
+        });
+      } else {
+        tryFormspree(name, email, subject, message);
+      }
     });
   }
 
-  /* ── openMailto ─────────────────────────────────────────────
-     FIX: creates a temporary invisible <a> and programmatically
-     clicks it instead of changing window.location.href.
-     This opens the email client WITHOUT touching the address bar
-     or navigating away from the page.
-  ─────────────────────────────────────────────────────────── */
+  function tryFormspree(name, email, subject, message) {
+    var data = new FormData();
+    data.append('name',    name);
+    data.append('email',   email);
+    data.append('subject', subject);
+    data.append('message', message);
+
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST', body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (res) {
+      if (res.ok) {
+        showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
+        if (form) form.reset();
+      } else {
+        openMailto(name, email, subject, message);
+      }
+    })
+    .catch(function () {
+      openMailto(name, email, subject, message);
+    })
+    .finally(function () { setBusy(false); });
+  }
+
+  /* Opens email client WITHOUT changing the address bar */
   function openMailto(name, email, subject, message) {
     var body   = 'From: ' + name + ' <' + email + '>\n\n' + message;
-    var mailto = 'mailto:mugarrajohnson4@gmail.com'
+    var mailto = 'mailto:' + CONTACT_EMAIL
                + '?subject=' + encodeURIComponent(subject)
                + '&body='    + encodeURIComponent(body);
-
     var a = document.createElement('a');
-    a.href   = mailto;
-    a.style.display = 'none';
+    a.href = mailto; a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-
-    showMsg('success', '&#x2713; Your email client has opened \u2014 just hit Send!');
+    showMsg('success', '&#x2713; Your email client opened &#x2014; just hit Send!');
     if (form) form.reset();
+    setBusy(false);
+  }
+
+  function setBusy(busy) {
+    if (!sendBtn) return;
+    sendBtn.disabled    = busy;
+    sendBtn.textContent = busy ? 'Sending\u2026' : 'Send message \u2192';
   }
 
   function showMsg(type, html) {
     if (!fMsg) return;
     fMsg.innerHTML = html;
     fMsg.className = 'f-msg show ' + (type || '');
-    setTimeout(function () { fMsg.classList.remove('show'); }, 8000);
+    setTimeout(function () { fMsg.className = 'f-msg'; }, 8000);
   }
 
 }); /* end DOMContentLoaded */
