@@ -122,7 +122,7 @@ nav.scrolled {
   border-color: rgba(255,255,255,.13);
 }
 .nav-logo {
-  font-family: var(--syne); font-weight: 800; font-size: 1.2rem;
+  font-family: "Gill Sans", sans-serif; font-weight: 800; font-size: 1.2rem;
   color: var(--text); text-decoration: none; letter-spacing: -.02em;
 }
 .nav-logo em { font-style: normal; color: var(--blue); }
@@ -172,7 +172,7 @@ nav.scrolled {
 }
 .mob-menu.open { display: flex; }
 .mob-menu a {
-  font-family: var(--syne); font-size: 2rem; font-weight: 800;
+  font-family: "Gill Sans", sans-serif; font-size: 2rem; font-weight: 800;
   color: var(--text); text-decoration: none; transition: color .2s;
 }
 .mob-menu a:hover { color: var(--blue); }
@@ -211,7 +211,7 @@ nav.scrolled {
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
 
 h1.hero-name {
-  font-family: var(--syne); font-weight: 800;
+  font-family: "Gill Sans", sans-serif; font-weight: 800;
   font-size: clamp(2rem, 3.4vw, 3.2rem);
   line-height: 1.1; letter-spacing: -.02em; margin-bottom: .6rem;
 }
@@ -309,7 +309,7 @@ h1.hero-name em {
   letter-spacing: .05em; text-transform: uppercase; line-height: 1.5;
 }
 
-.p-name { font-family: var(--syne); font-weight: 700; font-size: 1.25rem; text-align: center; }
+.p-name { font-family: "Gill Sans", sans-serif; font-weight: 700; font-size: 1.25rem;font-optical-sizing: auto; text-align: center; }
 .p-role { font-size: .7rem; color: var(--blue); letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
 .p-loc  { font-size: .76rem; color: var(--muted); display: flex; align-items: center; gap: .3rem; }
 .p-chips { display: flex; flex-wrap: wrap; gap: .32rem; justify-content: center; }
@@ -341,7 +341,7 @@ section { padding: 6rem 5%; position: relative; z-index: 1; }
 }
 
 .s-title {
-  font-family: var(--syne); font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+  font-family: "Gill Sans", sans-serif; font-size: clamp(1.7rem, 2.8vw, 2.5rem);
   font-weight: 800; letter-spacing: normal;
   line-height: 1.18; margin-bottom: .85rem;
 }
@@ -371,7 +371,7 @@ section { padding: 6rem 5%; position: relative; z-index: 1; }
 }
 .metric:hover { background: rgba(10,132,255,.06); }
 .metric-val {
-  font-family: var(--syne); font-size: 2.4rem;
+  font-family: "Gill Sans", sans-serif; font-size: 2.4rem;
   font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: .35rem;
   text-shadow: 0 0 30px rgba(10,132,255,.3);
 }
@@ -402,7 +402,7 @@ section { padding: 6rem 5%; position: relative; z-index: 1; }
   background: var(--blue);
   box-shadow: 0 0 0 3px rgba(6,9,26,.9), 0 0 0 5px rgba(10,132,255,.25), 0 0 12px rgba(10,132,255,.4);
 }
-.t-role { font-family: var(--syne); font-weight: 700; font-size: .87rem; margin-bottom: .1rem; }
+.t-role { font-family: "Gill Sans", sans-serif; font-weight: 700; font-size: .87rem; margin-bottom: .1rem; }
 .t-org  { font-size: .78rem; color: var(--blue); margin-bottom: .22rem; font-weight: 600; }
 .t-desc { font-size: .79rem; color: var(--muted); line-height: 1.6; }
 
@@ -476,7 +476,7 @@ section { padding: 6rem 5%; position: relative; z-index: 1; }
   border-radius: var(--r-sm);
   display: flex; align-items: center; justify-content: center;
 }
-.proj-card h3 { font-family: var(--syne); font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.proj-card h3 { font-family: "Gill Sans", sans-serif; font-weight: 700; font-size: .9rem; line-height: 1.35; }
 .proj-card p  { font-size: .83rem; color: var(--muted); line-height: 1.65; flex: 1; }
 .proj-card p strong { color: rgba(240,244,255,.9); font-weight: 600; }
 .p-tags { display: flex; flex-wrap: wrap; gap: .32rem; margin-top: auto; }
@@ -595,7 +595,7 @@ section { padding: 6rem 5%; position: relative; z-index: 1; }
   background: rgba(10,132,255,.1);
   border: 1px solid rgba(10,132,255,.2);
   display: flex; align-items: center; justify-content: center;
-  font-size: .9rem; color: var(--blue); font-family: var(--syne); font-weight: 700;
+  font-size: .9rem; color: var(--blue); font-family: "Gill Sans", sans-serif; font-weight: 700;
 }
 .c-lbl { font-size: .65rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
 .c-val { font-size: .85rem; font-weight: 400; }
@@ -664,7 +664,7 @@ footer {
   justify-content: space-between; flex-wrap: wrap; gap: 1rem;
 }
 .foot-logo {
-  font-family: var(--syne); font-weight: 800;
+  font-family: "Gill Sans", sans-serif; font-weight: 800;
   font-size: 1.05rem; color: var(--text);
 }
 .foot-logo em { font-style: normal; color: var(--blue); }
