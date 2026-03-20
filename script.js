@@ -4,6 +4,39 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
+  /* ── Theme toggle ────────────────────────────────────── */
+  var root        = document.documentElement;
+  var toggleBtn   = document.getElementById('theme-toggle');
+  var STORAGE_KEY = 'jm-theme';
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    if (toggleBtn) {
+      toggleBtn.textContent = theme === 'light' ? '🌙' : '☀️';
+      toggleBtn.setAttribute('aria-label',
+        theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+  }
+
+  /* Start with saved preference, or OS preference, or dark */
+  var saved  = localStorage.getItem(STORAGE_KEY);
+  var osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved || (osDark ? 'dark' : 'dark'));
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem(STORAGE_KEY, next);
+    });
+  }
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light');
+    });
+  }
+  /* ── End theme toggle ───────────────────────────────── */
 
   /* ── EmailJS ─────────────────────────────────────────────
      Credentials — all three values come from your dashboard.
