@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     if (toggleBtn) {
-      toggleBtn.textContent = theme === 'light' ? '🌙' : '☀️';
+      toggleBtn.textContent = theme === 'light' ? '🔆' : '🔅';
       toggleBtn.setAttribute('aria-label',
         theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
     }
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries, obs) {
         if (entries[0].isIntersecting) {
-          setTimeout(animateBars, 200);
+          setTimeout(animateBars, 100);
           obs.disconnect();
         }
       }, { threshold: 0.15 }).observe(skillSection);
@@ -133,21 +133,17 @@ document.addEventListener('DOMContentLoaded', function () {
       new IntersectionObserver(function (entries, obs) {
         if (entries[0].isIntersecting && !counted) {
           counted = true;
-          countUp(document.getElementById('m0'), 95, 1500);
-          countUp(document.getElementById('m1'), 18, 1500);
-          countUp(document.getElementById('m2'), 85, 1800);
-          countUp(document.getElementById('m3'), 80, 1600);
-          countUp(document.getElementById('m4'), 95, 1200);
-          countUp(document.getElementById('m5'), 6, 1200);
-          countUp(document.getElementById('m6'), 5, 1200);
-          countUp(document.getElementById('m7'), 4, 1200);
+          countUp(document.getElementById('m1'), 95, 15000);
+          countUp(document.getElementById('m2'), 90, 15000);
+          countUp(document.getElementById('m3'), 85, 16000);
+          countUp(document.getElementById('m4'), 6, 12000);
           obs.disconnect();
         }
       }, { threshold: 0.4 }).observe(metricsEl);
     } else {
-      ['m0','m1','m2','m3','m4','m5','m6','m7'].forEach(function (id, i) {
+      ['m1','m2','m3','m4'].forEach(function (id, i) {
         var el = document.getElementById(id);
-        if (el) el.textContent = [95,18,85,80,95,6,5,4][i];
+        if (el) el.textContent = [95,90,85,6][i];
       });
     }
   }
