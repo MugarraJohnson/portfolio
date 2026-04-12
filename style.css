@@ -337,7 +337,7 @@ h1.hero-name em {
   color: var(--muted); padding: .7rem 1.8rem; border-radius: 22px;
   font-size: .9rem; text-decoration: none;
   transition: all .3s cubic-bezier(.34,1.56,.64,1);
-  display: inline-flex; align-items: center; gap: .4rem; font-weight: 400;
+  display: inline-flex; align-items: center; gap: .4rem; font-weight: 600;
 }
 .btn-ghost:hover {
   border-color: rgba(10,132,255,.4); color: var(--blue);
