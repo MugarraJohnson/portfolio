@@ -1192,8 +1192,17 @@ h2.s-title {
   box-shadow: 0 10px 24px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.08);
 }
 .pub-icon {
-  font-size: 2.5rem;
+  width: 52px; height: 52px; min-width: 52px;
+  background: rgba(10,132,255,.08);
+  border: 1px solid rgba(10,132,255,.18);
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue);
   flex-shrink: 0;
+}
+:root[data-theme="light"] .pub-icon {
+  background: rgba(10,132,255,.07);
+  border-color: rgba(10,132,255,.16);
 }
 .pub-content {
   flex: 1;

@@ -3,128 +3,129 @@
    ═══════════════════════════════════════════════════ */
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Page Loader ─────────────────────────────────────── */
-  window.addEventListener('load', function () {
-    var loader = document.getElementById('page-loader');
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('page-loader');
     if (loader) {
       loader.style.opacity = '0';
-      setTimeout(function () { loader.style.display = 'none'; }, 300);
+      setTimeout(() => { loader.style.display = 'none'; }, 300);
     }
   });
 
 
   /* ── Theme toggle ────────────────────────────────────── */
-  var root        = document.documentElement;
-  var toggleBtn   = document.getElementById('theme-toggle');
-  var STORAGE_KEY = 'jm-theme';
+  const root        = document.documentElement;
+  const toggleBtn   = document.getElementById('theme-toggle');
+  const STORAGE_KEY = 'jm-theme';
 
-  function applyTheme(theme) {
+  const ICON_MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  const ICON_SUN  = '<circle cx="12" cy="12" r="5"/>'
+    + '<line x1="12" y1="1"  x2="12" y2="3"/>'
+    + '<line x1="12" y1="21" x2="12" y2="23"/>'
+    + '<line x1="4.22" y1="4.22"   x2="5.64"  y2="5.64"/>'
+    + '<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>'
+    + '<line x1="1"  y1="12" x2="3"  y2="12"/>'
+    + '<line x1="21" y1="12" x2="23" y2="12"/>'
+    + '<line x1="4.22" y1="19.78" x2="5.64"  y2="18.36"/>'
+    + '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+
+  const applyTheme = (theme) => {
     root.setAttribute('data-theme', theme);
     if (toggleBtn) {
-      toggleBtn.textContent = theme === 'light' ? '🌙' : '☀️'; /* 🌙 / ☀️ */
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.innerHTML = theme === 'light' ? ICON_MOON : ICON_SUN;
       toggleBtn.setAttribute('aria-label',
         theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
     }
     if (typeof dataLayer !== 'undefined') {
-      dataLayer.push({ event: 'theme_change', theme: theme });
+      dataLayer.push({ event: 'theme_change', theme });
     }
-  }
+  };
 
   /* Respect saved preference → OS preference → default dark */
-  var saved  = localStorage.getItem(STORAGE_KEY);
-  var osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const saved  = localStorage.getItem(STORAGE_KEY);
+  const osDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
   applyTheme(saved || (osDark ? 'dark' : 'light'));
 
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function () {
-      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      applyTheme(next);
-      localStorage.setItem(STORAGE_KEY, next);
-    });
-  }
+  toggleBtn?.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    localStorage.setItem(STORAGE_KEY, next);
+  });
 
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-      if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light');
-    });
-  }
+  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light');
+  });
 
 
   /* ── EmailJS ─────────────────────────────────────────── */
-  var EJS_SERVICE  = 'service_51t4hfn';
-  var EJS_TEMPLATE = 'template_tutr40i';
-  var EJS_KEY      = 'i8KrO_W-JbnVbaLqL';
+  const EJS_SERVICE  = 'service_51t4hfn';
+  const EJS_TEMPLATE = 'template_tutr40i';
+  const EJS_KEY      = 'i8KrO_W-JbnVbaLqL';
 
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: EJS_KEY });
-  }
+  if (typeof emailjs !== 'undefined') emailjs.init({ publicKey: EJS_KEY });
 
 
   /* ── 1. Scroll progress bar ──────────────────────────── */
-  var progressBar = document.getElementById('progress-bar');
-  window.addEventListener('scroll', function () {
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
     if (!progressBar) return;
-    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    progressBar.style.width = Math.min(pct, 100) + '%';
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    progressBar.style.width = `${Math.min(pct, 100)}%`;
   }, { passive: true });
 
 
   /* ── 2. Nav glass + active section highlight ─────────── */
-  var navbar   = document.getElementById('navbar');
-  var navLinks = document.querySelectorAll('.nav-links a');
-  var sections = document.querySelectorAll('section[id]');
+  const navbar   = document.getElementById('navbar');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
 
-  window.addEventListener('scroll', function () {
-    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+  window.addEventListener('scroll', () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 50);
 
-    var current = '';
-    sections.forEach(function (sec) {
+    let current = '';
+    sections.forEach((sec) => {
       if (window.scrollY >= sec.offsetTop - 130) current = sec.id;
     });
-    navLinks.forEach(function (link) {
-      var href = link.getAttribute('href');
-      link.classList.toggle('active', href === '#' + current);
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
     });
   }, { passive: true });
 
 
   /* ── 3. Mobile menu ──────────────────────────────────── */
-  var ham    = document.getElementById('ham');
-  var mmenu  = document.getElementById('mob-menu');
-  var mclose = document.getElementById('mob-close');
+  const ham    = document.getElementById('ham');
+  const mmenu  = document.getElementById('mob-menu');
+  const mclose = document.getElementById('mob-close');
 
-  function openMenu() {
-    if (mmenu) mmenu.classList.add('open');
-    if (ham)   ham.setAttribute('aria-expanded', 'true');
+  const openMenu = () => {
+    mmenu?.classList.add('open');
+    ham?.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    if (mmenu) mmenu.classList.remove('open');
-    if (ham)   ham.setAttribute('aria-expanded', 'false');
+  };
+  const closeMenu = () => {
+    mmenu?.classList.remove('open');
+    ham?.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
-  }
+  };
 
-  if (ham)    ham.addEventListener('click', openMenu);
-  if (mclose) mclose.addEventListener('click', closeMenu);
-  if (mmenu) {
-    mmenu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', closeMenu);
-    });
-  }
+  ham?.addEventListener('click', openMenu);
+  mclose?.addEventListener('click', closeMenu);
+  mmenu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
 
 
   /* ── 4. Skill bars ───────────────────────────────────── */
-  var skillSection = document.getElementById('skill-bars');
+  const skillSection = document.getElementById('skill-bars');
   if (skillSection) {
-    var animateBars = function () {
-      skillSection.querySelectorAll('.sk-fill').forEach(function (fill) {
-        fill.style.width = (fill.dataset.w || '0') + '%';
+    const animateBars = () => {
+      skillSection.querySelectorAll('.sk-fill').forEach((fill) => {
+        fill.style.width = `${fill.dataset.w || 0}%`;
       });
     };
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries, obs) {
+      new IntersectionObserver((entries, obs) => {
         if (entries[0].isIntersecting) { setTimeout(animateBars, 100); obs.disconnect(); }
       }, { threshold: 0.15 }).observe(skillSection);
     } else {
@@ -134,25 +135,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ── 5. Metrics counter ──────────────────────────────── */
-  function countUp(el, target, duration) {
+  const countUp = (el, target, duration) => {
     if (!el) return;
-    var start = null;
-    function step(ts) {
+    let start = null;
+    const step = (ts) => {
       if (!start) start = ts;
-      var p    = Math.min((ts - start) / duration, 1);
-      var ease = 1 - Math.pow(1 - p, 3);
+      const p    = Math.min((ts - start) / duration, 1);
+      const ease = 1 - (1 - p) ** 3;
       el.textContent = Math.floor(ease * target);
       if (p < 1) requestAnimationFrame(step);
       else el.textContent = target;
-    }
+    };
     requestAnimationFrame(step);
-  }
+  };
 
-  var metricsEl = document.getElementById('metrics');
+  const metricsEl = document.getElementById('metrics');
   if (metricsEl) {
-    var counted = false;
+    let counted = false;
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries, obs) {
+      new IntersectionObserver((entries, obs) => {
         if (entries[0].isIntersecting && !counted) {
           counted = true;
           countUp(document.getElementById('m1'), 95, 1500);
@@ -163,35 +164,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }, { threshold: 0.4 }).observe(metricsEl);
     } else {
-      [['m1',95],['m2',90],['m3',85],['m4',6]].forEach(function (pair) {
-        var el = document.getElementById(pair[0]);
-        if (el) el.textContent = pair[1];
+      [['m1',95],['m2',90],['m3',85],['m4',6]].forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
       });
     }
   }
 
 
   /* ── 6. Project filter ───────────────────────────────── */
-  var filterRow = document.getElementById('filter-row');
+  const filterRow = document.getElementById('filter-row');
   if (filterRow) {
-    var hideTimers = new WeakMap();
+    const hideTimers = new WeakMap();
 
-    filterRow.addEventListener('click', function (e) {
-      var btn = e.target.closest('.filt');
+    filterRow.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filt');
       if (!btn) return;
 
-      document.querySelectorAll('.filt').forEach(function (b) {
+      document.querySelectorAll('.filt').forEach((b) => {
         b.classList.remove('active');
         b.setAttribute('aria-pressed', 'false');
       });
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
 
-      var f = btn.getAttribute('data-f');
+      const f = btn.getAttribute('data-f');
 
-      document.querySelectorAll('.proj-card').forEach(function (card) {
-        var cats  = (card.getAttribute('data-cat') || '').split(' ');
-        var match = f === 'all' || cats.indexOf(f) !== -1;
+      document.querySelectorAll('.proj-card').forEach((card) => {
+        const cats  = (card.getAttribute('data-cat') || '').split(' ');
+        const match = f === 'all' || cats.includes(f);
 
         if (hideTimers.has(card)) { clearTimeout(hideTimers.get(card)); hideTimers.delete(card); }
 
@@ -202,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
           card.classList.remove('hiding');
         } else {
           card.classList.add('hiding');
-          var t = setTimeout(function () { card.classList.add('hidden'); hideTimers.delete(card); }, 360);
+          const t = setTimeout(() => { card.classList.add('hidden'); hideTimers.delete(card); }, 360);
           hideTimers.set(card, t);
         }
       });
@@ -213,21 +214,21 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ── 7. Contact form — EmailJS → Formspree → mailto ─────
      Three-layer fallback so messages always get through.
   ──────────────────────────────────────────────────────── */
-  var FORMSPREE_ID  = 'xpqyjjbq';
-  var CONTACT_EMAIL = 'johnsonmugarra@yahoo.com';
+  const FORMSPREE_ID  = 'xpqyjjbq';
+  const CONTACT_EMAIL = 'johnsonmugarra@yahoo.com';
 
-  var form    = document.getElementById('contact-form');
-  var sendBtn = document.getElementById('send-btn');
-  var fMsg    = document.getElementById('f-msg');
+  const form    = document.getElementById('contact-form');
+  const sendBtn = document.getElementById('send-btn');
+  const fMsg    = document.getElementById('f-msg');
 
   if (form) {
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      var name    = form.querySelector('[name="name"]').value.trim();
-      var email   = form.querySelector('[name="email"]').value.trim();
-      var subject = (form.querySelector('[name="subject"]').value.trim()) || 'Portfolio enquiry';
-      var message = form.querySelector('[name="message"]').value.trim();
+      const name    = form.querySelector('[name="name"]').value.trim();
+      const email   = form.querySelector('[name="email"]').value.trim();
+      const subject = form.querySelector('[name="subject"]').value.trim() || 'Portfolio enquiry';
+      const message = form.querySelector('[name="message"]').value.trim();
 
       if (!name || !email || !message) {
         showMsg('error', '&#x26A0; Please fill in your name, email and message.');
@@ -242,81 +243,71 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (typeof emailjs !== 'undefined') {
         emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
-          from_name:  name,
-          from_email: email,
-          reply_to:   email,
-          to_email:   CONTACT_EMAIL,
-          subject:    subject,
-          message:    message
+          from_name: name, from_email: email, reply_to: email,
+          to_email: CONTACT_EMAIL, subject, message,
         })
-        .then(function () {
-          showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
+        .then(() => {
+          showMsg('success', `&#x2713; Message sent! I'll reply to ${email} soon.`);
           form.reset();
           setBusy(false);
           trackEvent('form_submission_success', { method: 'emailjs' });
         })
-        .catch(function () { tryFormspree(name, email, subject, message); });
+        .catch(() => tryFormspree(name, email, subject, message));
       } else {
         tryFormspree(name, email, subject, message);
       }
     });
   }
 
-  function tryFormspree(name, email, subject, message) {
-    var data = new FormData();
-    data.append('name',    name);
-    data.append('email',   email);
-    data.append('subject', subject);
-    data.append('message', message);
+  const tryFormspree = (name, email, subject, message) => {
+    const data = new FormData();
+    data.append('name', name); data.append('email', email);
+    data.append('subject', subject); data.append('message', message);
 
-    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-      method: 'POST', body: data,
-      headers: { 'Accept': 'application/json' }
+    fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST', body: data, headers: { Accept: 'application/json' },
     })
-    .then(function (res) {
+    .then((res) => {
       if (res.ok) {
-        showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
-        if (form) form.reset();
+        showMsg('success', `&#x2713; Message sent! I'll reply to ${email} soon.`);
+        form?.reset();
         trackEvent('form_submission_success', { method: 'formspree' });
       } else {
         openMailto(name, email, subject, message);
       }
     })
-    .catch(function () { openMailto(name, email, subject, message); })
-    .finally(function () { setBusy(false); });
-  }
+    .catch(() => openMailto(name, email, subject, message))
+    .finally(() => setBusy(false));
+  };
 
-  function openMailto(name, email, subject, message) {
-    var body   = 'From: ' + name + ' <' + email + '>\n\n' + message;
-    var mailto = 'mailto:' + CONTACT_EMAIL
-               + '?subject=' + encodeURIComponent(subject)
-               + '&body='    + encodeURIComponent(body);
-    var a = document.createElement('a');
-    a.href = mailto; a.style.display = 'none';
+  const openMailto = (name, email, subject, message) => {
+    const body   = `From: ${name} <${email}>\n\n${message}`;
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const a = Object.assign(document.createElement('a'), { href: mailto, style: 'display:none' });
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     showMsg('success', '&#x2713; Your email client opened &#x2014; just hit Send!');
-    if (form) form.reset();
+    form?.reset();
     setBusy(false);
-  }
+  };
 
-  function setBusy(busy) {
+  const setBusy = (busy) => {
     if (!sendBtn) return;
     sendBtn.disabled    = busy;
     sendBtn.textContent = busy ? 'Sending…' : 'Send message →';
-  }
+  };
 
-  function showMsg(type, html) {
+  const showMsg = (type, html) => {
     if (!fMsg) return;
-    fMsg.innerHTML = html;
-    fMsg.className = 'f-msg show ' + (type || '');
-    setTimeout(function () { fMsg.className = 'f-msg'; }, 8000);
-  }
+    fMsg.innerHTML  = html;
+    fMsg.className  = `f-msg show ${type || ''}`;
+    setTimeout(() => { fMsg.className = 'f-msg'; }, 8000);
+  };
 
 
   /* ── 8. Scroll reveal with stagger ──────────────────── */
   if ('IntersectionObserver' in window) {
-    var revealObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('fade-in-up');
           revealObs.unobserve(entry.target);
@@ -326,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll(
       '.proj-card, .cert-card, .testimonial-card, .highlight-card, .pub-item, .trust-item, .metric'
-    ).forEach(function (el, i) {
+    ).forEach((el, i) => {
       el.style.setProperty('--stagger', i % 4);
       revealObs.observe(el);
     });
@@ -334,129 +325,120 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ── 9. Outbound link tracking ───────────────────────── */
-  document.querySelectorAll('a[href^="http"], a[href^="//"]').forEach(function (link) {
-    link.addEventListener('click', function () {
-      trackEvent('outbound_click', { url: link.getAttribute('href') });
-    });
+  document.querySelectorAll('a[href^="http"], a[href^="//"]').forEach((link) => {
+    link.addEventListener('click', () => trackEvent('outbound_click', { url: link.href }));
   });
 
 
   /* ── 10. CV download tracking ────────────────────────── */
-  document.querySelectorAll('a[download], a[href$=".pdf"]').forEach(function (link) {
-    link.addEventListener('click', function () {
-      trackEvent('file_download', {
-        file_name: link.getAttribute('href').split('/').pop(),
-        link_text: link.textContent.trim()
-      });
-    });
+  document.querySelectorAll('a[download], a[href$=".pdf"]').forEach((link) => {
+    link.addEventListener('click', () => trackEvent('file_download', {
+      file_name: link.href.split('/').pop(),
+      link_text: link.textContent.trim(),
+    }));
   });
 
 
   /* ── 11. Section view tracking ───────────────────────── */
   if ('IntersectionObserver' in window) {
-    var sectionObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
+    const sectionObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) trackEvent('section_view', { section_id: entry.target.id });
       });
     }, { threshold: 0.5 });
-    document.querySelectorAll('section[id]').forEach(function (s) { sectionObs.observe(s); });
+    sections.forEach((s) => sectionObs.observe(s));
   }
 
 
   /* ── 12. Smooth scroll (fixed-nav offset) ────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
+      const href = this.getAttribute('href');
       if (!href || href === '#') return;
-      var target = document.querySelector(href);
+      const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
         window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-        trackEvent('internal_nav', { href: href });
+        trackEvent('internal_nav', { href });
       }
     });
   });
 
 
   /* ── 13. Right-click email address to copy ───────────── */
-  document.querySelectorAll('a[href^="mailto:"]').forEach(function (emailLink) {
-    emailLink.addEventListener('contextmenu', function (e) {
-      var address = this.getAttribute('href').replace('mailto:', '').split('?')[0];
-      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+  document.querySelectorAll('a[href^="mailto:"]').forEach((emailLink) => {
+    emailLink.addEventListener('contextmenu', (e) => {
+      const address = emailLink.href.replace('mailto:', '').split('?')[0];
+      if (!navigator.clipboard?.writeText) return;
       e.preventDefault();
-      navigator.clipboard.writeText(address).then(function () {
-        var valEl  = emailLink.querySelector('.c-val');
-        var target = valEl || emailLink;
-        var orig   = target.textContent;
+      navigator.clipboard.writeText(address).then(() => {
+        const valEl  = emailLink.querySelector('.c-val');
+        const target = valEl || emailLink;
+        const orig   = target.textContent;
         target.textContent = 'Copied!';
-        setTimeout(function () { target.textContent = orig; }, 2000);
+        setTimeout(() => { target.textContent = orig; }, 2000);
       });
     });
   });
 
 
   /* ── 14. Keyboard: Escape closes mobile menu ─────────── */
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && mmenu && mmenu.classList.contains('open')) {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mmenu?.classList.contains('open')) {
       closeMenu();
-      if (ham) ham.focus();
+      ham?.focus();
     }
   });
 
 
   /* ── 15. Page performance (Navigation Timing Level 2) ── */
-  window.addEventListener('load', function () {
-    if (!window.performance) return;
-    var navEntries = performance.getEntriesByType('navigation');
-    if (navEntries.length) {
-      trackEvent('timing_complete', {
-        name: 'page_load',
-        value: Math.round(navEntries[0].loadEventEnd),
-        event_category: 'Performance'
-      });
-    }
+  window.addEventListener('load', () => {
+    const [nav] = performance.getEntriesByType('navigation');
+    if (nav) trackEvent('timing_complete', {
+      name: 'page_load',
+      value: Math.round(nav.loadEventEnd),
+      event_category: 'Performance',
+    });
   });
 
 
   /* ── 16. Page exit + time-on-page ───────────────────── */
-  var hiddenTime = 0;
-  var lastHide   = 0;
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) { lastHide = Date.now(); }
-    else { hiddenTime += Date.now() - lastHide; }
+  let hiddenTime = 0;
+  let lastHide   = 0;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) lastHide = Date.now();
+    else hiddenTime += Date.now() - lastHide;
   });
 
-  window.addEventListener('beforeunload', function () {
-    var navEntries = window.performance ? performance.getEntriesByType('navigation') : [];
-    var navStart   = navEntries.length ? navEntries[0].startTime : 0;
-    var timeOnPage = Math.floor((Date.now() - navStart - hiddenTime) / 1000);
-    var scrollPct  = document.body.scrollHeight > window.innerHeight
+  window.addEventListener('beforeunload', () => {
+    const [nav]    = performance.getEntriesByType('navigation');
+    const navStart = nav?.startTime ?? 0;
+    const timeOnPage = Math.floor((Date.now() - navStart - hiddenTime) / 1000);
+    const scrollPct  = document.body.scrollHeight > window.innerHeight
       ? Math.floor(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100)
       : 100;
     trackEvent('page_exit', { time_on_page: timeOnPage, scroll_depth: scrollPct });
   });
 
-  window.addEventListener('beforeprint', function () {
-    trackEvent('print', { event_category: 'engagement' });
-  });
+  window.addEventListener('beforeprint', () => trackEvent('print', { event_category: 'engagement' }));
 
 
   /* ── Shared analytics helper ─────────────────────────── */
-  function trackEvent(name, params) {
-    if (typeof gtag !== 'undefined') gtag('event', name, params || {});
-    else if (typeof dataLayer !== 'undefined') dataLayer.push({ event: name });
-  }
+  const trackEvent = (name, params = {}) => {
+    if (typeof gtag !== 'undefined') gtag('event', name, params);
+    else if (typeof dataLayer !== 'undefined') dataLayer.push({ event: name, ...params });
+  };
 
 }); /* end DOMContentLoaded */
 
 
 /* ── Service Worker (PWA) ────────────────────────────────
-   Relative path (./sw.js) works on both user-page roots
-   and GitHub Pages project-site subdirectories.
+   Relative path works on both root deployments and
+   GitHub Pages project-site subdirectories.
 ──────────────────────────────────────────────────────── */
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js').catch(function () {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {
       /* SW unavailable — site still works fully without it */
     });
   });
