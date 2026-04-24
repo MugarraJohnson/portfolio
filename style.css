@@ -14,6 +14,9 @@ body {
   background: #06091A;
   overflow-x: hidden;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ── Variables ───────────────────────────────────────── */
@@ -50,32 +53,55 @@ body {
 
 /* ── LIGHT theme overrides ───────────────────────────────── */
 :root[data-theme="light"] {
-  --glass-bg:     rgba(255,255,255,.55);
-  --glass-border: rgba(0,0,0,.09);
-  --glass-shine:  rgba(255,255,255,.90);
-  --bg:    #EEF2FA;
-  --bg2:   #E6EAF5;
-  --text:  #0C1230;
-  --muted: rgba(12,18,48,.55);
-  --muted2:rgba(12,18,48,.35);
-  --blue-soft: rgba(10,132,255,.12);
-  --blue-glow: rgba(10,132,255,.25);
+  /* Page backgrounds — intentionally off-white, not stark */
+  --bg:    #ECF0F9;
+  --bg2:   #E2E8F5;
+
+  /* Text — solid colours, WCAG AA+ at every size */
+  --text:  #0F172A;       /* near-black navy            */
+  --muted: #47556A;       /* slate — readable body copy */
+  --muted2:#8696B0;       /* muted labels / captions    */
+
+  /* Cards: opaque enough to contrast against the bg */
+  --glass-bg:     rgba(255,255,255,.92);
+  --glass-border: rgba(15,23,42,.09);
+  --glass-shine:  rgba(255,255,255,1);
+
+  /* Accent tweaks */
+  --blue-soft: rgba(10,132,255,.10);
+  --blue-glow: rgba(10,132,255,.20);
 }
-:root[data-theme="light"] body       { background: var(--bg); }
-:root[data-theme="light"] .orb-1     { background: radial-gradient(circle, rgba(10,132,255,.14), transparent 70%); }
-:root[data-theme="light"] .orb-2     { background: radial-gradient(circle, rgba(191,90,242,.10), transparent 70%); }
-:root[data-theme="light"] .orb-3     { background: radial-gradient(circle, rgba(50,211,200,.09), transparent 70%); }
-:root[data-theme="light"] nav        { background: rgba(238,242,250,.75); }
-:root[data-theme="light"] nav.scrolled { background: rgba(238,242,250,.92); }
-:root[data-theme="light"] .mob-menu  { background: rgba(238,242,250,.96); }
-:root[data-theme="light"] #metrics   { background: rgba(255,255,255,.4); }
-:root[data-theme="light"] .metric    { background: rgba(255,255,255,.7); }
-:root[data-theme="light"] .metric:hover { background: rgba(10,132,255,.06); }
-:root[data-theme="light"] #projects  { background: rgba(255,255,255,.28); }
-:root[data-theme="light"] #Education     { background: rgba(255,255,255,.22); }
-:root[data-theme="light"] #testimonials  { background: rgba(255,255,255,.3); }
-:root[data-theme="light"] #publications  { background: rgba(255,255,255,.25); }
-:root[data-theme="light"] footer     { background: rgba(255,255,255,.35); }
+
+/* Body: subtle directional gradient for visual depth */
+:root[data-theme="light"] body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 15%  0%, rgba(10,132,255,.07)  0%, transparent 65%),
+    radial-gradient(ellipse 55% 40% at 85% 25%, rgba(191,90,242,.05)  0%, transparent 65%),
+    radial-gradient(ellipse 50% 35% at 50% 88%, rgba(50,211,200,.04)  0%, transparent 65%);
+}
+
+/* Orbs — slightly muted in light */
+:root[data-theme="light"] .orb-1 { background: radial-gradient(circle, rgba(10,132,255,.12),  transparent 70%); }
+:root[data-theme="light"] .orb-2 { background: radial-gradient(circle, rgba(191,90,242,.09),  transparent 70%); }
+:root[data-theme="light"] .orb-3 { background: radial-gradient(circle, rgba(50,211,200,.07),  transparent 70%); }
+
+/* Nav */
+:root[data-theme="light"] nav          { background: rgba(236,240,249,.82); border-bottom-color: rgba(15,23,42,.10); }
+:root[data-theme="light"] nav.scrolled { background: rgba(236,240,249,.97); border-bottom-color: rgba(15,23,42,.14); }
+:root[data-theme="light"] .mob-menu    { background: rgba(236,240,249,.98); }
+
+/* Section rhythm — alternate subtle tinting */
+:root[data-theme="light"] #metrics      { background: rgba(15,23,42,.025); border-top-color: rgba(15,23,42,.07); border-bottom-color: rgba(15,23,42,.07); }
+:root[data-theme="light"] .metric       { background: #fff; border-color: rgba(15,23,42,.08); box-shadow: 0 2px 12px rgba(15,23,42,.07), inset 0 1px 0 #fff; }
+:root[data-theme="light"] .metric:hover { background: rgba(10,132,255,.04); }
+:root[data-theme="light"] #projects     { background: rgba(15,23,42,.022); border-top-color: rgba(15,23,42,.08); }
+:root[data-theme="light"] #Education    { background: rgba(15,23,42,.015); border-top-color: rgba(15,23,42,.07); }
+:root[data-theme="light"] #testimonials { background: rgba(15,23,42,.025); border-top-color: rgba(15,23,42,.08); }
+:root[data-theme="light"] #publications { background: rgba(15,23,42,.015); border-top-color: rgba(15,23,42,.07); }
+:root[data-theme="light"] footer        { background: rgba(15,23,42,.04);  border-top-color:  rgba(15,23,42,.10); }
+
+/* Cards — solid white + layered shadow = crisp depth without glass wash-out */
 :root[data-theme="light"] .proj-card,
 :root[data-theme="light"] .cert-card,
 :root[data-theme="light"] .c-item,
@@ -84,25 +110,75 @@ body {
 :root[data-theme="light"] .highlight-card,
 :root[data-theme="light"] .pub-item,
 :root[data-theme="light"] .trust-item {
-  background: rgba(255,255,255,.65);
-  box-shadow: 0 4px 24px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.9);
+  background: #fff;
+  border-color: rgba(15,23,42,.08);
+  box-shadow:
+    0 1px 3px  rgba(15,23,42,.05),
+    0 4px 16px rgba(15,23,42,.07),
+    inset 0 1px 0 #fff;
 }
 :root[data-theme="light"] .proj-card:hover,
 :root[data-theme="light"] .cert-card:hover,
 :root[data-theme="light"] .testimonial-card:hover {
-  box-shadow: 0 14px 36px rgba(0,0,0,.11), inset 0 1px 0 rgba(255,255,255,.95);
+  box-shadow:
+    0 4px 8px  rgba(15,23,42,.06),
+    0 14px 36px rgba(15,23,42,.12),
+    inset 0 1px 0 #fff;
 }
+:root[data-theme="light"] .highlight-card:hover,
+:root[data-theme="light"] .pub-item:hover,
+:root[data-theme="light"] .trust-item:hover {
+  box-shadow:
+    0 4px 8px  rgba(15,23,42,.06),
+    0 12px 28px rgba(15,23,42,.10),
+    inset 0 1px 0 #fff;
+}
+
+/* Form inputs */
 :root[data-theme="light"] input,
-:root[data-theme="light"] textarea   { background: rgba(255,255,255,.75); border-color: rgba(0,0,0,.1); color: var(--text); }
+:root[data-theme="light"] textarea {
+  background: #fff;
+  border-color: rgba(15,23,42,.16);
+  color: var(--text);
+  box-shadow: none;
+}
+:root[data-theme="light"] input:focus,
+:root[data-theme="light"] textarea:focus {
+  border-color: rgba(10,132,255,.55);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(10,132,255,.12);
+}
+
+/* Badges / filters / tags */
 :root[data-theme="light"] .bdg,
 :root[data-theme="light"] .ptag,
-:root[data-theme="light"] .filt      { background: rgba(255,255,255,.6); border-color: rgba(0,0,0,.1); }
-:root[data-theme="light"] .sk-track  { background: rgba(0,0,0,.08); }
+:root[data-theme="light"] .filt {
+  background: rgba(255,255,255,.88);
+  border-color: rgba(15,23,42,.11);
+  color: var(--muted);
+}
+:root[data-theme="light"] .filt.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+:root[data-theme="light"] .bdg:hover   { color: var(--blue); background: rgba(10,132,255,.08); }
+:root[data-theme="light"] .chip        { background: rgba(10,132,255,.08); border-color: rgba(10,132,255,.18); }
+
+/* Skill track */
+:root[data-theme="light"] .sk-track { background: rgba(15,23,42,.08); }
+
+/* Text colour overrides — all use solid slate for readability */
 :root[data-theme="light"] .hero-desc,
-:root[data-theme="light"] .contact-intro { color: var(--muted); }
-:root[data-theme="light"] .about-text p  { color: var(--muted); }
+:root[data-theme="light"] .contact-intro,
+:root[data-theme="light"] .about-text p,
 :root[data-theme="light"] .proj-card p,
-:root[data-theme="light"] .t-desc        { color: var(--muted); }
+:root[data-theme="light"] .test-text,
+:root[data-theme="light"] .pub-desc,
+:root[data-theme="light"] .github-desc,
+:root[data-theme="light"] .highlight-card p,
+:root[data-theme="light"] .metric-lbl,
+:root[data-theme="light"] .t-desc { color: var(--muted); }
+
+/* Scrollbar in light */
+:root[data-theme="light"] ::-webkit-scrollbar-track { background: var(--bg2); }
+:root[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(10,132,255,.40); }
 
 /* smooth cross-fade when theme switches */
 *, *::before, *::after {
@@ -280,8 +356,11 @@ nav.scrolled {
   background: linear-gradient(90deg, var(--blue), var(--teal));
   border-radius: 1px; transition: width .3s cubic-bezier(.4,0,.2,1);
 }
-.nav-links a:hover { color: var(--text); }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover,
+.nav-links a.active { color: var(--text); }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--blue); }
 
 .nav-cta {
   background: var(--blue-soft);
@@ -332,6 +411,22 @@ nav.scrolled {
   min-height: 100vh; display: flex; align-items: center;
   padding: 7rem 5% 5rem; position: relative; z-index: 1;
 }
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(10,132,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,132,255,.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 5%, #000 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 5%, #000 0%, transparent 100%);
+}
+:root[data-theme="light"] #hero::before {
+  background-image:
+    linear-gradient(rgba(10,132,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,132,255,.022) 1px, transparent 1px);
+}
+.hero-inner { position: relative; z-index: 1; }
 .hero-inner {
   display: grid; grid-template-columns: 1fr 300px;
   gap: 5rem; align-items: center;
@@ -638,17 +733,28 @@ h2.s-title {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  opacity: 0.95;
-  transition: opacity .3s;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
 }
-.client-logo:hover {
-  opacity: 1;
-  filter: grayscale(0%);
-}
+.client-logo:hover { transform: translateY(-3px); }
 .client-logo img {
   max-width: 100%;
   max-height: 60px;
   object-fit: contain;
+  opacity: .7;
+  filter: grayscale(35%);
+  transition: opacity .3s, filter .3s;
+}
+.client-logo:hover img {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+:root[data-theme="light"] .client-logo img {
+  opacity: .65;
+  filter: grayscale(30%) contrast(1.05);
+}
+:root[data-theme="light"] .client-logo:hover img {
+  opacity: 1;
+  filter: grayscale(0%) contrast(1);
 }
 .client-text {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -1327,7 +1433,7 @@ footer {
 }
 
 .fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out calc(var(--stagger, 0) * 80ms) forwards;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1377,8 +1483,79 @@ footer {
 
 /* ── Print Styles ──────────────────────────────────────── */
 @media print {
-  .orb, nav, .hamburger, .mob-menu, #progress-bar, 
+  .orb, nav, .hamburger, .mob-menu, #progress-bar,
   .theme-toggle, .hero-btns, footer { display: none; }
   body { background: white; color: black; }
   section { page-break-inside: avoid; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   PROFESSIONAL POLISH & ACCESSIBILITY
+   ═══════════════════════════════════════════════════════ */
+
+/* Text selection */
+::selection      { background: rgba(10,132,255,.25); color: inherit; }
+::-moz-selection { background: rgba(10,132,255,.25); color: inherit; }
+:root[data-theme="light"] ::selection      { background: rgba(10,132,255,.20); }
+:root[data-theme="light"] ::-moz-selection { background: rgba(10,132,255,.20); }
+
+/* Headings: prevent orphaned words on narrow lines */
+h1, h2, h3 { text-wrap: balance; }
+
+/* Section anchor offset — content doesn't hide under fixed nav */
+section[id] { scroll-margin-top: 80px; }
+
+/* Heading hierarchy font feature */
+h1.hero-name, h2.s-title {
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -.025em;
+}
+
+/* Proj-image in light mode — remove the harsh blue tint */
+:root[data-theme="light"] .proj-image {
+  background: linear-gradient(135deg, rgba(15,23,42,.04), rgba(50,211,200,.03));
+  border-bottom-color: rgba(15,23,42,.07);
+}
+
+/* Proj-placeholder icon in light mode */
+:root[data-theme="light"] .proj-placeholder { color: rgba(10,132,255,.25); }
+
+/* Project tag colour in light mode */
+:root[data-theme="light"] .proj-card:hover .ptag {
+  border-color: rgba(10,132,255,.25);
+  color: var(--blue);
+}
+
+/* Profile card social in light mode */
+:root[data-theme="light"] .p-social a {
+  background: rgba(10,132,255,.08);
+  border-color: rgba(10,132,255,.18);
+}
+
+/* Publication icon in light mode */
+:root[data-theme="light"] .c-ico {
+  background: rgba(10,132,255,.08);
+  border-color: rgba(10,132,255,.16);
+}
+
+/* Testimonial quote mark in light mode */
+:root[data-theme="light"] .test-quote { opacity: .12; }
+
+/* Better nav-cta contrast in light mode */
+:root[data-theme="light"] .nav-cta {
+  background: rgba(10,132,255,.10);
+  border-color: rgba(10,132,255,.30);
+}
+
+/* ── Reduced motion ───────────────────────────────────────
+   Honour OS-level preference: no decorative animations,
+   no smooth scrolling that can cause motion sickness.
+──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
 }

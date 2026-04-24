@@ -1,20 +1,19 @@
 /* ═══════════════════════════════════════════════════
-   script.js — Johnson Mugarra Portfolio (Enhanced)
+   script.js — Johnson Mugarra Portfolio
    ═══════════════════════════════════════════════════ */
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-  
+
   /* ── Page Loader ─────────────────────────────────────── */
-  window.addEventListener('load', function() {
-    const loader = document.getElementById('page-loader');
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('page-loader');
     if (loader) {
       loader.style.opacity = '0';
-      setTimeout(function() {
-        loader.style.display = 'none';
-      }, 300);
+      setTimeout(function () { loader.style.display = 'none'; }, 300);
     }
   });
+
 
   /* ── Theme toggle ────────────────────────────────────── */
   var root        = document.documentElement;
@@ -24,24 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     if (toggleBtn) {
-      toggleBtn.textContent = theme === 'light' ? '🔆' : '🔅';
+      toggleBtn.textContent = theme === 'light' ? '🌙' : '☀️'; /* 🌙 / ☀️ */
       toggleBtn.setAttribute('aria-label',
         theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
     }
-    
-    // Track theme change
     if (typeof dataLayer !== 'undefined') {
-  dataLayer.push({
-    'event': 'theme_change',
-    'theme': theme
-  });
-}
+      dataLayer.push({ event: 'theme_change', theme: theme });
+    }
   }
 
-  /* Start with saved preference, or OS preference, or dark */
+  /* Respect saved preference → OS preference → default dark */
   var saved  = localStorage.getItem(STORAGE_KEY);
   var osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  applyTheme(saved || (osDark ? 'dark' : 'dark'));
+  applyTheme(saved || (osDark ? 'dark' : 'light'));
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', function () {
@@ -56,11 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light');
     });
   }
-  /* ── End theme toggle ───────────────────────────────── */
 
-  /* ── EmailJS ─────────────────────────────────────────────
-     Credentials — all three values come from your dashboard.
-  ─────────────────────────────────────────────────────── */
+
+  /* ── EmailJS ─────────────────────────────────────────── */
   var EJS_SERVICE  = 'service_51t4hfn';
   var EJS_TEMPLATE = 'template_tutr40i';
   var EJS_KEY      = 'i8KrO_W-JbnVbaLqL';
@@ -70,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* ── 1. Scroll progress ──────────────────────────────── */
+  /* ── 1. Scroll progress bar ──────────────────────────── */
   var progressBar = document.getElementById('progress-bar');
   window.addEventListener('scroll', function () {
     if (!progressBar) return;
@@ -79,11 +71,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { passive: true });
 
 
-  /* ── 2. Nav glass on scroll ──────────────────────────── */
-  var navbar = document.getElementById('navbar');
+  /* ── 2. Nav glass + active section highlight ─────────── */
+  var navbar   = document.getElementById('navbar');
+  var navLinks = document.querySelectorAll('.nav-links a');
+  var sections = document.querySelectorAll('section[id]');
+
   window.addEventListener('scroll', function () {
-    if (!navbar) return;
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
+    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+
+    var current = '';
+    sections.forEach(function (sec) {
+      if (window.scrollY >= sec.offsetTop - 130) current = sec.id;
+    });
+    navLinks.forEach(function (link) {
+      var href = link.getAttribute('href');
+      link.classList.toggle('active', href === '#' + current);
+    });
   }, { passive: true });
 
 
@@ -91,27 +94,28 @@ document.addEventListener('DOMContentLoaded', function () {
   var ham    = document.getElementById('ham');
   var mmenu  = document.getElementById('mob-menu');
   var mclose = document.getElementById('mob-close');
-  if (ham && mmenu) {
-    ham.addEventListener('click', function () { 
-      mmenu.classList.add('open'); 
-      
-      // Track mobile menu open
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'mobile_menu_open');
-      }
-    });
+
+  function openMenu() {
+    if (mmenu) mmenu.classList.add('open');
+    if (ham)   ham.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
   }
-  if (mclose && mmenu) {
-    mclose.addEventListener('click', function () { mmenu.classList.remove('open'); });
+  function closeMenu() {
+    if (mmenu) mmenu.classList.remove('open');
+    if (ham)   ham.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }
+
+  if (ham)    ham.addEventListener('click', openMenu);
+  if (mclose) mclose.addEventListener('click', closeMenu);
   if (mmenu) {
     mmenu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { mmenu.classList.remove('open'); });
+      a.addEventListener('click', closeMenu);
     });
   }
 
 
-  /* ── 4. Skill bars animate in ────────────────────────── */
+  /* ── 4. Skill bars ───────────────────────────────────── */
   var skillSection = document.getElementById('skill-bars');
   if (skillSection) {
     var animateBars = function () {
@@ -121,10 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries, obs) {
-        if (entries[0].isIntersecting) {
-          setTimeout(animateBars, 100);
-          obs.disconnect();
-        }
+        if (entries[0].isIntersecting) { setTimeout(animateBars, 100); obs.disconnect(); }
       }, { threshold: 0.15 }).observe(skillSection);
     } else {
       animateBars();
@@ -157,22 +158,20 @@ document.addEventListener('DOMContentLoaded', function () {
           countUp(document.getElementById('m1'), 95, 1500);
           countUp(document.getElementById('m2'), 90, 1500);
           countUp(document.getElementById('m3'), 85, 1600);
-          countUp(document.getElementById('m4'), 6, 1200);
+          countUp(document.getElementById('m4'), 6,  1200);
           obs.disconnect();
         }
       }, { threshold: 0.4 }).observe(metricsEl);
     } else {
-      ['m1','m2','m3','m4'].forEach(function (id, i) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = [95,90,85,6][i];
+      [['m1',95],['m2',90],['m3',85],['m4',6]].forEach(function (pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.textContent = pair[1];
       });
     }
   }
 
 
-  /* ── 6. Project filter — spring animation ────────────────
-     Uses WeakMap to track per-card hide timers.
-  ─────────────────────────────────────────────────────── */
+  /* ── 6. Project filter ───────────────────────────────── */
   var filterRow = document.getElementById('filter-row');
   if (filterRow) {
     var hideTimers = new WeakMap();
@@ -183,41 +182,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
       document.querySelectorAll('.filt').forEach(function (b) {
         b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
       });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       var f = btn.getAttribute('data-f');
 
-      // Track filter usage
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'project_filter', {
-          'filter': f
-        });
-      }
-
       document.querySelectorAll('.proj-card').forEach(function (card) {
         var cats  = (card.getAttribute('data-cat') || '').split(' ');
-        var match = (f === 'all' || cats.indexOf(f) !== -1);
+        var match = f === 'all' || cats.indexOf(f) !== -1;
 
-        /* Cancel any pending hide timer for this card */
-        if (hideTimers.has(card)) {
-          clearTimeout(hideTimers.get(card));
-          hideTimers.delete(card);
-        }
+        if (hideTimers.has(card)) { clearTimeout(hideTimers.get(card)); hideTimers.delete(card); }
 
         if (match) {
-          /* SHOW: set invisible state → unhide → reflow → spring in */
           card.classList.add('hiding');
           card.classList.remove('hidden');
-          void card.offsetWidth;         /* force reflow — critical */
+          void card.offsetWidth;
           card.classList.remove('hiding');
         } else {
-          /* HIDE: spring out → display:none after transition */
           card.classList.add('hiding');
-          var t = setTimeout(function () {
-            card.classList.add('hidden');
-            hideTimers.delete(card);
-          }, 360);
+          var t = setTimeout(function () { card.classList.add('hidden'); hideTimers.delete(card); }, 360);
           hideTimers.set(card, t);
         }
       });
@@ -225,12 +210,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* ── 7. Contact form — EmailJS with triple fallback ──────
-     Order of attempts:
-       1. EmailJS  (works on localhost:8080 and hosted)
-       2. Formspree (secondary fallback)
-       3. mailto hidden-link (never changes address bar)
-  ─────────────────────────────────────────────────────── */
+  /* ── 7. Contact form — EmailJS → Formspree → mailto ─────
+     Three-layer fallback so messages always get through.
+  ──────────────────────────────────────────────────────── */
   var FORMSPREE_ID  = 'xpqyjjbq';
   var CONTACT_EMAIL = 'johnsonmugarra@yahoo.com';
 
@@ -251,24 +233,13 @@ document.addEventListener('DOMContentLoaded', function () {
         showMsg('error', '&#x26A0; Please fill in your name, email and message.');
         return;
       }
-
-      // Basic email validation
-      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showMsg('error', '&#x26A0; Please enter a valid email address.');
         return;
       }
 
       setBusy(true);
 
-      // Track form submission attempt
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'form_submission_attempt', {
-          'form_name': 'contact_form'
-        });
-      }
-
-      /* ── Try EmailJS first ── */
       if (typeof emailjs !== 'undefined') {
         emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
           from_name:  name,
@@ -278,23 +249,13 @@ document.addEventListener('DOMContentLoaded', function () {
           subject:    subject,
           message:    message
         })
-        .then(function (res) {
-          console.log('[EmailJS] success', res.status);
+        .then(function () {
           showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
           form.reset();
           setBusy(false);
-          
-          // Track successful submission
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'form_submission_success', {
-              'method': 'emailjs'
-            });
-          }
+          trackEvent('form_submission_success', { method: 'emailjs' });
         })
-        .catch(function (err) {
-          console.warn('[EmailJS] failed, trying Formspree:', err);
-          tryFormspree(name, email, subject, message);
-        });
+        .catch(function () { tryFormspree(name, email, subject, message); });
       } else {
         tryFormspree(name, email, subject, message);
       }
@@ -316,24 +277,15 @@ document.addEventListener('DOMContentLoaded', function () {
       if (res.ok) {
         showMsg('success', '&#x2713; Message sent! I\'ll reply to ' + email + ' soon.');
         if (form) form.reset();
-        
-        // Track successful submission
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'form_submission_success', {
-            'method': 'formspree'
-          });
-        }
+        trackEvent('form_submission_success', { method: 'formspree' });
       } else {
         openMailto(name, email, subject, message);
       }
     })
-    .catch(function () {
-      openMailto(name, email, subject, message);
-    })
+    .catch(function () { openMailto(name, email, subject, message); })
     .finally(function () { setBusy(false); });
   }
 
-  /* Opens email client WITHOUT changing the address bar */
   function openMailto(name, email, subject, message) {
     var body   = 'From: ' + name + ' <' + email + '>\n\n' + message;
     var mailto = 'mailto:' + CONTACT_EMAIL
@@ -341,25 +293,16 @@ document.addEventListener('DOMContentLoaded', function () {
                + '&body='    + encodeURIComponent(body);
     var a = document.createElement('a');
     a.href = mailto; a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     showMsg('success', '&#x2713; Your email client opened &#x2014; just hit Send!');
     if (form) form.reset();
     setBusy(false);
-    
-    // Track mailto fallback
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'form_submission_mailto', {
-        'method': 'mailto'
-      });
-    }
   }
 
   function setBusy(busy) {
     if (!sendBtn) return;
     sendBtn.disabled    = busy;
-    sendBtn.textContent = busy ? 'Sending\u2026' : 'Send message \u2192';
+    sendBtn.textContent = busy ? 'Sending…' : 'Send message →';
   }
 
   function showMsg(type, html) {
@@ -370,287 +313,151 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  /* ── 8. Scroll Reveal Animations ────────────────────────
-     Animate elements as they enter viewport
-  ──────────────────────────────────────────────────────── */
+  /* ── 8. Scroll reveal with stagger ──────────────────── */
   if ('IntersectionObserver' in window) {
-    var observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('fade-in-up');
-          observer.unobserve(entry.target);
+          revealObs.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    // Observe all elements that should animate in
-    var animateElements = document.querySelectorAll('.proj-card, .cert-card, .testimonial-card, .highlight-card, .pub-item, .trust-item');
-    animateElements.forEach(function(el) {
-      observer.observe(el);
+    document.querySelectorAll(
+      '.proj-card, .cert-card, .testimonial-card, .highlight-card, .pub-item, .trust-item, .metric'
+    ).forEach(function (el, i) {
+      el.style.setProperty('--stagger', i % 4);
+      revealObs.observe(el);
     });
   }
 
 
-  /* ── 9. Track Outbound Links ────────────────────────────
-     Track clicks on external links
-  ──────────────────────────────────────────────────────── */
-  document.querySelectorAll('a[href^="http"], a[href^="//"]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      var href = link.getAttribute('href');
-      
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'click', {
-          'event_category': 'outbound',
-          'event_label': href,
-          'transport_type': 'beacon'
-        });
-      }
+  /* ── 9. Outbound link tracking ───────────────────────── */
+  document.querySelectorAll('a[href^="http"], a[href^="//"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      trackEvent('outbound_click', { url: link.getAttribute('href') });
     });
   });
 
 
-  /* ── 10. Track Download Links ───────────────────────────
-     Track CV downloads
-  ──────────────────────────────────────────────────────── */
-  document.querySelectorAll('a[download], a[href$=".pdf"]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      var filename = link.getAttribute('href').split('/').pop();
-      
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'file_download', {
-          'file_name': filename,
-          'link_text': link.textContent.trim()
-        });
-      }
+  /* ── 10. CV download tracking ────────────────────────── */
+  document.querySelectorAll('a[download], a[href$=".pdf"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      trackEvent('file_download', {
+        file_name: link.getAttribute('href').split('/').pop(),
+        link_text: link.textContent.trim()
+      });
     });
   });
 
 
-  /* ── 11. Track Section Views ────────────────────────────
-     Track when users view different sections
-  ──────────────────────────────────────────────────────── */
+  /* ── 11. Section view tracking ───────────────────────── */
   if ('IntersectionObserver' in window) {
-    var sectionObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var sectionId = entry.target.id;
-          
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'section_view', {
-              'section_id': sectionId
-            });
-          }
-        }
+    var sectionObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) trackEvent('section_view', { section_id: entry.target.id });
       });
     }, { threshold: 0.5 });
-
-    // Observe all major sections
-    document.querySelectorAll('section[id]').forEach(function(section) {
-      sectionObserver.observe(section);
-    });
+    document.querySelectorAll('section[id]').forEach(function (s) { sectionObs.observe(s); });
   }
 
 
-  /* ── 12. Performance Monitoring ─────────────────────────
-     Track page performance metrics
-  ──────────────────────────────────────────────────────── */
-  if (window.performance && window.performance.timing) {
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        var perfData = window.performance.timing;
-        var pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'timing_complete', {
-            'name': 'page_load',
-            'value': pageLoadTime,
-            'event_category': 'Performance'
-          });
-        }
-      }, 0);
-    });
-  }
-
-
-  /* ── 13. Smooth Scroll Enhancement ──────────────────────
-     Enhanced smooth scroll with offset for fixed nav
-  ──────────────────────────────────────────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  /* ── 12. Smooth scroll (fixed-nav offset) ────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       var href = this.getAttribute('href');
-      if (href === '#' || href === '') return;
-      
+      if (!href || href === '#') return;
       var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        var offsetTop = target.offsetTop - 80; // Account for fixed nav
-        
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-        
-        // Track internal navigation
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'click', {
-            'event_category': 'internal_navigation',
-            'event_label': href
-          });
-        }
+        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        trackEvent('internal_nav', { href: href });
       }
     });
   });
 
 
-  /* ── 14. Lazy Load Images ───────────────────────────────
-     Additional lazy loading for images that don't have loading="lazy"
-  ──────────────────────────────────────────────────────── */
-  if ('IntersectionObserver' in window) {
-    var lazyImages = document.querySelectorAll('img:not([loading])');
-    
-    var imageObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          imageObserver.unobserve(img);
-        }
-      });
-    });
-
-    lazyImages.forEach(function(img) {
-      imageObserver.observe(img);
-    });
-  }
-
-
-  /* ── 15. Browser/Device Detection ───────────────────────
-     Track visitor browser and device info
-  ──────────────────────────────────────────────────────── */
-  if (typeof gtag !== 'undefined') {
-    var ua = navigator.userAgent;
-    var browserName = 'Unknown';
-    
-    if (ua.indexOf('Firefox') > -1) browserName = 'Firefox';
-    else if (ua.indexOf('Chrome') > -1) browserName = 'Chrome';
-    else if (ua.indexOf('Safari') > -1) browserName = 'Safari';
-    else if (ua.indexOf('Edge') > -1) browserName = 'Edge';
-    
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
-    
-    gtag('event', 'visitor_info', {
-      'browser': browserName,
-      'device_type': isMobile ? 'mobile' : 'desktop',
-      'screen_width': window.innerWidth,
-      'screen_height': window.innerHeight
-    });
-  }
-
-
-  /* ── 16. Copy Email on Click (UX Enhancement) ───────────
-     Allow users to copy email by clicking on it
-  ──────────────────────────────────────────────────────── */
-  document.querySelectorAll('a[href^="mailto:"]').forEach(function(emailLink) {
-    emailLink.addEventListener('contextmenu', function(e) {
+  /* ── 13. Right-click email address to copy ───────────── */
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (emailLink) {
+    emailLink.addEventListener('contextmenu', function (e) {
+      var address = this.getAttribute('href').replace('mailto:', '').split('?')[0];
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
       e.preventDefault();
-      var email = this.getAttribute('href').replace('mailto:', '').split('?')[0];
-      
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).then(function() {
-          // Show temporary tooltip or notification
-          var originalText = emailLink.textContent;
-          emailLink.textContent = 'Email copied!';
-          setTimeout(function() {
-            emailLink.textContent = originalText;
-          }, 2000);
-          
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'email_copy', {
-              'method': 'right_click'
-            });
-          }
-        });
-      }
+      navigator.clipboard.writeText(address).then(function () {
+        var valEl  = emailLink.querySelector('.c-val');
+        var target = valEl || emailLink;
+        var orig   = target.textContent;
+        target.textContent = 'Copied!';
+        setTimeout(function () { target.textContent = orig; }, 2000);
+      });
     });
   });
 
 
-  /* ── 17. Keyboard Navigation Enhancement ────────────────
-     Better keyboard accessibility
-  ──────────────────────────────────────────────────────── */
-  document.addEventListener('keydown', function(e) {
-    // Escape key closes mobile menu
+  /* ── 14. Keyboard: Escape closes mobile menu ─────────── */
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && mmenu && mmenu.classList.contains('open')) {
-      mmenu.classList.remove('open');
+      closeMenu();
+      if (ham) ham.focus();
     }
   });
 
 
-  /* ── 18. Print Optimization ─────────────────────────────
-     Prepare page for printing
-  ──────────────────────────────────────────────────────── */
-  window.addEventListener('beforeprint', function() {
-    // Track print events
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'print', {
-        'event_category': 'engagement'
+  /* ── 15. Page performance (Navigation Timing Level 2) ── */
+  window.addEventListener('load', function () {
+    if (!window.performance) return;
+    var navEntries = performance.getEntriesByType('navigation');
+    if (navEntries.length) {
+      trackEvent('timing_complete', {
+        name: 'page_load',
+        value: Math.round(navEntries[0].loadEventEnd),
+        event_category: 'Performance'
       });
     }
   });
 
 
-  /* ── 19. Visibility Change Tracking ─────────────────────
-     Track when users leave/return to page
-  ──────────────────────────────────────────────────────── */
+  /* ── 16. Page exit + time-on-page ───────────────────── */
   var hiddenTime = 0;
-  var visibilityStart = Date.now();
+  var lastHide   = 0;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { lastHide = Date.now(); }
+    else { hiddenTime += Date.now() - lastHide; }
+  });
 
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-      visibilityStart = Date.now();
-    } else {
-      hiddenTime += Date.now() - visibilityStart;
-    }
+  window.addEventListener('beforeunload', function () {
+    var navEntries = window.performance ? performance.getEntriesByType('navigation') : [];
+    var navStart   = navEntries.length ? navEntries[0].startTime : 0;
+    var timeOnPage = Math.floor((Date.now() - navStart - hiddenTime) / 1000);
+    var scrollPct  = document.body.scrollHeight > window.innerHeight
+      ? Math.floor(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100)
+      : 100;
+    trackEvent('page_exit', { time_on_page: timeOnPage, scroll_depth: scrollPct });
+  });
+
+  window.addEventListener('beforeprint', function () {
+    trackEvent('print', { event_category: 'engagement' });
   });
 
 
-  /* ── 20. Page Exit Intent ───────────────────────────────
-     Track engagement before leaving
-  ──────────────────────────────────────────────────────── */
-  window.addEventListener('beforeunload', function() {
-    var timeOnPage = Math.floor((Date.now() - performance.timing.navigationStart - hiddenTime) / 1000);
-    
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'page_exit', {
-        'time_on_page': timeOnPage,
-        'scroll_depth': Math.floor((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100)
-      });
-    }
-  });
-
+  /* ── Shared analytics helper ─────────────────────────── */
+  function trackEvent(name, params) {
+    if (typeof gtag !== 'undefined') gtag('event', name, params || {});
+    else if (typeof dataLayer !== 'undefined') dataLayer.push({ event: name });
+  }
 
 }); /* end DOMContentLoaded */
 
 
-/* ═══════════════════════════════════════════════════
-   Service Worker Registration (PWA Support)
-   ═══════════════════════════════════════════════════ */
+/* ── Service Worker (PWA) ────────────────────────────────
+   Relative path (./sw.js) works on both user-page roots
+   and GitHub Pages project-site subdirectories.
+──────────────────────────────────────────────────────── */
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(registration) {
-        console.log('ServiceWorker registration successful');
-      })
-      .catch(function(err) {
-        console.log('ServiceWorker registration failed: ', err);
-      });
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {
+      /* SW unavailable — site still works fully without it */
+    });
   });
 }
