@@ -474,7 +474,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <p>Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
           <div class="proj-links">
-            <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
+            <a href="#fraud-analytics" class="proj-link" target="_blank" rel="noopener noreferrer">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15 3 21 3 21 9"/>
@@ -633,6 +633,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="https://github.com/MugarraJohnson" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="margin-top: 1.5rem;">
           View GitHub Profile &#x2192;
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FRAUD DETECTION ANALYTICS ═══════════════════════ -->
+  <section id="fraud-analytics">
+    <div class="container">
+      <div class="s-label">Financial Analytics · Predictive Modelling</div>
+      <h2 class="s-title">Transaction Fraud Detection Model</h2>
+      <p class="fraud-intro">
+        Gradient-boosted risk scores across <strong>2,000 synthetic bank transactions</strong>. Each point is plotted by predicted risk score vs. transaction amount (log scale) — the clustering reveals how the model separates legitimate behaviour from suspicious and confirmed fraud. The dashed vertical line marks the 0.50 classification threshold. Hover any point for details; filter by payment channel to isolate category-specific patterns.
+      </p>
+
+      <div class="fraud-controls">
+        <span class="fraud-ctrl-label">Channel:</span>
+        <button class="fraud-btn active" data-cat="All">All Channels</button>
+        <button class="fraud-btn" data-cat="Online">
+          <span class="fraud-dot-sm" style="background:#0A84FF"></span>Online
+        </button>
+        <button class="fraud-btn" data-cat="ATM">
+          <span class="fraud-dot-sm" style="background:#BF5AF2"></span>ATM
+        </button>
+        <button class="fraud-btn" data-cat="POS">
+          <span class="fraud-dot-sm" style="background:#32D3C8"></span>Point of Sale
+        </button>
+        <button class="fraud-btn" data-cat="Wire">
+          <span class="fraud-dot-sm" style="background:#FF9F0A"></span>Wire Transfer
+        </button>
+      </div>
+
+      <div class="fraud-stats-row" id="fraud-stats"></div>
+
+      <div id="fraud-chart" aria-label="Transaction fraud detection scatter plot"></div>
+
+      <div class="fraud-legend-row">
+        <div class="fraud-leg-item">
+          <span class="fraud-leg-dot" style="background:#30D158"></span>
+          <span>Legitimate</span>
+        </div>
+        <div class="fraud-leg-item">
+          <span class="fraud-leg-dot" style="background:#FF9F0A"></span>
+          <span>Suspicious</span>
+        </div>
+        <div class="fraud-leg-item">
+          <span class="fraud-leg-dot" style="background:#FF453A"></span>
+          <span>Confirmed Fraud</span>
+        </div>
+        <div class="fraud-leg-item">
+          <svg width="28" height="5" style="flex-shrink:0">
+            <line x1="0" y1="2.5" x2="28" y2="2.5" stroke="rgba(255,69,58,0.55)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          </svg>
+          <span>Classification Threshold (0.50)</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1040,6 +1093,231 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
   </footer>
+
+  <!-- Fraud Detection D3 Chart -->
+  <script>
+  (function initFraudChart() {
+    if (!window.d3) return;
+
+    var savedTheme = localStorage.getItem('jm-theme');
+    var osDark     = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isLight    = savedTheme ? savedTheme === 'light' : !osDark;
+
+    var textColor   = isLight ? 'rgba(15,23,42,0.88)'  : 'rgba(232,232,232,0.88)';
+    var axisColor   = isLight ? 'rgba(0,0,0,0.18)'     : 'rgba(255,255,255,0.16)';
+    var gridColor   = isLight ? 'rgba(0,0,0,0.05)'     : 'rgba(255,255,255,0.05)';
+    var labelColor  = isLight ? 'rgba(40,40,40,0.52)'  : 'rgba(195,195,195,0.52)';
+    var threshColor = isLight ? 'rgba(255,69,58,0.45)' : 'rgba(255,69,58,0.38)';
+    var zoneColor   = isLight ? 'rgba(255,69,58,0.03)' : 'rgba(255,69,58,0.04)';
+
+    // Seeded PRNG
+    function mkRNG(seed) {
+      var s = seed >>> 0;
+      return function() { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; };
+    }
+    var rng = mkRNG(20240201);
+
+    function gauss(mean, std) {
+      var u1 = Math.max(1e-10, rng()), u2 = rng();
+      return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std;
+    }
+    function logUniform(lo, hi) {
+      return Math.exp(Math.log(lo) + rng() * (Math.log(hi) - Math.log(lo)));
+    }
+
+    // Amount ranges per channel / status
+    var AMOUNT = {
+      Online: { leg: [8,   900],  susp: [300, 5000],   fraud: [600,  22000] },
+      ATM:    { leg: [20,  500],  susp: [200, 2000],   fraud: [400,   6000] },
+      POS:    { leg: [4,   400],  susp: [150, 3000],   fraud: [800,  15000] },
+      Wire:   { leg: [150, 9000], susp: [3000, 30000], fraud: [9000, 95000] }
+    };
+
+    // Generate 2000 transactions
+    var txns = [];
+    for (var i = 0; i < 2000; i++) {
+      var cr = rng();
+      var cat = cr < 0.40 ? 'Online' : cr < 0.60 ? 'ATM' : cr < 0.90 ? 'POS' : 'Wire';
+      var sr  = rng();
+      var status, risk, amount;
+
+      if (sr < 0.83) {
+        status = 'Legitimate';
+        risk   = Math.max(0.004, Math.min(0.94, gauss(0.11, 0.08)));
+        amount = logUniform(AMOUNT[cat].leg[0], AMOUNT[cat].leg[1]);
+        if (rng() < 0.04) amount *= (1.8 + rng() * 3.5);
+      } else if (sr < 0.93) {
+        status = 'Suspicious';
+        risk   = Math.max(0.22, Math.min(0.89, gauss(0.50, 0.14)));
+        amount = logUniform(AMOUNT[cat].susp[0], AMOUNT[cat].susp[1]);
+      } else {
+        status = 'Fraud';
+        risk   = Math.max(0.36, Math.min(0.998, gauss(0.77, 0.13)));
+        amount = logUniform(AMOUNT[cat].fraud[0], AMOUNT[cat].fraud[1]);
+      }
+
+      txns.push({ id: i, cat: cat, status: status,
+                  risk: +risk.toFixed(4), amount: +amount.toFixed(2) });
+    }
+
+    var STATUS_COL = { Legitimate: '#30D158', Suspicious: '#FF9F0A', Fraud: '#FF453A' };
+    var STATUS_OPA = { Legitimate: 0.48,      Suspicious: 0.75,      Fraud: 0.92 };
+    var STATUS_R   = { Legitimate: 3.5,       Suspicious: 4.5,       Fraud: 5.5  };
+
+    // ── Chart geometry ──────────────────────────────────────
+    var container = document.getElementById('fraud-chart');
+    if (!container) return;
+
+    var WT = 960, HT = 480, M = { top: 30, right: 28, bottom: 58, left: 84 };
+    var W = WT - M.left - M.right, H = HT - M.top - M.bottom;
+
+    var svg = d3.select('#fraud-chart').append('svg')
+      .attr('viewBox', '0 0 ' + WT + ' ' + HT)
+      .attr('style', 'max-width:100%;height:auto;display:block;overflow:visible');
+    var g = svg.append('g').attr('transform', 'translate(' + M.left + ',' + M.top + ')');
+
+    // ── Scales ──────────────────────────────────────────────
+    var xSc = d3.scaleLinear().domain([0, 1]).range([0, W]);
+    var ySc = d3.scaleLog().domain([3.5, 130000]).range([H, 0]).nice();
+
+    // ── Grid ────────────────────────────────────────────────
+    g.append('g').call(d3.axisLeft(ySc).ticks(6).tickSize(-W).tickFormat(''))
+      .call(function(el) {
+        el.select('.domain').remove();
+        el.selectAll('line').attr('stroke', gridColor).attr('stroke-dasharray', '3,5');
+      });
+
+    // ── High-risk zone shading ───────────────────────────────
+    g.append('rect')
+      .attr('x', xSc(0.5)).attr('y', 0)
+      .attr('width', W - xSc(0.5)).attr('height', H)
+      .attr('fill', zoneColor);
+
+    // ── Threshold line ───────────────────────────────────────
+    var tx = xSc(0.5);
+    g.append('line')
+      .attr('x1', tx).attr('x2', tx).attr('y1', 0).attr('y2', H)
+      .attr('stroke', threshColor).attr('stroke-width', 1.5).attr('stroke-dasharray', '7,4');
+    g.append('text')
+      .attr('x', tx + 6).attr('y', 18)
+      .attr('fill', threshColor).attr('font-size', '9px').attr('font-weight', '700')
+      .attr('letter-spacing', '0.06em').text('RISK THRESHOLD');
+
+    // ── X axis ──────────────────────────────────────────────
+    var xAx = g.append('g').attr('transform', 'translate(0,' + H + ')')
+      .call(d3.axisBottom(xSc).ticks(10).tickFormat(d3.format('.1f')).tickSizeOuter(0));
+    xAx.selectAll('text').style('fill', textColor).style('font-size', '10px');
+    xAx.select('.domain').style('stroke', axisColor);
+    xAx.selectAll('.tick line').style('stroke', axisColor);
+    g.append('text').attr('x', W / 2).attr('y', H + 46)
+      .attr('text-anchor', 'middle').attr('fill', labelColor).attr('font-size', '10.5px')
+      .text('Predicted Risk Score');
+
+    // ── Y axis ──────────────────────────────────────────────
+    var yAx = g.append('g')
+      .call(d3.axisLeft(ySc).ticks(6)
+        .tickFormat(function(d) { return d >= 1000 ? '$' + (d/1000).toFixed(0)+'k' : '$'+d; })
+        .tickSizeOuter(0));
+    yAx.selectAll('text').style('fill', textColor).style('font-size', '10px');
+    yAx.select('.domain').style('stroke', axisColor);
+    yAx.selectAll('.tick line').style('stroke', axisColor);
+    g.append('text').attr('transform', 'rotate(-90)').attr('x', -H / 2).attr('y', -68)
+      .attr('text-anchor', 'middle').attr('fill', labelColor).attr('font-size', '10.5px')
+      .text('Transaction Amount (USD)');
+
+    // ── Scatter points (draw Legitimate first, Fraud on top) ─
+    var ORDER = ['Legitimate', 'Suspicious', 'Fraud'];
+    var sortedTxns = txns.slice().sort(function(a, b) {
+      return ORDER.indexOf(a.status) - ORDER.indexOf(b.status);
+    });
+
+    var dots = g.append('g').selectAll('circle')
+      .data(sortedTxns)
+      .enter().append('circle')
+      .attr('cx', function(d) { return xSc(d.risk); })
+      .attr('cy', function(d) { return ySc(Math.max(3.5, d.amount)); })
+      .attr('r',  function(d) { return STATUS_R[d.status]; })
+      .attr('fill', function(d) { return STATUS_COL[d.status]; })
+      .attr('fill-opacity', function(d) { return STATUS_OPA[d.status]; })
+      .style('cursor', 'crosshair');
+
+    // ── Tooltip ─────────────────────────────────────────────
+    var tip = d3.select('#fraud-chart').append('div').attr('class', 'fraud-tooltip');
+    var tc = isLight ? '#0a0a0a' : 'rgba(255,255,255,0.92)';
+    var sc = isLight ? 'rgba(50,50,50,0.55)' : 'rgba(185,185,185,0.55)';
+
+    dots.on('mouseover', function(event, d) {
+      d3.select(this).raise().transition().duration(80)
+        .attr('r', STATUS_R[d.status] + 2.5).attr('fill-opacity', 1);
+
+      var html =
+        '<strong style="color:' + STATUS_COL[d.status] + '">' + d.status + '</strong>'
+        + ' <span style="color:' + sc + ';font-size:10px">· ' + d.cat + '</span><br>'
+        + '<span style="color:' + sc + '">Amount: </span>'
+        + '<strong style="color:' + tc + '">$' + d.amount.toLocaleString('en', {maximumFractionDigits:0}) + '</strong><br>'
+        + '<span style="color:' + sc + '">Risk Score: </span>'
+        + '<strong style="color:' + STATUS_COL[d.status] + '">' + (d.risk * 100).toFixed(1) + '%</strong>';
+      if (d.risk >= 0.5 && d.status === 'Legitimate')
+        html += '<br><span style="color:#FF9F0A;font-size:10px">&#9888; False positive</span>';
+      if (d.risk < 0.5 && d.status === 'Fraud')
+        html += '<br><span style="color:#FF453A;font-size:10px">&#9888; Undetected fraud</span>';
+
+      var cR = container.getBoundingClientRect();
+      var lx = event.clientX - cR.left + 14, ty = event.clientY - cR.top - 62;
+      if (lx + 240 > cR.width) lx = event.clientX - cR.left - 224;
+      tip.style('display','block').style('left', lx+'px').style('top', ty+'px').html(html);
+    })
+    .on('mouseleave', function(event, d) {
+      tip.style('display','none');
+      d3.select(this).transition().duration(80)
+        .attr('r', STATUS_R[d.status]).attr('fill-opacity', STATUS_OPA[d.status]);
+    });
+
+    // ── Stats bar ────────────────────────────────────────────
+    var statsEl = document.getElementById('fraud-stats');
+    function updateStats(cat) {
+      var vis   = cat === 'All' ? txns : txns.filter(function(t) { return t.cat === cat; });
+      var total = vis.length;
+      var fCnt  = vis.filter(function(t) { return t.status === 'Fraud'; }).length;
+      var sCnt  = vis.filter(function(t) { return t.status === 'Suspicious'; }).length;
+      if (statsEl) statsEl.innerHTML =
+        '<strong>' + total.toLocaleString() + '</strong> transactions'
+        + ' <span class="fstat-sep">&#183;</span> '
+        + '<span style="color:#FF453A"><strong>' + fCnt + '</strong> fraud ('
+        + (fCnt / total * 100).toFixed(1) + '%)</span>'
+        + ' <span class="fstat-sep">&#183;</span> '
+        + '<span style="color:#FF9F0A"><strong>' + sCnt + '</strong> suspicious ('
+        + (sCnt / total * 100).toFixed(1) + '%)</span>';
+    }
+
+    // ── Category filter ─────────────────────────────────────
+    var activeCat = 'All';
+    function filterDots(cat) {
+      dots.transition().duration(380)
+        .attr('fill-opacity', function(d) {
+          return (cat === 'All' || d.cat === cat) ? STATUS_OPA[d.status] : 0;
+        })
+        .attr('r', function(d) {
+          return (cat === 'All' || d.cat === cat) ? STATUS_R[d.status] : 0;
+        });
+      updateStats(cat);
+    }
+
+    document.querySelectorAll('.fraud-btn[data-cat]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var cat = btn.dataset.cat;
+        if (cat === activeCat) return;
+        activeCat = cat;
+        document.querySelectorAll('.fraud-btn[data-cat]').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.cat === cat);
+        });
+        filterDots(cat);
+      });
+    });
+
+    updateStats('All');
+  })();
+  </script>
 
   <!-- Vanilla Harvest D3 Chart -->
   <script>
