@@ -446,11 +446,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="proj-card featured" data-cat="ml automation">
           <div class="proj-image">
             <div class="proj-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="7" height="7"/>
-                <rect x="14" y="3" width="7" height="7"/>
-                <rect x="14" y="14" width="7" height="7"/>
-                <rect x="3" y="14" width="7" height="7"/>
+              <svg width="48" height="48" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="1" width="10" height="10" rx="2"/>
+                <path d="M1 4h10"/>
+                <path d="M4 11V4"/>
               </svg>
             </div>
           </div>
@@ -476,7 +475,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </div>
             </div>
             
-            <p>Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
+              <p>Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
             
             <div class="proj-links">
               <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
@@ -495,8 +494,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="proj-card" data-cat="dashboard">
           <div class="proj-image">
             <div class="proj-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <svg width="128" height="128" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="3" height="3" rx="2"/>
                 <path d="M3 9h18"/>
                 <path d="M9 21V9"/>
               </svg>
@@ -526,7 +525,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <p>Interactive stakeholder dashboards with daily API automation, enabling data-driven decision-making and operational efficiency improvements.</p>
             
             <div class="proj-links">
-              <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
+              <a href="#vanilla-harvest" class="proj-link" target="_blank" rel="noopener noreferrer">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                   <polyline points="15 3 21 3 21 9"/>
@@ -1078,7 +1077,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     // ── Farmers (15,000) ──────────────────────────────────────
     var PROFILES = { West:{mean:608,std:25}, Central:{mean:400,std:10}, East:{mean:100,std:6} };
     var farmers = [];
-    for (var i = 0; i < 15000; i++) {
+    for (var i = 0; i < 1000; i++) {
       var r = rng();
       var region = r < 0.60 ? 'West' : r < 0.90 ? 'Central' : 'East';
       farmers.push({ region: region, basePeak: Math.max(18, gauss(PROFILES[region].mean, PROFILES[region].std)) });
@@ -1108,7 +1107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         West:    cnts.West    ? sums.West    / cnts.West    : 0,
         Central: cnts.Central ? sums.Central / cnts.Central : 0,
         East:    cnts.East    ? sums.East    / cnts.East    : 0,
-        All:     (sums.West + sums.Central + sums.East) / 15000
+        All:     (sums.West + sums.Central + sums.East) / 1000
       });
       gmo++; if (gmo > 11) { gmo = 0; gyr++; }
     }
