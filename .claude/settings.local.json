@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"d:\\\\portfolio\\\\style.css\")",
+      "Bash(Select-Object -Last 30)"
+    ]
+  }
+}

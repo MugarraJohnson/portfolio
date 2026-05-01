@@ -52,7 +52,10 @@
   
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  
+
+  <!-- D3.js for Vanilla Harvest Chart -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
   <!-- Google Analytics -->
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -639,6 +642,52 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </section>
 
+  <!-- ══ VANILLA HARVEST TIME SERIES ═══════════════════════ -->
+  <section id="vanilla-harvest" class="vanilla-harvest-section">
+    <div class="container">
+      <div class="s-label">Agricultural Analytics · Jan 2024 – Jun 2026</div>
+      <h2 class="s-title">Vanilla Harvest Season Analysis</h2>
+      <p class="vanilla-intro">
+        Pollination activity and projected harvest output across <strong>1,000 Ugandan vanilla farmers</strong> (January 2024 – June 2026). Vanilla beans take approximately <strong>9 months</strong> to mature after hand-pollination — the <em>harvest line</em> is the pollination curve shifted forward by 9 months. The main pollination season (<strong>September–November</strong>) drives the <em>June–July main harvest</em>; the secondary season (<strong>February–May</strong>) drives the <em>December–January harvest</em>. West Uganda leads production (~60%), Central is moderate (~30%), and East is smallest (~10%). Select a region below to isolate its trend.
+      </p>
+
+      <div class="vanilla-controls">
+        <span class="vanilla-ctrl-label">Region:</span>
+        <button class="vanilla-btn active" data-region="All">All Regions</button>
+        <button class="vanilla-btn" data-region="West">
+          <span class="vanilla-dot vdot-west"></span>West
+        </button>
+        <button class="vanilla-btn" data-region="Central">
+          <span class="vanilla-dot vdot-central"></span>Central
+        </button>
+        <button class="vanilla-btn" data-region="East">
+          <span class="vanilla-dot vdot-east"></span>East
+        </button>
+      </div>
+
+      <div id="vanilla-chart" aria-label="Vanilla harvest season time series chart"></div>
+
+      <div class="vanilla-legend-row">
+        <div class="vleg-item">
+          <span class="vleg-swatch" style="background:rgba(46,160,67,0.22);border:1.5px solid rgba(46,160,67,0.65)"></span>
+          <span>Main Harvest Window (Jun–Jul)</span>
+        </div>
+        <div class="vleg-item">
+          <span class="vleg-swatch" style="background:rgba(160,110,50,0.22);border:1.5px solid rgba(160,110,50,0.6)"></span>
+          <span>Secondary Harvest Window (Dec–Jan)</span>
+        </div>
+        <div class="vleg-item">
+          <svg width="26" height="5" style="flex-shrink:0;margin-right:2px"><line x1="0" y1="2.5" x2="26" y2="2.5" stroke="#2eaab8" stroke-width="2.5"/></svg>
+          <span>Pollination Activity</span>
+        </div>
+        <div class="vleg-item">
+          <svg width="26" height="5" style="flex-shrink:0;margin-right:2px"><line x1="0" y1="2.5" x2="26" y2="2.5" stroke="#d4861a" stroke-width="2.5" stroke-dasharray="7,3"/></svg>
+          <span>Projected Harvest (t + 9 mo)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ TESTIMONIALS ══════════════════════════════════════ -->
   <section id="testimonials">
     <div class="container">
@@ -995,6 +1044,246 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
   </footer>
+
+  <!-- Vanilla Harvest D3 Chart -->
+  <script>
+  (function initVanillaChart() {
+    if (!window.d3) { console.warn('D3 not loaded'); return; }
+
+    // ── Theme-aware colours ───────────────────────────────────
+    var isLight    = document.body.classList.contains('light');
+    var textColor  = isLight ? 'rgba(18,18,18,0.92)'  : 'rgba(232,232,232,0.92)';
+    var axisColor  = isLight ? 'rgba(0,0,0,0.25)'     : 'rgba(255,255,255,0.20)';
+    var gridColor  = isLight ? 'rgba(0,0,0,0.07)'     : 'rgba(255,255,255,0.06)';
+    var hLineColor = isLight ? 'rgba(0,0,0,0.25)'     : 'rgba(255,255,255,0.25)';
+    var labelDimColor = isLight ? 'rgba(40,40,40,0.58)' : 'rgba(195,195,195,0.58)';
+
+    // ── Seeded PRNG (LCG) ────────────────────────────────────
+    function makePRNG(seed) {
+      var s = seed >>> 0;
+      return function () {
+        s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+        return s / 4294967296;
+      };
+    }
+    var rng = makePRNG(20240315);
+
+    // ── Gaussian sample via Box-Muller ───────────────────────
+    function gauss(mean, std) {
+      var u1 = Math.max(1e-10, rng()), u2 = rng();
+      return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std;
+    }
+
+    // ── Farmers (1,000) ──────────────────────────────────────
+    var PROFILES = { West:{mean:158,std:52}, Central:{mean:124,std:44}, East:{mean:92,std:36} };
+    var farmers = [];
+    for (var i = 0; i < 1000; i++) {
+      var r = rng();
+      var region = r < 0.60 ? 'West' : r < 0.90 ? 'Central' : 'East';
+      farmers.push({ region: region, basePeak: Math.max(18, gauss(PROFILES[region].mean, PROFILES[region].std)) });
+    }
+
+    // ── Seasonal factors (Jan=0 … Dec=11) ────────────────────
+    var SF = [0.10, 0.44, 0.80, 1.00, 0.82, 0.06, 0.05, 0.14, 0.54, 0.94, 0.69, 0.07];
+
+    // ── Generate monthly data: Apr 2023 → Jun 2026 (39 mo) ──
+    // genData index 0 = Apr 2023 … index 38 = Jun 2026
+    // Harvest for display month j = genData[j]     (9 months before the display date)
+    // Pollination for display month j = genData[9+j] (Jan 2024 + j months)
+    var genData = [];
+    var gmo = 3, gyr = 2023;
+    for (var gi = 0; gi < 39; gi++) {
+      var yf = 1 + (gyr - 2022) * 0.055;
+      var sf = SF[gmo];
+      var sums = {West:0, Central:0, East:0};
+      var cnts = {West:0, Central:0, East:0};
+      farmers.forEach(function(f) {
+        var exp = f.basePeak * sf * yf * 26;
+        var val = Math.max(0, exp + (rng() - 0.5) * exp * 0.30);
+        sums[f.region] += val; cnts[f.region]++;
+      });
+      genData.push({
+        date:    new Date(gyr, gmo, 15),
+        West:    cnts.West    ? sums.West    / cnts.West    : 0,
+        Central: cnts.Central ? sums.Central / cnts.Central : 0,
+        East:    cnts.East    ? sums.East    / cnts.East    : 0,
+        All:     (sums.West + sums.Central + sums.East) / 1000
+      });
+      gmo++; if (gmo > 11) { gmo = 0; gyr++; }
+    }
+
+    // Display slices — both cover Jan 2024 → Jun 2026 (30 months)
+    var pollBase = genData.slice(9, 39); // pollination values, Jan 2024–Jun 2026
+    var harvBase = genData.slice(0, 30); // harvest source values (Apr 2023–Sep 2025), mapped to same display dates
+
+    function getLines(reg) {
+      return {
+        poll: pollBase.map(function(d)    { return {date: d.date, value: d[reg]}; }),
+        harv: harvBase.map(function(d, j) { return {date: pollBase[j].date, value: d[reg]}; })
+      };
+    }
+
+    // Y-max computed across all region selections so axis stays stable
+    var allVals = [];
+    ['All', 'West', 'Central', 'East'].forEach(function(reg) {
+      var L = getLines(reg);
+      L.poll.concat(L.harv).forEach(function(d) { allVals.push(d.value); });
+    });
+    var globalYMax = d3.max(allVals);
+
+    // ── Chart geometry ───────────────────────────────────────
+    var container = document.getElementById('vanilla-chart');
+    if (!container) return;
+
+    var WT = 960, HT = 490, M = {top:40, right:22, bottom:64, left:74};
+    var W = WT - M.left - M.right, H = HT - M.top - M.bottom;
+
+    var svg = d3.select('#vanilla-chart')
+      .append('svg')
+      .attr('viewBox', '0 0 ' + WT + ' ' + HT)
+      .attr('style', 'max-width:100%;height:auto;display:block;overflow:visible');
+    var g = svg.append('g').attr('transform', 'translate(' + M.left + ',' + M.top + ')');
+
+    // ── Scales ───────────────────────────────────────────────
+    var xScale = d3.scaleTime()
+      .domain([new Date(2024, 0, 1), new Date(2026, 6, 15)])
+      .range([0, W]);
+
+    var yScale = d3.scaleLinear()
+      .domain([0, globalYMax * 1.12])
+      .range([H, 0]).nice();
+
+    // ── Harvest shading ──────────────────────────────────────
+    var BSTYLE = {
+      main:      {fill:'rgba(46,160,67,0.13)',  stroke:'rgba(46,160,67,0.45)',  lbl:'#1e7a32', txt:'Main Harvest'},
+      secondary: {fill:'rgba(160,110,50,0.13)', stroke:'rgba(160,110,50,0.40)', lbl:'#7a5020', txt:'2nd Harvest'}
+    };
+    var bands = [
+      {s:new Date(2024, 5,1), e:new Date(2024, 7,1), t:'main'},
+      {s:new Date(2024,11,1), e:new Date(2025, 1,1), t:'secondary'},
+      {s:new Date(2025, 5,1), e:new Date(2025, 7,1), t:'main'},
+      {s:new Date(2025,11,1), e:new Date(2026, 1,1), t:'secondary'},
+      {s:new Date(2026, 5,1), e:new Date(2026, 7,1), t:'main'}
+    ];
+    var bandsG = g.append('g');
+    bands.forEach(function(b) {
+      var x1 = Math.max(0, xScale(b.s)), x2 = Math.min(W, xScale(b.e));
+      if (x2 <= x1) return;
+      var c = BSTYLE[b.t];
+      bandsG.append('rect').attr('x',x1).attr('y',0).attr('width',x2-x1).attr('height',H)
+        .attr('fill',c.fill).attr('stroke',c.stroke).attr('stroke-width',1).attr('stroke-dasharray','3,3');
+      bandsG.append('text').attr('x',(x1+x2)/2).attr('y',-10).attr('text-anchor','middle')
+        .attr('fill',c.lbl).attr('font-size','9px').attr('font-weight','700').text(c.txt);
+    });
+
+    // ── Grid ─────────────────────────────────────────────────
+    g.append('g').call(d3.axisLeft(yScale).ticks(6).tickSize(-W).tickFormat(''))
+      .call(function(gEl) {
+        gEl.select('.domain').remove();
+        gEl.selectAll('line').attr('stroke', gridColor).attr('stroke-dasharray','3,5');
+      });
+
+    // ── X axis ───────────────────────────────────────────────
+    var xAx = g.append('g').attr('transform','translate(0,'+H+')')
+      .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(2))
+        .tickFormat(d3.timeFormat('%b %Y')).tickSizeOuter(0));
+    xAx.selectAll('text').style('fill', textColor).style('font-size','10px')
+      .attr('transform','rotate(-38)').attr('text-anchor','end').attr('dx','-0.4em').attr('dy','0.15em');
+    xAx.select('.domain').style('stroke', axisColor);
+    xAx.selectAll('.tick line').style('stroke', axisColor);
+
+    // ── Y axis ───────────────────────────────────────────────
+    var yAx = g.append('g').call(d3.axisLeft(yScale).ticks(6)
+      .tickFormat(function(d){ return d >= 1000 ? (d/1000).toFixed(1)+'k' : d; }).tickSizeOuter(0));
+    yAx.selectAll('text').style('fill', textColor).style('font-size','10px');
+    yAx.select('.domain').style('stroke', axisColor);
+    yAx.selectAll('.tick line').style('stroke', axisColor);
+
+    g.append('text').attr('transform','rotate(-90)').attr('x',-H/2).attr('y',-60)
+      .attr('text-anchor','middle').attr('fill', labelDimColor).attr('font-size','10.5px')
+      .text('Avg. Flowers / Farmer / Month');
+
+    // ── Two line paths: Pollination & Harvest ─────────────────
+    var PCOL = '#2eaab8';  // teal  — pollination
+    var HCOL = '#d4861a';  // amber — harvest (t+9 mo)
+    var lineGen = d3.line()
+      .x(function(d){ return xScale(d.date); }).y(function(d){ return yScale(d.value); })
+      .curve(d3.curveCatmullRom.alpha(0.5));
+
+    var pollPath = g.append('path').attr('fill','none').attr('stroke',PCOL)
+      .attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round');
+    var harvPath = g.append('path').attr('fill','none').attr('stroke',HCOL)
+      .attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round')
+      .attr('stroke-dasharray','7,3');
+
+    var activeRegion = 'All';
+
+    function updateChart(reg, animate) {
+      var L = getLines(reg);
+      if (animate) {
+        pollPath.transition().duration(450).attr('d', lineGen(L.poll));
+        harvPath.transition().duration(450).attr('d', lineGen(L.harv));
+      } else {
+        pollPath.attr('d', lineGen(L.poll));
+        harvPath.attr('d', lineGen(L.harv));
+      }
+    }
+    updateChart('All', false);
+
+    // ── Tooltip ──────────────────────────────────────────────
+    var tooltip = d3.select('#vanilla-chart').append('div').attr('class','vanilla-tooltip');
+    var MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var bisect = d3.bisector(function(d){ return d.date; }).left;
+
+    var hLine = g.append('line').attr('y1',0).attr('y2',H)
+      .attr('stroke', hLineColor).attr('stroke-width',1).attr('stroke-dasharray','4,4').style('display','none');
+
+    g.append('rect').attr('width',W).attr('height',H).attr('fill','none').attr('pointer-events','all')
+      .on('mousemove', function(ev) {
+        var L = getLines(activeRegion);
+        var mx = d3.pointer(ev)[0];
+        var idx = Math.min(bisect(L.poll, xScale.invert(mx), 1), L.poll.length - 1);
+        var pd = L.poll[idx], hd = L.harv[idx];
+        if (!pd) return;
+
+        hLine.attr('x1', xScale(pd.date)).attr('x2', xScale(pd.date)).style('display', null);
+
+        var mo = pd.date.getMonth(), yr = pd.date.getFullYear();
+        var pDate = new Date(yr, mo - 9, 1); // pollination month that produced this harvest
+        var pStr = MN[pDate.getMonth()] + ' ' + pDate.getFullYear();
+
+        var tc = isLight ? '#0a0a0a' : 'rgba(255,255,255,0.92)';
+        var sc = isLight ? 'rgba(50,50,50,0.55)' : 'rgba(185,185,185,0.55)';
+        var html = '<strong style="color:' + tc + '">' + MN[mo] + ' ' + yr + '</strong>'
+                 + ' <span style="color:' + sc + ';font-size:10px">(' + activeRegion + ' Uganda)</span><br>'
+                 + '<span style="color:' + PCOL + '">Pollination: </span><strong>' + Math.round(pd.value).toLocaleString() + '</strong> flowers<br>'
+                 + '<span style="color:' + HCOL + '">Harvest: </span><strong>' + Math.round(hd.value).toLocaleString() + '</strong> flowers'
+                 + ' <span style="color:' + sc + ';font-size:10px">(from ' + pStr + ')</span><br>';
+        if (mo === 5 || mo === 6)  html += '<span style="color:#2a9d5c;font-size:10px;font-weight:600">Main Harvest Period</span>';
+        if (mo === 11 || mo === 0) html += '<span style="color:#c4821a;font-size:10px;font-weight:600">Secondary Harvest Period</span>';
+
+        var cR = container.getBoundingClientRect();
+        var ttL = ev.clientX - cR.left + 14, ttT = ev.clientY - cR.top - 52;
+        if (ttL + 240 > cR.width) ttL = ev.clientX - cR.left - 215;
+        tooltip.style('display','block').style('left', ttL+'px').style('top', ttT+'px').html(html);
+      })
+      .on('mouseleave', function() { hLine.style('display','none'); tooltip.style('display','none'); });
+
+    // ── Region toggle (radio-style) ───────────────────────────
+    document.querySelectorAll('.vanilla-btn[data-region]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var reg = btn.dataset.region;
+        if (reg === activeRegion) return;
+        activeRegion = reg;
+        document.querySelectorAll('.vanilla-btn[data-region]').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.region === reg);
+        });
+        updateChart(reg, true);
+      });
+    });
+
+  })();
+  </script>
 
   <!-- Main JavaScript (includes SW registration) -->
   <script src="script.js" defer></script>
