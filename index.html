@@ -1075,10 +1075,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std;
     }
 
-    // ── Farmers (1,000) ──────────────────────────────────────
-    var PROFILES = { West:{mean:158,std:52}, Central:{mean:124,std:44}, East:{mean:92,std:36} };
+    // ── Farmers (15,000) ──────────────────────────────────────
+    var PROFILES = { West:{mean:608,std:25}, Central:{mean:400,std:10}, East:{mean:100,std:6} };
     var farmers = [];
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 15000; i++) {
       var r = rng();
       var region = r < 0.60 ? 'West' : r < 0.90 ? 'Central' : 'East';
       farmers.push({ region: region, basePeak: Math.max(18, gauss(PROFILES[region].mean, PROFILES[region].std)) });
@@ -1108,7 +1108,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         West:    cnts.West    ? sums.West    / cnts.West    : 0,
         Central: cnts.Central ? sums.Central / cnts.Central : 0,
         East:    cnts.East    ? sums.East    / cnts.East    : 0,
-        All:     (sums.West + sums.Central + sums.East) / 1000
+        All:     (sums.West + sums.Central + sums.East) / 15000
       });
       gmo++; if (gmo > 11) { gmo = 0; gyr++; }
     }
@@ -1258,7 +1258,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var html = '<strong style="color:' + tc + '">' + MN[mo] + ' ' + yr + '</strong>'
                  + ' <span style="color:' + sc + ';font-size:10px">(' + activeRegion + ' Uganda)</span><br>'
                  + '<span style="color:' + PCOL + '">Pollination: </span><strong>' + Math.round(pd.value).toLocaleString() + '</strong> flowers<br>'
-                 + '<span style="color:' + HCOL + '">Harvest: </span><strong>' + Math.round(hd.value).toLocaleString() + '</strong> pods'
+                 + '<span style="color:' + HCOL + '">Harvest: </span><strong>' + Math.round(hd.value/5.6).toLocaleString() + '</strong> Kgs'
                  + ' <span style="color:' + sc + ';font-size:10px">(from ' + pStr + ')</span><br>';
         if (mo === 5 || mo === 6)  html += '<span style="color:#2a9d5c;font-size:10px;font-weight:600">Main Harvest Period</span>';
         if (mo === 11 || mo === 0) html += '<span style="color:#c4821a;font-size:10px;font-weight:600">Secondary Harvest Period</span>';
