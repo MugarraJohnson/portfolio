@@ -443,52 +443,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
 
       <!-- Project 2: Automated ML Pipeline -->
-      <div class="proj-card featured" data-cat="ml automation">
-          <div class="proj-image">
-            <div class="proj-placeholder">
-              <svg width="48" height="48" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="1" y="1" width="10" height="10" rx="2"/>
-                <path d="M1 4h10"/>
-                <path d="M4 11V4"/>
-              </svg>
-            </div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-header">
-              <h3>Automated Impact Evaluation Pipeline</h3>
-            </div>
-              <div class="proj-tags">
-                <span class="ptag">Python</span>
-                <span class="ptag">Airflow</span>
-              <span class="ptag">PostgreSQL</span>
-              </div>
-            </div>
-            
-            <div class="proj-metrics-row">
-              <div class="proj-metric">
-                <strong>85%</strong>
-                <span>Time Reduction</span>
-              </div>
-              <div class="proj-metric">
-                <strong>95%+</strong>
-                <span>Data Quality</span>
-              </div>
-            </div>
-            
-              <p>Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
-            
-            <div class="proj-links">
-              <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/>
-                  <line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-                View Details
-              </a>
-            </div>
+      <div class="proj-card" data-cat="ml automation">
+        <div class="proj-image">
+          <div class="proj-placeholder">
+            <svg width="48" height="48" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="1" width="10" height="10" rx="2"/>
+              <path d="M1 4h10"/>
+              <path d="M4 11V4"/>
+            </svg>
           </div>
         </div>
+        <div class="proj-content">
+          <div class="proj-header">
+            <h3>Automated Impact Evaluation Pipeline</h3>
+            <div class="proj-tags">
+              <span class="ptag">Python</span>
+              <span class="ptag">Airflow</span>
+              <span class="ptag">PostgreSQL</span>
+            </div>
+          </div>
+          <div class="proj-metrics-row">
+            <div class="proj-metric">
+              <strong>85%</strong>
+              <span>Time Reduction</span>
+            </div>
+            <div class="proj-metric">
+              <strong>95%+</strong>
+              <span>Data Quality</span>
+            </div>
+          </div>
+          <p>Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
+          <div class="proj-links">
+            <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              View Details
+            </a>
+          </div>
+        </div>
+      </div>
 
         <!-- Project 3: Interactive BI Dashboard -->
           <div class="proj-card" data-cat="dashboard">
@@ -1051,7 +1047,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     if (!window.d3) { console.warn('D3 not loaded'); return; }
 
     // ── Theme-aware colours ───────────────────────────────────
-    var isLight    = document.body.classList.contains('light');
+    var savedTheme = localStorage.getItem('jm-theme');
+    var osDark     = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isLight    = savedTheme ? savedTheme === 'light' : !osDark;
     var textColor  = isLight ? 'rgba(18,18,18,0.92)'  : 'rgba(232,232,232,0.92)';
     var axisColor  = isLight ? 'rgba(0,0,0,0.25)'     : 'rgba(255,255,255,0.20)';
     var gridColor  = isLight ? 'rgba(0,0,0,0.07)'     : 'rgba(255,255,255,0.06)';

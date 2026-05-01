@@ -1573,11 +1573,9 @@ h1.hero-name, h2.s-title {
    VANILLA HARVEST CHART SECTION
    ═══════════════════════════════════════════════════════ */
 
-.vanilla-harvest-section { padding: 5rem 0; }
-
 .vanilla-intro {
   max-width: 760px;
-  color: rgb(255, 255, 255);
+  color: var(--text);
   line-height: 1.78;
   margin: 1.1rem 0 2rem;
   font-size: 0.95rem;
@@ -1593,7 +1591,7 @@ h1.hero-name, h2.s-title {
 
 .vanilla-ctrl-label {
   font-size: 0.8rem;
-  color: rgba(200,200,200,0.5);
+  color: var(--muted2);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -1605,10 +1603,12 @@ h1.hero-name, h2.s-title {
   align-items: center;
   gap: 0.42rem;
   padding: 0.42rem 1rem;
-  border: 1.5px solid rgba(255,255,255,0.13);
+  border: 1.5px solid var(--glass-border);
   border-radius: 999px;
-  background: transparent;
-  color: rgba(200,200,200,0.45);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--muted);
   font-size: 0.83rem;
   font-weight: 600;
   cursor: pointer;
@@ -1617,14 +1617,14 @@ h1.hero-name, h2.s-title {
 }
 
 .vanilla-btn.active {
-  border-color: rgba(255, 255, 255, 0);
+  border-color: rgba(10,132,255,.35);
   color: var(--blue);
-  background: rgba(255, 255, 255, 0);
+  background: var(--blue-soft);
 }
 
 .vanilla-btn:hover {
-  border-color: rgba(0, 0, 0, 0.42);
-  background: rgba(255, 255, 255, 0);
+  border-color: rgba(10,132,255,.25);
+  background: rgba(10,132,255,.08);
   color: var(--amber);
 }
 
@@ -1632,9 +1632,11 @@ h1.hero-name, h2.s-title {
   display: inline-flex;
   align-items: center;
   padding: 0.42rem 1rem;
-  border: 1.5px solid rgba(255,255,255,0.1);
+  border: 1.5px solid var(--glass-border);
   border-radius: 999px;
-  background: transparent;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--green);
   font-size: 0.8rem;
   font-weight: 600;
@@ -1645,9 +1647,9 @@ h1.hero-name, h2.s-title {
 }
 
 .vanilla-btn-reset:hover {
-  border-color: rgba(255,255,255,0.28);
+  border-color: rgba(10,132,255,.25);
   color: var(--blue);
-  background: rgba(255,255,255,0.05);
+  background: rgba(10,132,255,.08);
 }
 
 .vanilla-dot {
@@ -1664,11 +1666,14 @@ h1.hero-name, h2.s-title {
 
 #vanilla-chart {
   position: relative;
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
   padding: 0.4rem 0.4rem 0;
   overflow: visible;
+  box-shadow: inset 0 1px 0 var(--glass-shine);
 }
 
 .vanilla-legend-row {
@@ -1678,7 +1683,7 @@ h1.hero-name, h2.s-title {
   flex-wrap: wrap;
   margin-top: 1.2rem;
   font-size: 0.8rem;
-  color: var(--blue);
+  color: var(--muted);
 }
 
 .vleg-item { display: flex; align-items: center; gap: 0.42rem; }
@@ -1704,25 +1709,25 @@ h1.hero-name, h2.s-title {
   pointer-events: none;
   display: none;
   background: rgba(8,12,22,0.92);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-sm);
   padding: 10px 14px;
-  color: var(--blue);
+  color: var(--text);
   font-size: 12px;
   line-height: 1.65;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 20;
   white-space: nowrap;
 }
 
 /* ── Vanilla chart: light-mode overrides ──────────────── */
-body.light .vanilla-intro        { color: var(--blue); }
-body.light .vanilla-ctrl-label   { color: var(--blue); }
-body.light .vanilla-btn          { border-color: rgba(0,0,0,0.14); color: rgba(40,40,40,0.55); }
-body.light .vanilla-btn.active   { border-color: rgba(0,0,0,0.38); color: rgba(20,20,20,0.92); background: rgba(0,0,0,0.05); }
-body.light .vanilla-btn:hover    { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.4); color: #111; }
-body.light .vanilla-btn-reset    { border-color: rgba(0,0,0,0.1); color: rgba(40,40,40,0.45); }
-body.light .vanilla-btn-reset:hover { border-color: rgba(0,0,0,0.3); color: rgba(20,20,20,0.78); }
-body.light #vanilla-chart        { background: rgba(0,0,0,0.025); border-color: rgba(0,0,0,0.09); }
-body.light .vanilla-legend-row   { color: rgba(40,40,40,0.62); }
-body.light .vanilla-tooltip      { background: rgba(240,242,248,0.96); color: #111; border-color: rgba(0,0,0,0.14); }
+:root[data-theme="light"] #vanilla-chart {
+  box-shadow:
+    0 4px 16px rgba(15,23,42,.07),
+    inset 0 1px 0 #fff;
+}
+:root[data-theme="light"] .vanilla-tooltip {
+  background: rgba(240,242,248,0.97);
+  border-color: var(--glass-border);
+}
