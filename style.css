@@ -1577,7 +1577,7 @@ h1.hero-name, h2.s-title {
 
 .vanilla-intro {
   max-width: 760px;
-  color: rgba(220,220,220,0.72);
+  color: rgb(255, 255, 255);
   line-height: 1.78;
   margin: 1.1rem 0 2rem;
   font-size: 0.95rem;
@@ -1617,15 +1617,15 @@ h1.hero-name, h2.s-title {
 }
 
 .vanilla-btn.active {
-  border-color: rgba(255,255,255,0.35);
-  color: rgba(240,240,240,0.9);
-  background: rgba(255,255,255,0.07);
+  border-color: rgba(255, 255, 255, 0);
+  color: var(--blue);
+  background: rgba(255, 255, 255, 0);
 }
 
 .vanilla-btn:hover {
-  border-color: rgba(255,255,255,0.42);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
+  border-color: rgba(0, 0, 0, 0.42);
+  background: rgba(255, 255, 255, 0);
+  color: var(--amber);
 }
 
 .vanilla-btn-reset {
@@ -1635,7 +1635,7 @@ h1.hero-name, h2.s-title {
   border: 1.5px solid rgba(255,255,255,0.1);
   border-radius: 999px;
   background: transparent;
-  color: rgba(200,200,200,0.4);
+  color: var(--green);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
@@ -1646,7 +1646,7 @@ h1.hero-name, h2.s-title {
 
 .vanilla-btn-reset:hover {
   border-color: rgba(255,255,255,0.28);
-  color: rgba(235,235,235,0.75);
+  color: var(--blue);
   background: rgba(255,255,255,0.05);
 }
 
@@ -1678,7 +1678,7 @@ h1.hero-name, h2.s-title {
   flex-wrap: wrap;
   margin-top: 1.2rem;
   font-size: 0.8rem;
-  color: rgba(200,200,200,0.58);
+  color: var(--blue);
 }
 
 .vleg-item { display: flex; align-items: center; gap: 0.42rem; }
@@ -1707,7 +1707,7 @@ h1.hero-name, h2.s-title {
   border: 1px solid rgba(255,255,255,0.14);
   border-radius: 10px;
   padding: 10px 14px;
-  color: #fff;
+  color: var(--blue);
   font-size: 12px;
   line-height: 1.65;
   backdrop-filter: blur(10px);
@@ -1716,8 +1716,8 @@ h1.hero-name, h2.s-title {
 }
 
 /* ── Vanilla chart: light-mode overrides ──────────────── */
-body.light .vanilla-intro        { color: rgba(30,30,30,0.72); }
-body.light .vanilla-ctrl-label   { color: rgba(60,60,60,0.55); }
+body.light .vanilla-intro        { color: var(--blue); }
+body.light .vanilla-ctrl-label   { color: var(--blue); }
 body.light .vanilla-btn          { border-color: rgba(0,0,0,0.14); color: rgba(40,40,40,0.55); }
 body.light .vanilla-btn.active   { border-color: rgba(0,0,0,0.38); color: rgba(20,20,20,0.92); background: rgba(0,0,0,0.05); }
 body.light .vanilla-btn:hover    { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.4); color: #111; }
