@@ -1,1568 +1,922 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Enhanced SEO Meta Tags -->
-  <meta name="description" content="Johnson Mugarra — Data Scientist & AI/ML Specialist with 6+ years turning satellite data, surveys & causal inference into policy impact across East Africa. Expert in predictive analytics, MLOps, and automated data pipelines.">
-  <meta name="keywords" content="Data Scientist Uganda, Machine Learning Expert, AI Specialist, Impact Evaluation, Power BI, USAID, MAAIF, NASA POWER, MLOps, Predictive Analytics, Time-Series Forecasting, ETL Pipelines">
-  <meta name="author" content="Johnson Mugarra">
-  <meta name="robots" content="index, follow">
-  
-  <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://johnsonmugarra.com/">
-  <meta property="og:title" content="Johnson Mugarra - Data Scientist & AI/ML Specialist">
-  <meta property="og:description" content="6+ years deploying ML solutions, predictive models, and automated ETL pipelines across East Africa. Turning complex data into strategies that move governments and international partners to act.">
-  <meta property="og:image" content="https://johnsonmugarra.com/og-image.jpg">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://johnsonmugarra.com/">
-  <meta name="twitter:title" content="Johnson Mugarra - Data Scientist & AI/ML Specialist">
-  <meta name="twitter:description" content="6+ years deploying ML solutions, predictive models, and automated ETL pipelines across East Africa.">
-  <meta name="twitter:image" content="https://johnsonmugarra.com/og-image.jpg">
-  
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0A84FF">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-  
-  <title>Johnson Mugarra - Data Scientist & AI/ML Specialist</title>
-  
-  <!-- Preconnect for Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  
-  <!-- Preload Critical Assets -->
-  <link rel="preload" as="image" href="img/photo.jpg">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
-  
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <!-- D3.js for Vanilla Harvest Chart -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-
-  <!-- Google Analytics -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Johnson Mugarra — Data Scientist &amp; AI/ML Specialist with 6+ years turning satellite data, surveys &amp; causal inference into policy impact across East Africa." name="description"/>
+<meta content="Data Scientist Uganda, Machine Learning Expert, AI Specialist, Impact Evaluation, Power BI, USAID, MAAIF, NASA POWER, MLOps, Predictive Analytics" name="keywords"/>
+<meta content="Johnson Mugarra" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="https://johnsonmugarra.com/" property="og:url"/>
+<meta content="Johnson Mugarra - Data Scientist &amp; AI/ML Specialist" property="og:title"/>
+<meta content="6+ years deploying ML solutions, predictive models, and automated ETL pipelines across East Africa." property="og:description"/>
+<meta content="https://johnsonmugarra.com/og-image.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Johnson Mugarra - Data Scientist &amp; AI/ML Specialist" name="twitter:title"/>
+<meta content="6+ years deploying ML solutions, predictive models, and automated ETL pipelines across East Africa." name="twitter:description"/>
+<link href="manifest.json" rel="manifest"/>
+<meta content="#06091A" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="img/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="img/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="img/apple-touch-icon.png" rel="apple-touch-icon"/>
+<title>Johnson Mugarra - Data Scientist &amp; AI/ML Specialist</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Syne:wght@700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T9LR8Q6B');</script>
-<!-- End Google Tag Manager -->
-  
-  <!-- Structured Data (Schema.org) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Johnson Mugarra",
-    "jobTitle": "Data Scientist & AI/ML Specialist",
-    "url": "https://johnsonmugarra.com",
-    "image": "https://johnsonmugarra.com/photo.jpg",
-    "sameAs": [
-      "https://linkedin.com/in/johnsonmugarra",
-      "https://github.com/MugarraJohnson"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kampala",
-      "addressRegion": "Central Region",
-      "addressCountry": "Uganda"
-    },
-    "alumniOf": [
-      {
-        "@type": "EducationalOrganization",
-        "name": "Manipal Academy of Higher Education",
-        "location": "India"
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T9LR8Q6B');</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-container-lowest": "#0b0e15",
+        "surface-container-high": "#262a32",
+        "outline-variant": "#414754",
+        "surface": "#10131b",
+        "surface-container-highest": "#31353d",
+        "surface-variant": "#31353d",
+        "on-secondary-container": "#004a46",
+        "primary-fixed": "#d6e3ff",
+        "outline": "#8b91a0",
+        "tertiary": "#e9b3ff",
+        "error": "#ffb4ab",
+        "tertiary-container": "#c863fb",
+        "error-container": "#93000a",
+        "on-primary": "#003064",
+        "on-background": "#e0e2ed",
+        "background": "#06091A",
+        "on-secondary": "#003734",
+        "secondary": "#32D3C8",
+        "secondary-container": "#03c2b8",
+        "surface-container-low": "#181c23",
+        "primary-container": "#3e90ff",
+        "on-surface": "#e0e2ed",
+        "primary": "#0A84FF",
+        "surface-container": "#1c2027",
+        "surface-dim": "#10131b",
+        "on-surface-variant": "#c0c6d6",
+        "on-tertiary": "#510074",
+        "surface-bright": "#363941",
+        "inverse-surface": "#e0e2ed",
+        "on-error": "#690005",
+        "primary-fixed-dim": "#aac7ff"
       },
-      {
-        "@type": "EducationalOrganization",
-        "name": "Makerere University",
-        "location": "Kampala, Uganda"
+      fontFamily: {
+        "body-md": ["Plus Jakarta Sans"],
+        "label-mono": ["JetBrains Mono"],
+        "headline-lg": ["Syne"],
+        "headline-xl": ["Syne"],
+        "body-lg": ["Plus Jakarta Sans"],
+        "headline-md": ["Syne"]
+      },
+      animation: {
+        'blob': 'blob 15s infinite',
+        'blob-delayed': 'blob 15s infinite 2s',
+        'blob-slow': 'blob 20s infinite 4s',
+      },
+      keyframes: {
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        }
       }
-    ],
-    "knowsAbout": ["Machine Learning", "Data Science", "Predictive Analytics", "Impact Evaluation", "MLOps", "Time-Series Forecasting"],
-    "email": "johnsonmugarra@yahoo.com",
-    "telephone": "+256777108405"
+    }
   }
-  </script>
+}
+</script>
+<style type="text/tailwindcss">
+@layer utilities {
+  .glass-card { @apply bg-white/[0.045] backdrop-blur-[24px] border border-white/10 rounded-2xl; }
+  .glass-nav { @apply bg-[#06091A]/60 backdrop-blur-md border-b border-white/10; }
+  .text-gradient { @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary; }
+}
+html { scroll-behavior: smooth; }
+body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-hidden; }
+.bg-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; }
+.orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5; }
+.orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #0A84FF, transparent 70%); animation: blob 20s infinite; }
+.orb-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #32D3C8, transparent 70%); animation: blob-delayed 25s infinite; }
+.orb-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: radial-gradient(circle, #BF5AF2, transparent 70%); animation: blob-slow 22s infinite; }
+.btn-primary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(10,132,255,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background; }
+.btn-secondary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full glass-card text-on-background font-medium transition-all hover:bg-white/10 focus:outline-none; }
+.btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-on-background/70 font-medium transition-all hover:text-on-background hover:bg-white/5 focus:outline-none; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #06091A; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(to right, #0A84FF, #32D3C8); z-index: 9999; transition: width 0.1s linear; }
+#mob-menu.open { display: flex !important; opacity: 1 !important; }
+.fade-in-up { animation: fadeInUp 0.6s ease-out calc(var(--stagger, 0) * 80ms) both; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.f-msg { display: none; padding: 0.75rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; }
+.f-msg.show { display: block; }
+.f-msg.success { background: rgba(48,209,88,0.15); color: #30D158; border: 1px solid rgba(48,209,88,0.3); }
+.f-msg.error { background: rgba(255,69,58,0.15); color: #FF453A; border: 1px solid rgba(255,69,58,0.3); }
+#page-loader { position: fixed; inset: 0; z-index: 9999; background: #06091A; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
+.loader-spinner { width: 40px; height: 40px; border: 3px solid rgba(10,132,255,0.2); border-top-color: #0A84FF; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.proj-card.hidden { display: none; }
+.proj-card.hiding { opacity: 0; transform: scale(0.95); transition: opacity 0.36s, transform 0.36s; }
+.filt.active { @apply bg-primary/20 text-primary border-primary/30 border; }
+.fraud-tooltip, .vanilla-tooltip { position: absolute; pointer-events: none; display: none; background: rgba(15,18,28,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 13px; font-size: 12px; line-height: 1.55; color: rgba(232,232,232,0.92); min-width: 180px; max-width: 240px; z-index: 10; }
+.vanilla-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+.vdot-west { background: #2eaab8; }
+.vdot-central { background: #BF5AF2; }
+.vdot-east { background: #FF9F0A; }
+</style>
+<link as="image" href="img/photo.jpg" rel="preload"/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Johnson Mugarra","jobTitle":"Data Scientist & AI/ML Specialist","url":"https://johnsonmugarra.com","image":"https://johnsonmugarra.com/photo.jpg","sameAs":["https://linkedin.com/in/johnsonmugarra","https://github.com/MugarraJohnson"],"address":{"@type":"PostalAddress","addressLocality":"Kampala","addressRegion":"Central Region","addressCountry":"Uganda"},"alumniOf":[{"@type":"EducationalOrganization","name":"Manipal Academy of Higher Education","location":"India"},{"@type":"EducationalOrganization","name":"Makerere University","location":"Kampala, Uganda"}],"knowsAbout":["Machine Learning","Data Science","Predictive Analytics","Impact Evaluation","MLOps","Time-Series Forecasting"],"email":"johnsonmugarra@yahoo.com","telephone":"+256777108405"}
+</script>
 </head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9LR8Q6B"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-  <!-- Skip Navigation for Accessibility -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- Page Loader -->
-  <div id="page-loader">
-    <div class="loader-content">
-      <div class="loader-spinner"></div>
-      <p>Loading portfolio...</p>
-    </div>
-  </div>
-
-  <!-- Background orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-
-  <div id="progress-bar"></div>
-
-  <!-- ══ NAV ══════════════════════════════════════════════ -->
-  <nav id="navbar" aria-label="Main navigation">
-    <a href="#hero" class="nav-logo">Home<em>.</em></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#Education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Hire</a>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">
-      <!-- Moon icon (shown in dark mode — click to switch to light) -->
-      <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-    </button>
-    <button class="hamburger" id="ham" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="mob-menu" id="mob-menu">
-    <button class="mob-close" id="mob-close" aria-label="Close menu">&#x2715;</button>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#Education">Education</a>
-    <a href="#contact">Contact</a>
-  </div>
-
-  <!-- ══ HERO ══════════════════════════════════════════════ -->
-  <section id="hero">
-    <div class="hero-inner container" id="main-content">
-
-      <div>
-        <div class="hero-badge">Available for opportunities</div>
-        <h1 class="hero-name">Johnson <em>Mugarra</em></h1>
-        <p class="hero-role">Data Scientist &nbsp;/&nbsp; AI/ML Specialist &nbsp;/&nbsp; Research & MEAL Expert</p>
-        <p class="hero-desc">
-          Results-driven Data Scientist with <strong>6+ years</strong> deploying ML solutions,
-          predictive models, and automated ETL pipelines across agriculture, finance, health and
-          climate resilience initiatives in East Africa. Turning complex data into strategies that move
-          governments and international partners to act.
-        </p>
-        <div class="hero-btns">
-          <a href="#projects" class="btn-primary">View my work &#x2192;</a>
-          <a href="#contact" class="btn-secondary">Get in touch</a>
-          <a href="CV_Johnson_Mugarra.pdf" download class="btn-ghost" aria-label="Download CV as PDF">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Download CV
-          </a>
-        </div>
-        
-        <!-- Trust Indicators -->
-        <div class="trust-badges">
-          <div class="trust-item">
-            <strong>6+</strong>
-            <span>Years Experience</span>
-          </div>
-          <div class="trust-item">
-            <strong>15+</strong>
-            <span>Projects Delivered</span>
-          </div>
-          <div class="trust-item">
-            <strong>95%+</strong>
-            <span>Data Reliability</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile card -->
-      <div class="profile-card">
-        <div class="pic-wrap">
-          <div class="pic-ring"></div>
-          <div class="pic-inner">
-            <a href="https://linkedin.com/in/johnsonmugarra" target="_blank" rel="noopener noreferrer">
-            <img src="img/photo.jpg" alt="Johnson Mugarra - Data Scientist" loading="lazy" onerror="this.style.display='none';document.getElementById('pic-ph').style.display='flex'">
-            <div class="pic-ph" id="pic-ph" style="display:none">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(240,244,255,.3)" stroke-width="1.2">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-              </svg>
-              <small>Place photo.jpg<br>in this folder</small>
-            </div>
-            </a>
-          </div>
-        </div>
-        <p class="p-name">Johnson Mugarra</p>
-        <p class="p-role">Data Scientist</p>
-        <p class="p-loc">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          Kampala, Uganda
-        </p>
-        <div class="p-chips">
-          <span class="chip">Python</span>
-          <span class="chip">R</span>
-          <span class="chip">ML / AI</span>
-          <span class="chip">Tableau</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">SQL</span>
-        </div>
-        
-        <!-- Social Links in Profile -->
-        <div class="p-social">
-          <a href="https://linkedin.com/in/johnsonmugarra" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-            </svg>
-          </a>
-          <a href="https://github.com/MugarraJohnson" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      
-    </div>
-  </section>
-
-  <!-- ══ METRICS ═══════════════════════════════════════════ -->
-  <div id="metrics">
-    <div class="metrics-grid">
-      <div class="metric">
-        <div class="metric-val"><span id="m1">95</span>%</div>
-        <div class="metric-lbl">MLOps and ETLs </div>
-      </div>
-      <div class="metric">
-        <div class="metric-val"><span id="m2">90</span>%</div>
-        <div class="metric-lbl">Faster Evaluation Cycles</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val"><span id="m3">85</span>%</div>
-        <div class="metric-lbl">Model Accuracy Rate</div>
-      </div>
-      <div class="metric">
-        <div class="metric-val"><span id="m4">6</span><sup>+ yrs</sup></div>
-        <div class="metric-lbl">Data & Analytics Experience</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ TRUSTED BY ════════════════════════════════════════ -->
-  <section id="clients" class="clients-section">
-    <div class="container">
-      <div class="s-label">Past Engagements</div>
-      <div class="client-logos">
-        <a href="https://manipal.edu" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="Manipal Academy of Higher Education">
-          <img src="img/mahe-logo.png" alt="Manipal Academy of Higher Education" loading="lazy">
-        </a>
-        <a href="https://mak.ac.ug" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="Makerere University">
-          <img src="img/Mak-Logo.png" alt="Makerere University" loading="lazy">
-        </a>
-        <a href="https://maaif.go.ug" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="Ministry of Agriculture, Animal Industry and Fisheries Uganda">
-          <img src="img/MAAIF.png" alt="MAAIF — Ministry of Agriculture, Animal Industry and Fisheries" loading="lazy">
-        </a>
-        <div class="client-logo">
-          <img src="img/CRC.png" alt="Center for Research &amp; Communication" loading="lazy">
-        </div>
-        <a href="https://www.consultbronkar.com" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="Bronkar Uganda">
-          <img src="img/bronkar-rem1.jpg" alt="Bronkar Uganda" loading="lazy">
-        </a>
-        <a href="https://www.crs.org" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="Catholic Relief Services">
-          <img src="img/crs-logo.png" alt="CRS — Catholic Relief Services" loading="lazy">
-        </a>
-        <a href="https://www.rescue.org" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="International Rescue Committee">
-          <img src="img/IRC.png" alt="IRC — International Rescue Committee" loading="lazy">
-        </a>
-        <a href="https://www.undp.org" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="United Nations Development Programme">
-          <img src="img/UNDP.jpg" alt="UNDP — United Nations Development Programme" loading="lazy">
-        </a>
-        <a href="https://www.usaid.gov" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="USAID">
-          <img src="img/usaid.png" alt="USAID" loading="lazy">
-        </a>
-        <a href="https://www.enimiro.com" target="_blank" rel="noopener noreferrer" class="client-logo" aria-label="Enimiro Uganda">
-          <img src="img/Enimiro Logo-rem.png" alt="Enimiro Uganda" loading="lazy">
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ ABOUT ══════════════════════════════════════════════ -->
-  <section id="about">
-    <div class="container">
-      <div class="s-label">About me</div>
-
-      <div class="about-grid">
-
-        <div class="about-text">
-          <p>
-            I work at the intersection of <strong>predictive modelling, impact evaluation, research and
-            development</strong>. Over the last <strong>6 years</strong>, I've designed and deployed
-            production-grade ML systems, automated ETL pipelines, and interactive dashboards
-            used by stakeholders including government ministries (<a href="https://maaif.go.ug" target="_blank" rel="noopener noreferrer"><strong>MAAIF</strong></a>), international NGOs, and
-            research institutions across East Africa.
-          </p>
-          <p>
-            At <a href="https://maaif.go.ug" target="_blank" rel="noopener noreferrer"><strong>MAAIF</strong></a> / <a href="https://mak.ac.ug" target="_blank" rel="noopener noreferrer"><strong>Makerere University</strong></a>, I developed prediction models for the Vanilla value chain
-            that integrated NASA POWER satellite data with local ground-truth measurements &#x2014; achieving
-            a <strong>30% improvement</strong> in forecast accuracy. I presented these findings to MAAIF
-            and stakeholders across public and private sectors.
-          </p>
-          <p>
-            At <a href="https://www.usaid.gov" target="_blank" rel="noopener noreferrer"><strong>USAID SITES</strong></a> (DLH Corp &amp; SSS Inc.), I led impact evaluations and built automated
-            analytics systems that compressed evaluation cycles from 6 weeks to under 10 days &#x2014; a <strong>85% efficiency gain</strong>.
-          </p>
-          <p>
-            I hold an <strong>M.Sc. in Data Science</strong> from MAHE India and am certified
-            in PMP, Power BI, SAS Statistics, and Tableau. Based in Kampala and available for remote and international roles.
-          </p>
-          <div class="about-ctas">
-            <a href="#contact" class="btn-primary">Let's connect &#x2192;</a>
-          </div>
-        </div>
-
-        <div class="about-highlights">
-          <div class="highlight-card">
-            <h3>Specialization</h3>
-            <p>End-to-end ML lifecycle management, from data collection through model deployment, monitoring, and continuous improvement</p>
-          </div>
-          <div class="highlight-card">
-            <h3>Impact</h3>
-            <p>Delivered measurable business value through predictive analytics, reducing forecast errors by 18% and achieving 95%+ data reliability</p>
-          </div>
-          <div class="highlight-card">
-            <h3>Recognition</h3>
-            <p>Selected to present research findings to H.E. President Yoweri Museveni, reflecting national-level analytical excellence</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PROJECTS ══════════════════════════════════════════ -->
-  <section id="projects">
-    <div class="container">
-      <div class="s-label">Projects</div>
-      <h2 class="s-title">Featured Projects</h2>
-
-      <div id="filter-row">
-        <button class="filt active" data-f="all">All projects</button>
-        <button class="filt" data-f="ml">ML / AI</button>
-        <button class="filt" data-f="forecasting">Forecasting</button>
-        <button class="filt" data-f="dashboard">Dashboards</button>
-        <button class="filt" data-f="automation">Automation</button>
-      </div>
-
-      <div class="proj-grid" id="proj-grid">
-
-        <!-- Project 1: Vanilla Supply Chain Forecasting -->
-        <div class="proj-card featured" data-cat="ml forecasting">
-          <div class="proj-badge">Featured</div>
-          <div class="proj-image">
-            <div class="proj-placeholder">
-
-                <img width="1080" height="720" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" src="img/Vanilla Workshop.JPG" alt="National Vanilla Workshop" loading="lazy">
-
-            </div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-header">
-              <h3>Vanilla Supply Chain Predictive Analytics</h3>
-              <div class="proj-tags">
-                <span class="ptag">Python</span>
-                <span class="ptag">Prophet</span>
-                <span class="ptag">NASA API</span>
-              </div>
-            </div>
-            
-            <div class="proj-metrics-row">
-              <div class="proj-metric">
-                <strong>18%</strong>
-                <span>MAE Reduction</span>
-              </div>
-              <div class="proj-metric">
-                <strong>80%+</strong>
-                <span>Accuracy</span>
-              </div>
-              <div class="proj-metric">
-                <strong>6 weeks</strong>
-                <span>Time Saved</span>
-              </div>
-            </div>
-            
-            <p>End-to-end predictive modeling system integrating satellite data, ground measurements, and market dynamics. Achieved 18% MAE reduction and presented findings to MAAIF Team.</p>
-            
-            <div class="proj-links">
-              <a href="#vanilla-harvest" class="proj-link" target="_blank" rel="noopener noreferrer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/>
-                  <line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-                Case Study
-              </a>
-              <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-      <!-- Project 2: Automated ML Pipeline -->
-      <div class="proj-card" data-cat="ml automation">
-        <div class="proj-image">
-          <div class="proj-placeholder">
-            <svg width="48" height="48" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="1" y="1" width="10" height="10" rx="2"/>
-              <path d="M1 4h10"/>
-              <path d="M4 11V4"/>
-            </svg>
-          </div>
-        </div>
-        <div class="proj-content">
-          <div class="proj-header">
-            <h3>Automated Impact Evaluation Pipeline</h3>
-            <div class="proj-tags">
-              <span class="ptag">Python</span>
-              <span class="ptag">Airflow</span>
-              <span class="ptag">PostgreSQL</span>
-            </div>
-          </div>
-          <div class="proj-metrics-row">
-            <div class="proj-metric">
-              <strong>85%</strong>
-              <span>Time Reduction</span>
-            </div>
-            <div class="proj-metric">
-              <strong>95%+</strong>
-              <span>Data Quality</span>
-            </div>
-          </div>
-          <p>Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
-          <div class="proj-links">
-            <a href="#fraud-analytics" class="proj-link" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-              View Details
-            </a>
-          </div>
-        </div>
-      </div>
-
-        <!-- Project 3: Interactive BI Dashboard -->
-          <div class="proj-card" data-cat="dashboard">
-          <div class="proj-image">
-            <div class="proj-placeholder">
-              <svg width="128" height="128" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="3" height="3" rx="2"/>
-                <path d="M3 9h18"/>
-                <path d="M9 21V9"/>
-              </svg>
-            </div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-header">
-              <h3>Real-Time Analytics Dashboard</h3>
-              <div class="proj-tags">
-                <span class="ptag">Power BI</span>
-                <span class="ptag">Tableau</span>
-                <span class="ptag">SQL</span>
-              </div>
-            </div>
-            
-            <div class="proj-metrics-row">
-              <div class="proj-metric">
-                <strong>15%</strong>
-                <span>Efficiency Gain</span>
-              </div>
-              <div class="proj-metric">
-                <strong>Daily</strong>
-                <span>Auto Updates</span>
-              </div>
-            </div>
-            
-            <p>Interactive stakeholder dashboards with daily API automation, enabling data-driven decision-making and operational efficiency improvements.</p>
-            
-            <div class="proj-links">
-              <a href="#vanilla-harvest" class="proj-link" target="_blank" rel="noopener noreferrer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/>
-                  <line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-                Live Demo
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5: ETL Data Warehouse -->
-        <div class="proj-card" data-cat="automation">
-          <div class="proj-image">
-            <div class="proj-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-              </svg>
-            </div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-header">
-              <h3>Scalable ETL Data Warehouse</h3>
-              <div class="proj-tags">
-                <span class="ptag">PostgreSQL</span>
-                <span class="ptag">API</span>
-                <span class="ptag">Airflow</span>
-              </div>
-            </div>
-            
-            <div class="proj-metrics-row">
-              <div class="proj-metric">
-                <strong>Daily</strong>
-                <span>Sync Schedule</span>
-              </div>
-              <div class="proj-metric">
-                <strong>Multi-source</strong>
-                <span>Integration</span>
-              </div>
-            </div>
-            
-            <p>Built automated ETL pipelines with daily API synchronization, ensuring secure data consolidation in centralized warehouse.</p>
-            
-            <div class="proj-links">
-              <a href="https://github.com/MugarraJohnson" class="proj-link" target="_blank" rel="noopener noreferrer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/>
-                  <line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-                Documentation
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 6: Time-Series Forecasting -->
-        <div class="proj-card" data-cat="ml forecasting">
-          <div class="proj-image">
-            <div class="proj-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-          </div>
-          <div class="proj-content">
-            <div class="proj-header">
-              <h3>Advanced Time-Series Forecasting</h3>
-              <div class="proj-tags">
-                <span class="ptag">Prophet</span>
-                <span class="ptag">ARIMA</span>
-                <span class="ptag">R</span>
-              </div>
-            </div>
-            
-            <div class="proj-metrics-row">
-              <div class="proj-metric">
-                <strong>30%</strong>
-                <span>Accuracy Boost</span>
-              </div>
-            </div>
-            
-            <p>Hierarchical time-series forecasting with Prophet, achieving significant improvements in agricultural yield predictions.</p>
-            
-            <div class="proj-links">
-              <a href="https://www.sciencedirect.com/science/article/pii/S2590123025017748" class="proj-link" target="_blank" rel="noopener noreferrer">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/>
-                  <line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-                View Details
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      
-      <!-- GitHub Activity -->
-      <div class="github-section">
-        <h3>GitHub Activity</h3>
-        <p class="github-desc">Active development and contributions to open-source projects</p>
-        <div class="github-chart">
-          <img src="https://ghchart.rshah.org/0A84FF/MugarraJohnson" alt="GitHub contribution chart" loading="lazy" />
-        </div>
-        <a href="https://github.com/MugarraJohnson" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="margin-top: 1.5rem;">
-          View GitHub Profile &#x2192;
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FRAUD DETECTION ANALYTICS ═══════════════════════ -->
-  <section id="fraud-analytics">
-    <div class="container">
-      <div class="s-label">Financial Analytics · Predictive Modelling</div>
-      <h2 class="s-title">Transaction Fraud Detection Model</h2>
-      <p class="fraud-intro">
-        Gradient-boosted risk scores across <strong>2,000 synthetic bank transactions</strong>. Each point is plotted by predicted risk score vs. transaction amount (log scale) — the clustering reveals how the model separates legitimate behaviour from suspicious and confirmed fraud. The dashed vertical line marks the 0.50 classification threshold. Hover any point for details; filter by payment channel to isolate category-specific patterns.
-      </p>
-
-      <div class="fraud-controls">
-        <span class="fraud-ctrl-label">Channel:</span>
-        <button class="fraud-btn active" data-cat="All">All Channels</button>
-        <button class="fraud-btn" data-cat="Online">
-          <span class="fraud-dot-sm" style="background:#0A84FF"></span>Online
-        </button>
-        <button class="fraud-btn" data-cat="ATM">
-          <span class="fraud-dot-sm" style="background:#BF5AF2"></span>ATM
-        </button>
-        <button class="fraud-btn" data-cat="POS">
-          <span class="fraud-dot-sm" style="background:#32D3C8"></span>Point of Sale
-        </button>
-        <button class="fraud-btn" data-cat="Wire">
-          <span class="fraud-dot-sm" style="background:#FF9F0A"></span>Wire Transfer
-        </button>
-      </div>
-
-      <div class="fraud-stats-row" id="fraud-stats"></div>
-
-      <div id="fraud-chart" aria-label="Transaction fraud detection scatter plot"></div>
-
-      <div class="fraud-legend-row">
-        <div class="fraud-leg-item">
-          <span class="fraud-leg-dot" style="background:#30D158"></span>
-          <span>Legitimate</span>
-        </div>
-        <div class="fraud-leg-item">
-          <span class="fraud-leg-dot" style="background:#FF9F0A"></span>
-          <span>Suspicious</span>
-        </div>
-        <div class="fraud-leg-item">
-          <span class="fraud-leg-dot" style="background:#FF453A"></span>
-          <span>Confirmed Fraud</span>
-        </div>
-        <div class="fraud-leg-item">
-          <svg width="28" height="5" style="flex-shrink:0">
-            <line x1="0" y1="2.5" x2="28" y2="2.5" stroke="rgba(255,69,58,0.55)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          </svg>
-          <span>Classification Threshold (0.50)</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ VANILLA HARVEST TIME SERIES ═══════════════════════ -->
-  <section id="vanilla-harvest">
-    <div class="container">
-      <div class="s-label">Agricultural Analytics · Jan 2024 – Jun 2026</div>
-      <h2 class="s-title">Vanilla Harvest Season Analysis</h2>
-      <p class="vanilla-intro">
-        Pollination activity and projected harvest output across <strong>1,000 Ugandan vanilla farmers</strong> (January 2024 – June 2026).
-        Vanilla beans take approximately <strong>9 months</strong> to mature after hand-pollination — the <em>harvest line</em> is the pollination curve shifted forward by 9 months. 
-        The main pollination season (<strong>September–November</strong>) drives the <em>June–July main harvest</em>; the secondary season (<strong>February–May</strong>) drives the <em>December–January harvest</em>. 
-        West Uganda leads production (~60%), Central is moderate (~30%), and East is smallest (~10%). Select a region below to isolate its trend.
-      </p>
-
-      <div class="vanilla-controls">
-        <span class="vanilla-ctrl-label">Region:</span>
-        <button class="vanilla-btn" data-region="All">All Regions</button>
-        <button class="vanilla-btn" data-region="West">
-          <span class="vanilla-dot vdot-west"></span>West
-        </button>
-        <button class="vanilla-btn" data-region="Central">
-          <span class="vanilla-dot vdot-central"></span>Central
-        </button>
-        <button class="vanilla-btn" data-region="East">
-          <span class="vanilla-dot vdot-east"></span>East
-        </button>
-      </div>
-
-      <div id="vanilla-chart" aria-label="Vanilla harvest season time series chart"></div>
-
-      <div class="vanilla-legend-row">
-        <div class="vleg-item">
-          <span class="vleg-swatch" style="background:rgba(46,160,67,0.22);border:1.5px solid rgba(46,160,67,0.65)"></span>
-          <span>Main Harvest Window (Jun–Jul)</span>
-        </div>
-        <div class="vleg-item">
-          <span class="vleg-swatch" style="background:rgba(160,110,50,0.22);border:1.5px solid rgba(160,110,50,0.6)"></span>
-          <span>Secondary Harvest Window (Dec–Jan)</span>
-        </div>
-        <div class="vleg-item">
-          <svg width="26" height="5" style="flex-shrink:0;margin-right:2px"><line x1="0" y1="2.5" x2="26" y2="2.5" stroke="#2eaab8" stroke-width="2.5"/></svg>
-          <span>Pollination Activity</span>
-        </div>
-        <div class="vleg-item">
-          <svg width="26" height="5" style="flex-shrink:0;margin-right:2px"><line x1="0" y1="2.5" x2="26" y2="2.5" stroke="#d4861a" stroke-width="2.5" stroke-dasharray="7,3"/></svg>
-          <span>Projected Harvest (t + 9 mo)</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ TESTIMONIALS ══════════════════════════════════════ -->
-  <section id="testimonials">
-    <div class="container">
-      <div class="s-label">What clients say</div>
-      <h2 class="s-title">Testimonials</h2>
-      
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <div class="test-quote">"</div>
-          <p class="test-text">Johnson's predictive models transformed our approach to agricultural planning. His ability to integrate satellite data with ground measurements delivered actionable insights that drove policy decisions at the highest levels.</p>
-          <div class="test-author">
-            <div class="test-avatar">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="5"/>
-                <path d="M3 21v-2a7 7 0 0 1 14 0v2"/>
-              </svg>
-            </div>
-            <div>
-              <div class="test-name">Senior Research Lead</div>
-              <div class="test-org">MAAIF / Makerere University</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="test-quote">"</div>
-          <p class="test-text">The automated evaluation pipeline Johnson built reduced our analysis time by over 80%. His technical expertise combined with clear communication made complex analytics accessible to all stakeholders.</p>
-          <div class="test-author">
-            <div class="test-avatar">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="5"/>
-                <path d="M3 21v-2a7 7 0 0 1 14 0v2"/>
-              </svg>
-            </div>
-            <div>
-              <div class="test-name">Director of Research</div>
-              <div class="test-org">Center for Research & Communication</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SKILLS ════════════════════════════════════════════ -->
-  <section id="skills">
-    <div class="container">
-      <div class="s-label">Expertise</div>
-      <h2 class="s-title">Skills &amp; Technologies</h2>
-
-      <div class="skills-layout">
-
-        <div id="skill-bars">
-          <div class="sg-title">Programming &amp; Data Science</div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">Python (TensorFlow, PyTorch, Scikit-Learn)</span><span class="sk-pct">90%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="90"></div></div>
-          </div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">R Programming (Statsmodels, Prophet)</span><span class="sk-pct">88%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="88"></div></div>
-          </div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">SQL & Database Management</span><span class="sk-pct">85%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="85"></div></div>
-          </div>
-
-          <div class="sg-title">Analytics &amp; Engineering</div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">Tableau / Power BI</span><span class="sk-pct">92%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="92"></div></div>
-          </div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">ETL Pipelines / Airflow</span><span class="sk-pct">85%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="85"></div></div>
-          </div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">NLP &amp; Time-Series Forecasting</span><span class="sk-pct">82%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="82"></div></div>
-          </div>
-          <div class="sk-row">
-            <div class="sk-meta"><span class="sk-name">MLOps & Model Deployment</span><span class="sk-pct">80%</span></div>
-            <div class="sk-track"><div class="sk-fill" data-w="80"></div></div>
-          </div>
-        </div>
-
-        <div>
-          <div class="bdg-group">
-            <div class="bdg-label">Languages</div>
-            <div class="bdg-wrap">
-              <span class="bdg">Python</span><span class="bdg">R</span>
-              <span class="bdg">SQL</span><span class="bdg">Java</span>
-              <span class="bdg">Bash / Batch</span>
-            </div>
-          </div>
-          <div class="bdg-group">
-            <div class="bdg-label">ML / AI Frameworks</div>
-            <div class="bdg-wrap">
-              <span class="bdg">TensorFlow</span><span class="bdg">PyTorch</span>
-              <span class="bdg">Scikit-Learn</span><span class="bdg">Statsmodels</span>
-              <span class="bdg">Prophet</span><span class="bdg">XGBoost</span>
-              <span class="bdg">Keras</span>
-            </div>
-          </div>
-          <div class="bdg-group">
-            <div class="bdg-label">Visualisation &amp; BI</div>
-            <div class="bdg-wrap">
-              <span class="bdg">Tableau</span><span class="bdg">Power BI</span>
-              <span class="bdg">Looker Studio</span><span class="bdg">ArcGIS</span>
-              <span class="bdg">Plotly</span><span class="bdg">D3.js</span>
-            </div>
-          </div>
-          <div class="bdg-group">
-            <div class="bdg-label">Data Engineering & MLOps</div>
-            <div class="bdg-wrap">
-              <span class="bdg">Airflow</span><span class="bdg">Spark</span>
-              <span class="bdg">Hadoop</span><span class="bdg">Docker</span>
-              <span class="bdg">Git</span><span class="bdg">PostgreSQL</span>
-              <span class="bdg">MongoDB</span><span class="bdg">API Integration</span>
-            </div>
-          </div>
-          <div class="bdg-group">
-            <div class="bdg-label">Cloud & Tools</div>
-            <div class="bdg-wrap">
-              <span class="bdg">AWS</span><span class="bdg">Azure</span>
-              <span class="bdg">Google Cloud</span><span class="bdg">Jupyter</span>
-              <span class="bdg">VS Code</span><span class="bdg">RStudio</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PUBLICATIONS ══════════════════════════════════════ -->
-  <section id="publications">
-    <div class="container">
-      <div class="s-label">Research & Presentations</div>
-      <h2 class="s-title">Publications & Key Presentations</h2>
-      
-      <div class="pub-list">
-        <div class="pub-item">
-          <div class="pub-icon" aria-hidden="true">
-            <!-- Leaf / agriculture -->
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
-              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-            </svg>
-          </div>
-          <div class="pub-content">
-            <h3>Presidential Presentation on Agricultural Analytics</h3>
-            <p class="pub-meta">Presented to H.E. President Yoweri Kaguta Museveni • April 2025 • Makerere University</p>
-            <p class="pub-desc">Research findings and policy recommendations on Vanilla supply chain forecasting using ML and satellite data integration. Demonstrated 30% improvement in forecast accuracy and presented actionable insights for agricultural policy.</p>
-            <div class="pub-tags">
-              <span class="pub-tag">ML/AI</span>
-              <span class="pub-tag">Policy Impact</span>
-              <span class="pub-tag">Agriculture</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="pub-item">
-          <div class="pub-icon" aria-hidden="true">
-            <!-- Presentation / workshop -->
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 3h20v13H2z"/>
-              <path d="M8 21l4-5 4 5"/>
-              <path d="M12 16v2"/>
-              <path d="M7 8h10M7 11h6"/>
-            </svg>
-          </div>
-          <div class="pub-content">
-            <h3>Impact Evaluation Methodologies Workshop</h3>
-            <p class="pub-meta">CRC Studies • 2025 • Multiple Stakeholder Sessions</p>
-            <p class="pub-desc">Led technical training workshops on advanced statistical modeling, causal inference, and automated analytics for program evaluation teams across East Africa.</p>
-            <div class="pub-tags">
-              <span class="pub-tag">Training</span>
-              <span class="pub-tag">Impact Evaluation</span>
-              <span class="pub-tag">Capacity Building</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ CERTIFICATIONS ══════════════════════════════════════ -->
-  <section id="Education">
-    <div class="container">
-      <div class="s-label">Credentials</div>
-      <h2 class="s-title">Certifications &amp; Education</h2>
-
-      <div class="Education-grid">
-        <div class="cert-card">
-          <div class="c-icon" aria-hidden="true">
-            <!-- Shield + checkmark — Project Management -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <polyline points="9 12 11 14 15 10"/>
-            </svg>
-          </div>
-          <div><div class="c-name">Google Certified: Project Management Professional (PMP)</div><div class="c-issuer"><a href="https://grow.google/certificates/project-management/" target="_blank" rel="noopener noreferrer">Google</a></div></div>
-        </div>
-        <div class="cert-card">
-          <div class="c-icon" aria-hidden="true">
-            <!-- Bar chart — Power BI / Data Analyst -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="18" y="3"  width="4" height="18" rx="1"/>
-              <rect x="10" y="8"  width="4" height="13" rx="1"/>
-              <rect x="2"  y="13" width="4" height="8"  rx="1"/>
-            </svg>
-          </div>
-          <div><div class="c-name">Microsoft Certified: Power BI Data Analyst Associate</div><div class="c-issuer"><a href="https://learn.microsoft.com/en-us/credentials/certifications/power-bi-data-analyst-associate/" target="_blank" rel="noopener noreferrer">Microsoft</a></div></div>
-        </div>
-        <div class="cert-card">
-          <div class="c-icon" aria-hidden="true">
-            <!-- Trend line — Statistical Analyst -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-              <polyline points="16 7 22 7 22 13"/>
-            </svg>
-          </div>
-          <div><div class="c-name">SAS Certified: Statistical Business Analyst</div><div class="c-issuer"><a href="https://www.sas.com/en_us/training/overview.html" target="_blank" rel="noopener noreferrer">SAS</a></div></div>
-        </div>
-        <div class="cert-card">
-          <div class="c-icon" aria-hidden="true">
-            <!-- Dashboard grid — Tableau -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="9" rx="1"/>
-              <rect x="14" y="3" width="7" height="5" rx="1"/>
-              <rect x="14" y="12" width="7" height="9" rx="1"/>
-              <rect x="3" y="16" width="7" height="5" rx="1"/>
-            </svg>
-          </div>
-          <div><div class="c-name">Tableau Desktop Specialist</div><div class="c-issuer"><a href="https://www.tableau.com/learn/certification/desktop-specialist" target="_blank" rel="noopener noreferrer">Tableau / Salesforce</a></div></div>
-        </div>
-
-        <div class="cert-card">
-            <div class="c-icon">
-              <img src="img/mahe-logo.png" 
-              alt="Manipal University Logo" loading="lazy"
-              style="width: 100%; height: auto; display: block;">
-            </div>
-            <div>
-              <div class="c-name">M.Sc. Data Science</div>
-              <div class="c-issuer"><a href="https://manipal.edu" target="_blank" rel="noopener noreferrer">Manipal Academy of Higher Education, India</a><br>Period · 2022–2024</div></div>
-        </div>
-
-        <div class="cert-card">
-          <div class="c-icon">
-            <img 
-              src="img/Mak-Logo.png" loading="lazy"
-              alt="Makerere University Logo" 
-              style="width: 100%; height: auto; display: block;">
-          </div>
-          <div>
-            <div class="c-name">B.Sc. Agriculture Science</div>
-            <div class="c-issuer"><a href="https://mak.ac.ug" target="_blank" rel="noopener noreferrer">Makerere University, Kampala</a><br>Period · 2016–2021</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ CONTACT ════════════════════════════════════════════ -->
-  <section id="contact">
-    <div class="container">
-      <div class="s-label">Get in touch</div>
-      <h2 class="s-title">Let's work together</h2>
-
-      <div class="contact-layout">
-
-        <div>
-          <div class="c-items">
-            <a href="mailto:johnsonmugarra@yahoo.com" class="c-item">
-              <div class="c-ico">✉</div>
-              <div><div class="c-lbl">Email</div><div class="c-val">johnsonmugarra@yahoo.com</div></div>
-            </a>
-            <a href="tel:+256777108405" class="c-item">
-              <div class="c-ico">📞</div>
-              <div><div class="c-lbl">Phone</div><div class="c-val">+256 777 108 405</div></div>
-            </a>
-            <a href="https://linkedin.com/in/johnsonmugarra" target="_blank" rel="noopener noreferrer" class="c-item">
-              <div class="c-ico">in</div>
-              <div><div class="c-lbl">LinkedIn</div><div class="c-val">linkedin.com/in/johnsonmugarra</div></div>
-            </a>
-            <a href="https://github.com/MugarraJohnson" target="_blank" rel="noopener noreferrer" class="c-item">
-              <div class="c-ico">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-                </svg>
-              </div>
-              <div><div class="c-lbl">GitHub</div><div class="c-val">github.com/MugarraJohnson</div></div>
-            </a>
-            <div class="c-item" style="cursor:default">
-              <div class="c-ico">📍</div>
-              <div><div class="c-lbl">Location</div><div class="c-val">Kampala, Central Region, Uganda</div></div>
-            </div>
-          </div>
-          
-          <p class="contact-intro">
-            Open to Data Science roles, ML/AI projects, research collaborations, consulting engagements,and conversations about predictive analytics, impact evaluation, and development data. Based in Kampala — available remotely worldwide.
-          </p>
-          
-          <!-- QR Code -->
-          <div class="qr-section">
-            <p class="qr-label">Scan to connect</p>
-            <img src="img/adobe-express-qr-code.jpeg" alt="QR Code to contact Johnson Mugarra" loading="lazy" class="qr-code">
-          </div>
-        </div>
-
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="form-row">
-            <div class="fg">
-              <label for="fname">Name *</label>
-              <input type="text" id="fname" name="name" placeholder="Your name" autocomplete="name" required />
-            </div>
-            <div class="fg">
-              <label for="femail">Email *</label>
-              <input type="email" id="femail" name="email" placeholder="your@email.com" autocomplete="email" required />
-            </div>
-          </div>
-          <div class="fg">
-            <label for="fsubject">Subject</label>
-            <input type="text" id="fsubject" name="subject" placeholder="Project idea, job opportunity…" autocomplete="off" />
-          </div>
-          <div class="fg">
-            <label for="fmessage">Message *</label>
-            <textarea id="fmessage" name="message" rows="5" placeholder="Tell me about what you're working on…" required></textarea>
-          </div>
-          <button type="submit" class="btn-send" id="send-btn">Send message →</button>
-          <div class="f-msg" id="f-msg"></div>
-        </form>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FOOTER ════════════════════════════════════════════ -->
-  <footer>
-    <div class="foot-inner">
-      <span class="foot-logo">JM<em>.</em></span>
-      <span class="foot-copy">&copy; Johnson Mugarra 2026. <br> All rights reserved.</span>
-      <div class="foot-links">
-        <a href="#hero">Top ↑</a>
-        <a href="mailto:johnsonmugarra@yahoo.com">Email</a>
-        <a href="https://linkedin.com/in/johnsonmugarra" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/MugarraJohnson" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="CV_Johnson_Mugarra.pdf" download>Download CV</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Fraud Detection D3 Chart -->
-  <script>
-  (function initFraudChart() {
-    if (!window.d3) return;
-
-    var savedTheme = localStorage.getItem('jm-theme');
-    var osDark     = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var isLight    = savedTheme ? savedTheme === 'light' : !osDark;
-
-    var textColor   = isLight ? 'rgba(15,23,42,0.88)'  : 'rgba(232,232,232,0.88)';
-    var axisColor   = isLight ? 'rgba(0,0,0,0.18)'     : 'rgba(255,255,255,0.16)';
-    var gridColor   = isLight ? 'rgba(0,0,0,0.05)'     : 'rgba(255,255,255,0.05)';
-    var labelColor  = isLight ? 'rgba(40,40,40,0.52)'  : 'rgba(195,195,195,0.52)';
-    var threshColor = isLight ? 'rgba(255,69,58,0.45)' : 'rgba(255,69,58,0.38)';
-    var zoneColor   = isLight ? 'rgba(255,69,58,0.03)' : 'rgba(255,69,58,0.04)';
-
-    // Seeded PRNG
-    function mkRNG(seed) {
-      var s = seed >>> 0;
-      return function() { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; };
-    }
-    var rng = mkRNG(20240201);
-
-    function gauss(mean, std) {
-      var u1 = Math.max(1e-10, rng()), u2 = rng();
-      return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std;
-    }
-    function logUniform(lo, hi) {
-      return Math.exp(Math.log(lo) + rng() * (Math.log(hi) - Math.log(lo)));
-    }
-
-    // Amount ranges per channel / status
-    var AMOUNT = {
-      Online: { leg: [8,   900],  susp: [300, 5000],   fraud: [600,  22000] },
-      ATM:    { leg: [20,  500],  susp: [200, 2000],   fraud: [400,   6000] },
-      POS:    { leg: [4,   400],  susp: [150, 3000],   fraud: [800,  15000] },
-      Wire:   { leg: [150, 9000], susp: [3000, 30000], fraud: [9000, 95000] }
-    };
-
-    // Generate 2000 transactions
-    var txns = [];
-    for (var i = 0; i < 2000; i++) {
-      var cr = rng();
-      var cat = cr < 0.40 ? 'Online' : cr < 0.60 ? 'ATM' : cr < 0.90 ? 'POS' : 'Wire';
-      var sr  = rng();
-      var status, risk, amount;
-
-      if (sr < 0.83) {
-        status = 'Legitimate';
-        risk   = Math.max(0.004, Math.min(0.94, gauss(0.11, 0.08)));
-        amount = logUniform(AMOUNT[cat].leg[0], AMOUNT[cat].leg[1]);
-        if (rng() < 0.04) amount *= (1.8 + rng() * 3.5);
-      } else if (sr < 0.93) {
-        status = 'Suspicious';
-        risk   = Math.max(0.22, Math.min(0.89, gauss(0.50, 0.14)));
-        amount = logUniform(AMOUNT[cat].susp[0], AMOUNT[cat].susp[1]);
-      } else {
-        status = 'Fraud';
-        risk   = Math.max(0.36, Math.min(0.998, gauss(0.77, 0.13)));
-        amount = logUniform(AMOUNT[cat].fraud[0], AMOUNT[cat].fraud[1]);
-      }
-
-      txns.push({ id: i, cat: cat, status: status,
-                  risk: +risk.toFixed(4), amount: +amount.toFixed(2) });
-    }
-
-    var STATUS_COL = { Legitimate: '#30D158', Suspicious: '#FF9F0A', Fraud: '#FF453A' };
-    var STATUS_OPA = { Legitimate: 0.48,      Suspicious: 0.75,      Fraud: 0.92 };
-    var STATUS_R   = { Legitimate: 3.5,       Suspicious: 4.5,       Fraud: 5.5  };
-
-    // ── Chart geometry ──────────────────────────────────────
-    var container = document.getElementById('fraud-chart');
-    if (!container) return;
-
-    var WT = 960, HT = 480, M = { top: 30, right: 28, bottom: 58, left: 84 };
-    var W = WT - M.left - M.right, H = HT - M.top - M.bottom;
-
-    var svg = d3.select('#fraud-chart').append('svg')
-      .attr('viewBox', '0 0 ' + WT + ' ' + HT)
-      .attr('style', 'max-width:100%;height:auto;display:block;overflow:visible');
-    var g = svg.append('g').attr('transform', 'translate(' + M.left + ',' + M.top + ')');
-
-    // ── Scales ──────────────────────────────────────────────
-    var xSc = d3.scaleLinear().domain([0, 1]).range([0, W]);
-    var ySc = d3.scaleLog().domain([3.5, 130000]).range([H, 0]).nice();
-
-    // ── Grid ────────────────────────────────────────────────
-    g.append('g').call(d3.axisLeft(ySc).ticks(6).tickSize(-W).tickFormat(''))
-      .call(function(el) {
-        el.select('.domain').remove();
-        el.selectAll('line').attr('stroke', gridColor).attr('stroke-dasharray', '3,5');
-      });
-
-    // ── High-risk zone shading ───────────────────────────────
-    g.append('rect')
-      .attr('x', xSc(0.5)).attr('y', 0)
-      .attr('width', W - xSc(0.5)).attr('height', H)
-      .attr('fill', zoneColor);
-
-    // ── Threshold line ───────────────────────────────────────
-    var tx = xSc(0.5);
-    g.append('line')
-      .attr('x1', tx).attr('x2', tx).attr('y1', 0).attr('y2', H)
-      .attr('stroke', threshColor).attr('stroke-width', 1.5).attr('stroke-dasharray', '7,4');
-    g.append('text')
-      .attr('x', tx + 6).attr('y', 18)
-      .attr('fill', threshColor).attr('font-size', '9px').attr('font-weight', '700')
-      .attr('letter-spacing', '0.06em').text('RISK THRESHOLD');
-
-    // ── X axis ──────────────────────────────────────────────
-    var xAx = g.append('g').attr('transform', 'translate(0,' + H + ')')
-      .call(d3.axisBottom(xSc).ticks(10).tickFormat(d3.format('.1f')).tickSizeOuter(0));
-    xAx.selectAll('text').style('fill', textColor).style('font-size', '10px');
-    xAx.select('.domain').style('stroke', axisColor);
-    xAx.selectAll('.tick line').style('stroke', axisColor);
-    g.append('text').attr('x', W / 2).attr('y', H + 46)
-      .attr('text-anchor', 'middle').attr('fill', labelColor).attr('font-size', '10.5px')
-      .text('Predicted Risk Score');
-
-    // ── Y axis ──────────────────────────────────────────────
-    var yAx = g.append('g')
-      .call(d3.axisLeft(ySc).ticks(6)
-        .tickFormat(function(d) { return d >= 1000 ? '$' + (d/1000).toFixed(0)+'k' : '$'+d; })
-        .tickSizeOuter(0));
-    yAx.selectAll('text').style('fill', textColor).style('font-size', '10px');
-    yAx.select('.domain').style('stroke', axisColor);
-    yAx.selectAll('.tick line').style('stroke', axisColor);
-    g.append('text').attr('transform', 'rotate(-90)').attr('x', -H / 2).attr('y', -68)
-      .attr('text-anchor', 'middle').attr('fill', labelColor).attr('font-size', '10.5px')
-      .text('Transaction Amount (USD)');
-
-    // ── Scatter points (draw Legitimate first, Fraud on top) ─
-    var ORDER = ['Legitimate', 'Suspicious', 'Fraud'];
-    var sortedTxns = txns.slice().sort(function(a, b) {
-      return ORDER.indexOf(a.status) - ORDER.indexOf(b.status);
+<body class="antialiased">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9LR8Q6B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- Page Loader -->
+<div id="page-loader"><div class="loader-spinner"></div></div>
+<div id="progress-bar"></div>
+<div class="bg-orbs">
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+</div>
+<a class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 btn-primary" href="#main-content">Skip to main content</a>
+<!-- NAV -->
+<nav aria-label="Main navigation" class="fixed top-0 w-full z-40 glass-nav transition-all duration-300" id="navbar">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<a class="text-xl font-headline-md text-white font-bold tracking-tight" href="#hero">JM<span class="text-primary">.</span></a>
+<ul class="hidden md:flex space-x-8 items-center nav-links">
+<li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#about">About</a></li>
+<li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#projects">Projects</a></li>
+<li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#skills">Skills</a></li>
+<li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#testimonials">Testimonials</a></li>
+<li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#Education">Education</a></li>
+</ul>
+<div class="hidden md:flex items-center space-x-3">
+<button aria-label="Toggle theme" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors" id="theme-toggle">
+<svg fill="none" height="16" id="theme-icon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+<a class="btn-primary py-2 px-5 text-sm" href="#contact">Hire me</a>
+</div>
+<button aria-label="Open menu" class="md:hidden text-white p-2" id="ham">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+</button>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div class="fixed inset-0 z-50 bg-[#06091A]/95 backdrop-blur-xl flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-300" id="mob-menu">
+<button aria-label="Close menu" class="absolute top-6 right-6 text-white p-2" id="mob-close">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+</button>
+<div class="flex flex-col space-y-6 text-center text-2xl font-headline-md">
+<a class="text-white hover:text-primary transition-colors" href="#about">About</a>
+<a class="text-white hover:text-primary transition-colors" href="#projects">Projects</a>
+<a class="text-white hover:text-primary transition-colors" href="#skills">Skills</a>
+<a class="text-white hover:text-primary transition-colors" href="#testimonials">Testimonials</a>
+<a class="text-white hover:text-primary transition-colors" href="#Education">Education</a>
+<a class="text-primary mt-4" href="#contact">Contact</a>
+</div>
+</div>
+<!-- HERO -->
+<main id="main-content">
+<section class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-6" id="hero">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center px-3 py-1 rounded-full glass-card text-xs font-medium text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary mr-2 animate-pulse"></span>Available for opportunities
+</div>
+<div class="space-y-4">
+<h1 class="text-5xl lg:text-7xl font-headline-xl text-white">Johnson <br/><span class="text-gradient">Mugarra</span></h1>
+<p class="text-xl lg:text-2xl font-medium text-white/80">Data Scientist <span class="text-white/30 mx-2">/</span> AI/ML Specialist <span class="text-white/30 mx-2">/</span> Research &amp; MEAL Expert</p>
+</div>
+<p class="text-lg text-white/60 leading-relaxed max-w-xl font-body-lg">Results-driven Data Scientist with <strong class="text-white">6+ years</strong> deploying ML solutions, predictive models, and automated ETL pipelines across agriculture, finance, health and climate resilience initiatives in East Africa. Turning complex data into strategies that move governments and international partners to act.</p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="btn-primary" href="#projects">View my work →</a>
+<a class="btn-secondary" href="#contact">Get in touch</a>
+<a aria-label="Download CV as PDF" class="btn-ghost group" download="" href="CV_Johnson_Mugarra.pdf">
+<svg class="mr-2 w-4 h-4 text-white/50 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Download CV</a>
+</div>
+<div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+<div class="trust-item"><div class="text-2xl font-headline-md text-white">6+</div><div class="text-sm text-white/50">Years Experience</div></div>
+<div class="trust-item"><div class="text-2xl font-headline-md text-white">15+</div><div class="text-sm text-white/50">Projects Delivered</div></div>
+<div class="trust-item"><div class="text-2xl font-headline-md text-white">95%+</div><div class="text-sm text-white/50">Data Reliability</div></div>
+</div>
+</div>
+<!-- Profile card -->
+<div class="relative max-w-md mx-auto lg:ml-auto w-full">
+<div class="glass-card p-6 flex flex-col items-center text-center">
+<div class="relative w-48 h-48 mb-6 rounded-full p-1 bg-gradient-to-tr from-primary to-secondary">
+<a class="block w-full h-full rounded-full overflow-hidden border-4 border-[#06091A]" href="https://linkedin.com/in/johnsonmugarra" rel="noopener noreferrer" target="_blank">
+<img alt="Johnson Mugarra" class="w-full h-full object-cover" onerror="this.style.display='none';document.getElementById('pic-ph').style.display='flex'" src="img/photo.jpg"/>
+<div class="w-full h-full bg-[#10131b] flex-col items-center justify-center text-white/30 hidden" id="pic-ph">
+<svg class="mb-2" fill="none" height="36" stroke="currentColor" stroke-width="1.2" viewbox="0 0 24 24" width="36"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+</div>
+</a>
+</div>
+<h3 class="text-2xl font-headline-md text-white mb-1">Johnson Mugarra</h3>
+<p class="text-primary font-medium mb-3">Data Scientist</p>
+<p class="text-sm text-white/50 flex items-center justify-center mb-6">
+<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Kampala, Uganda</p>
+<div class="flex flex-wrap justify-center gap-2 mb-6">
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">Python</span>
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">R</span>
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">ML / AI</span>
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">Tableau</span>
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">Power BI</span>
+<span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-white/80">SQL</span>
+</div>
+<div class="flex space-x-4">
+<a aria-label="LinkedIn" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors" href="https://linkedin.com/in/johnsonmugarra" rel="noopener noreferrer" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+</a>
+<a aria-label="GitHub" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- METRICS -->
+<section class="py-12 border-y border-white/5 glass-card mx-6 max-w-7xl lg:mx-auto" id="metrics">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x divide-white/5">
+<div class="text-center px-4 metric"><div class="text-4xl font-headline-md text-secondary mb-2"><span id="m1">95</span>%</div><div class="text-sm text-white/60">MLOps and ETLs</div></div>
+<div class="text-center px-4 metric"><div class="text-4xl font-headline-md text-primary mb-2"><span id="m2">90</span>%</div><div class="text-sm text-white/60">Faster Evaluation Cycles</div></div>
+<div class="text-center px-4 metric"><div class="text-4xl font-headline-md text-secondary mb-2"><span id="m3">85</span>%</div><div class="text-sm text-white/60">Model Accuracy Rate</div></div>
+<div class="text-center px-4 metric"><div class="text-4xl font-headline-md text-primary mb-2"><span id="m4">6</span><sup class="text-lg">+ yrs</sup></div><div class="text-sm text-white/60">Data &amp; Analytics Experience</div></div>
+</div>
+</section>
+<!-- CLIENTS -->
+<section class="py-20 px-6" id="clients">
+<div class="max-w-7xl mx-auto">
+<p class="text-sm uppercase tracking-widest text-white/40 mb-8 text-center font-label-mono">Past Engagements</p>
+<div class="flex flex-wrap justify-center gap-8 lg:gap-12 items-center opacity-60 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
+<a aria-label="Manipal Academy of Higher Education" href="https://manipal.edu" rel="noopener noreferrer" target="_blank"><img alt="Manipal Academy of Higher Education" class="h-10 object-contain" src="img/mahe-logo.png"/></a>
+<a aria-label="Makerere University" href="https://mak.ac.ug" rel="noopener noreferrer" target="_blank"><img alt="Makerere University" class="h-12 object-contain" src="img/Mak-Logo.png"/></a>
+<a aria-label="Ministry of Agriculture Uganda" href="https://maaif.go.ug" rel="noopener noreferrer" target="_blank"><img alt="MAAIF — Ministry of Agriculture, Animal Industry and Fisheries" class="h-12 object-contain" src="img/MAAIF.png"/></a>
+<img alt="Center for Research &amp; Communication" class="h-10 object-contain" src="img/CRC.png"/>
+<a aria-label="Bronkar Uganda" href="https://www.consultbronkar.com" rel="noopener noreferrer" target="_blank"><img alt="Bronkar Uganda" class="h-10 object-contain" src="img/bronkar-rem1.jpg"/></a>
+<a aria-label="Catholic Relief Services" href="https://www.crs.org" rel="noopener noreferrer" target="_blank"><img alt="CRS — Catholic Relief Services" class="h-10 object-contain" src="img/crs-logo.png"/></a>
+<a aria-label="International Rescue Committee" href="https://www.rescue.org" rel="noopener noreferrer" target="_blank"><img alt="IRC — International Rescue Committee" class="h-10 object-contain" src="img/IRC.png"/></a>
+<a aria-label="UNDP" href="https://www.undp.org" rel="noopener noreferrer" target="_blank"><img alt="UNDP — United Nations Development Programme" class="h-10 object-contain" src="img/UNDP.jpg"/></a>
+<a aria-label="USAID" href="https://www.usaid.gov" rel="noopener noreferrer" target="_blank"><img alt="USAID" class="h-8 object-contain" src="img/usaid.png"/></a>
+<a aria-label="Enimiro Uganda" href="https://www.enimiro.com" rel="noopener noreferrer" target="_blank"><img alt="Enimiro Uganda" class="h-10 object-contain" src="img/Enimiro Logo-rem.png"/></a>
+</div>
+</div>
+</section>
+<!-- ABOUT -->
+<section class="py-24 px-6 relative" id="about">
+<div class="max-w-7xl mx-auto">
+<div class="mb-4"><span class="text-primary font-label-mono text-sm uppercase tracking-widest">About me</span></div>
+<div class="grid lg:grid-cols-12 gap-16">
+<div class="lg:col-span-7 space-y-6 text-lg text-white/70 font-body-lg">
+<h2 class="text-4xl font-headline-lg text-white mb-8">Bridging Data Science &amp; Policy Impact</h2>
+<p>I work at the intersection of <strong class="text-white">predictive modelling, impact evaluation, research and development</strong>. Over the last <strong class="text-white">6 years</strong>, I've designed and deployed production-grade ML systems, automated ETL pipelines, and interactive dashboards used by stakeholders including government ministries (<a class="text-primary hover:underline" href="https://maaif.go.ug" target="_blank"><strong>MAAIF</strong></a>), international NGOs, and research institutions across East Africa.</p>
+<p>At <a class="text-primary hover:underline" href="https://maaif.go.ug" target="_blank"><strong>MAAIF</strong></a> / <a class="text-primary hover:underline" href="https://mak.ac.ug" target="_blank"><strong>Makerere University</strong></a>, I developed prediction models for the Vanilla value chain that integrated NASA POWER satellite data with local ground-truth measurements — achieving a <strong class="text-white">30% improvement</strong> in forecast accuracy. I presented these findings to MAAIF and stakeholders across public and private sectors.</p>
+<p>At <a class="text-primary hover:underline" href="https://www.usaid.gov" target="_blank"><strong>USAID SITES</strong></a> (DLH Corp &amp; SSS Inc.), I led impact evaluations and built automated analytics systems that compressed evaluation cycles from 6 weeks to under 10 days — a <strong class="text-white">85% efficiency gain</strong>.</p>
+<p>I hold an <strong class="text-white">M.Sc. in Data Science</strong> from MAHE India and am certified in PMP, Power BI, SAS Statistics, and Tableau. Based in Kampala and available for remote and international roles.</p>
+<div class="pt-6"><a class="btn-primary" href="#contact">Let's connect →</a></div>
+</div>
+<div class="lg:col-span-5 space-y-6">
+<div class="glass-card p-6 highlight-card"><h3 class="text-xl font-headline-md text-white mb-2">Specialization</h3><p class="text-white/60">End-to-end ML lifecycle management, from data collection through model deployment, monitoring, and continuous improvement</p></div>
+<div class="glass-card p-6 highlight-card"><h3 class="text-xl font-headline-md text-white mb-2">Impact</h3><p class="text-white/60">Delivered measurable business value through predictive analytics, reducing forecast errors by 18% and achieving 95%+ data reliability</p></div>
+<div class="glass-card p-6 highlight-card"><h3 class="text-xl font-headline-md text-white mb-2">Recognition</h3><p class="text-white/60">Selected to present research findings to H.E. President Yoweri Museveni, reflecting national-level analytical excellence</p></div>
+</div>
+</div>
+</div>
+</section>
+<!-- PROJECTS -->
+<section class="py-24 px-6 bg-white/[0.02]" id="projects">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Projects</span>
+<h2 class="text-4xl font-headline-lg text-white mb-6">Featured Projects</h2>
+<div class="flex flex-wrap gap-3" id="filter-row">
+<button aria-pressed="true" class="filt px-4 py-2 rounded-full text-sm font-medium" data-f="all">All Projects</button>
+<button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="ml">ML / AI</button>
+<button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="forecasting">Forecasting</button>
+<button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="dashboard">Dashboards</button>
+<button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="automation">Automation</button>
+</div>
+</div>
+<div class="grid lg:grid-cols-2 gap-8" id="proj-grid">
+<!-- Project 1: Vanilla Supply Chain -->
+<div class="glass-card overflow-hidden group proj-card" data-cat="ml forecasting">
+<div class="relative h-64 overflow-hidden border-b border-white/10">
+<div class="absolute inset-0 bg-gradient-to-t from-[#06091A] to-transparent z-10"></div>
+<img alt="National Vanilla Workshop — Johnson Mugarra presenting to MAAIF" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="img/Vanilla Workshop.JPG"/>
+<div class="absolute top-4 left-4 z-20 px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 rounded-full text-xs text-primary font-medium">Featured</div>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Python</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Prophet</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">NASA API</span>
+</div>
+<h3 class="text-2xl font-headline-md text-white mb-4">Vanilla Supply Chain Predictive Analytics</h3>
+<div class="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-white/10">
+<div><div class="text-lg font-bold text-secondary">18%</div><div class="text-xs text-white/50">MAE Reduction</div></div>
+<div><div class="text-lg font-bold text-primary">80%+</div><div class="text-xs text-white/50">Accuracy</div></div>
+<div><div class="text-lg font-bold text-white">6 wks</div><div class="text-xs text-white/50">Time Saved</div></div>
+</div>
+<p class="text-white/60 mb-6 line-clamp-3">End-to-end predictive modeling system integrating satellite data, ground measurements, and market dynamics. Achieved 18% MAE reduction and presented findings to MAAIF.</p>
+<div class="flex gap-4">
+<a class="text-sm text-primary hover:text-white transition-colors flex items-center" href="#vanilla-harvest">Case Study <span class="ml-1">→</span></a>
+<a class="text-sm text-white/40 hover:text-white transition-colors flex items-center" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">GitHub <span class="ml-1">→</span></a>
+</div>
+</div>
+</div>
+<!-- Project 2: Automated ML Pipeline -->
+<div class="glass-card overflow-hidden group proj-card" data-cat="ml automation">
+<div class="relative h-64 overflow-hidden border-b border-white/10 bg-[#0b0e15] flex items-center justify-center">
+<svg fill="none" height="64" stroke="rgba(255,255,255,0.1)" stroke-width="1" viewbox="0 0 24 24" width="64"><rect height="18" rx="2" width="18" x="3" y="3"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Python</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Airflow</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">PostgreSQL</span>
+</div>
+<h3 class="text-2xl font-headline-md text-white mb-4">Automated Impact Evaluation Pipeline</h3>
+<div class="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-white/10">
+<div><div class="text-lg font-bold text-secondary">85%</div><div class="text-xs text-white/50">Time Reduction</div></div>
+<div><div class="text-lg font-bold text-primary">95%+</div><div class="text-xs text-white/50">Data Quality</div></div>
+</div>
+<p class="text-white/60 mb-6 line-clamp-3">Built Python + Airflow ML pipeline with automated data ingestion, causal inference modeling, and report generation. Reduced evaluation cycles from 6 weeks to under 10 days.</p>
+<div class="flex gap-4">
+<a class="text-sm text-primary hover:text-white transition-colors flex items-center" href="#fraud-analytics">View Details <span class="ml-1">→</span></a>
+</div>
+</div>
+</div>
+<!-- Project 3: Real-Time Analytics Dashboard -->
+<div class="glass-card overflow-hidden group proj-card" data-cat="dashboard">
+<div class="relative h-64 overflow-hidden border-b border-white/10">
+<div class="absolute inset-0 bg-gradient-to-t from-[#06091A] to-transparent z-10"></div>
+<img alt="Vanilla Harvest Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="img/demo_dashboard.png"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Power BI</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Tableau</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">SQL</span>
+</div>
+<h3 class="text-2xl font-headline-md text-white mb-4">Real-Time Analytics Dashboard</h3>
+<div class="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-white/10">
+<div><div class="text-lg font-bold text-secondary">15%</div><div class="text-xs text-white/50">Efficiency Gain</div></div>
+<div><div class="text-lg font-bold text-primary">Daily</div><div class="text-xs text-white/50">Auto Updates</div></div>
+</div>
+<p class="text-white/60 mb-6 line-clamp-3">Interactive stakeholder dashboards with daily API automation, enabling data-driven decision-making and operational efficiency improvements across program teams.</p>
+<div class="flex gap-4">
+<a class="text-sm text-primary hover:text-white transition-colors flex items-center" href="#vanilla-harvest">Live Demo <span class="ml-1">→</span></a>
+</div>
+</div>
+</div>
+<!-- Project 4: Scalable ETL Data Warehouse -->
+<div class="glass-card overflow-hidden group proj-card" data-cat="automation">
+<div class="relative h-64 overflow-hidden border-b border-white/10 bg-[#0b0e15] flex items-center justify-center">
+<svg fill="none" height="64" stroke="rgba(255,255,255,0.1)" stroke-width="1" viewbox="0 0 24 24" width="64"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">PostgreSQL</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">API</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Airflow</span>
+</div>
+<h3 class="text-2xl font-headline-md text-white mb-4">Scalable ETL Data Warehouse</h3>
+<div class="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-white/10">
+<div><div class="text-lg font-bold text-secondary">Daily</div><div class="text-xs text-white/50">Sync Schedule</div></div>
+<div><div class="text-lg font-bold text-primary">Multi-source</div><div class="text-xs text-white/50">Integration</div></div>
+</div>
+<p class="text-white/60 mb-6 line-clamp-3">Built automated ETL pipelines with daily API synchronization, ensuring secure data consolidation in a centralized warehouse across multiple government and NGO data sources.</p>
+<div class="flex gap-4">
+<a class="text-sm text-primary hover:text-white transition-colors flex items-center" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">Documentation <span class="ml-1">→</span></a>
+</div>
+</div>
+</div>
+<!-- Project 5: Advanced Time-Series Forecasting -->
+<div class="glass-card overflow-hidden group proj-card" data-cat="ml forecasting">
+<div class="relative h-64 overflow-hidden border-b border-white/10 bg-[#0b0e15] flex items-center justify-center">
+<svg fill="none" height="64" stroke="rgba(255,255,255,0.1)" stroke-width="1" viewbox="0 0 24 24" width="64"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">Prophet</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">ARIMA</span>
+<span class="px-2 py-1 rounded bg-white/5 text-xs text-white/60">R</span>
+</div>
+<h3 class="text-2xl font-headline-md text-white mb-4">Advanced Time-Series Forecasting</h3>
+<div class="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-white/10">
+<div><div class="text-lg font-bold text-secondary">30%</div><div class="text-xs text-white/50">Accuracy Boost</div></div>
+<div><div class="text-lg font-bold text-primary">Published</div><div class="text-xs text-white/50">ScienceDirect</div></div>
+</div>
+<p class="text-white/60 mb-6 line-clamp-3">Hierarchical time-series forecasting with Prophet and ARIMA, achieving significant improvements in agricultural yield predictions for Ugandan vanilla farmers.</p>
+<div class="flex gap-4">
+<a class="text-sm text-primary hover:text-white transition-colors flex items-center" href="https://www.sciencedirect.com/science/article/pii/S2590123025017748" rel="noopener noreferrer" target="_blank">View Publication <span class="ml-1">→</span></a>
+</div>
+</div>
+</div>
+</div>
+<!-- GitHub Activity -->
+<div class="glass-card p-8 mt-10 text-center">
+<h3 class="text-xl font-headline-md text-white mb-2">GitHub Activity</h3>
+<p class="text-white/50 text-sm mb-6">Active development and open-source contributions</p>
+<div class="overflow-x-auto"><img alt="GitHub contribution chart" class="mx-auto rounded-lg max-w-full" loading="lazy" src="https://ghchart.rshah.org/0A84FF/MugarraJohnson"/></div>
+<a class="btn-ghost mt-6 inline-flex" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">View GitHub Profile →</a>
+</div>
+</div>
+</section>
+<!-- FRAUD DETECTION ANALYTICS -->
+<section class="py-24 px-6 relative" id="fraud-analytics">
+<div class="max-w-7xl mx-auto glass-card p-8 lg:p-12">
+<div class="mb-8 max-w-3xl">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Financial Analytics · Predictive Modelling</span>
+<h2 class="text-3xl lg:text-4xl font-headline-lg text-white mb-6">Transaction Fraud Detection Model</h2>
+<p class="text-white/70 font-body-lg">Gradient-boosted risk scores across <strong class="text-white">2,000 synthetic bank transactions</strong>. Each point is plotted by predicted risk score vs. transaction amount (log scale) — the clustering reveals how the model separates legitimate behaviour from suspicious and confirmed fraud. The dashed vertical line marks the 0.50 classification threshold.</p>
+</div>
+<div class="flex flex-wrap items-center gap-4 mb-8">
+<span class="text-sm text-white/50">Channel:</span>
+<button class="fraud-btn active px-4 py-2 rounded-full bg-white/10 text-white text-sm" data-cat="All">All Channels</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="Online"><span class="w-2 h-2 rounded-full bg-[#0A84FF] mr-2"></span>Online</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="ATM"><span class="w-2 h-2 rounded-full bg-[#BF5AF2] mr-2"></span>ATM</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="POS"><span class="w-2 h-2 rounded-full bg-[#32D3C8] mr-2"></span>Point of Sale</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="Wire"><span class="w-2 h-2 rounded-full bg-[#FF9F0A] mr-2"></span>Wire Transfer</button>
+</div>
+<div class="text-sm text-white/60 mb-6" id="fraud-stats"></div>
+<div class="bg-[#0b0e15]/50 border border-white/5 rounded-xl p-4 mb-6 relative">
+<div class="w-full h-[480px]" id="fraud-chart"></div>
+</div>
+<div class="flex flex-wrap gap-6 text-sm text-white/60 justify-center">
+<div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#30D158] opacity-60 mr-2"></span>Legitimate</div>
+<div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#FF9F0A] opacity-80 mr-2"></span>Suspicious</div>
+<div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#FF453A] mr-2"></span>Confirmed Fraud</div>
+<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="28"><line stroke="rgba(255,69,58,0.55)" stroke-dasharray="6,4" stroke-width="1.5" x1="0" x2="28" y1="2.5" y2="2.5"/></svg>Threshold 0.50</div>
+</div>
+</div>
+</section>
+<!-- VANILLA HARVEST TIME SERIES -->
+<section class="py-24 px-6 relative" id="vanilla-harvest">
+<div class="max-w-7xl mx-auto glass-card p-8 lg:p-12">
+<div class="mb-8 max-w-3xl">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Agricultural Analytics · Jan 2024 – Jun 2026</span>
+<h2 class="text-3xl lg:text-4xl font-headline-lg text-white mb-6">Vanilla Harvest Season Analysis</h2>
+<p class="text-white/70 font-body-lg">Pollination activity and projected harvest output across <strong class="text-white">1,000 Ugandan vanilla farmers</strong> (January 2024 – June 2026). Vanilla beans take approximately <strong class="text-white">9 months</strong> to mature after hand-pollination — the harvest line is the pollination curve shifted forward by 9 months. The main pollination season (<strong class="text-white">September–November</strong>) drives the June–July main harvest; the secondary season (<strong class="text-white">February–May</strong>) drives the December–January harvest.</p>
+</div>
+<div class="flex flex-wrap items-center gap-4 mb-8">
+<span class="text-sm text-white/50">Region:</span>
+<button class="vanilla-btn active px-4 py-2 rounded-full bg-white/10 text-white text-sm" data-region="All">All Regions</button>
+<button class="vanilla-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-region="West"><span class="vanilla-dot vdot-west"></span>West</button>
+<button class="vanilla-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-region="Central"><span class="vanilla-dot vdot-central"></span>Central</button>
+<button class="vanilla-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-region="East"><span class="vanilla-dot vdot-east"></span>East</button>
+</div>
+<div class="bg-[#0b0e15]/50 border border-white/5 rounded-xl p-4 mb-6 relative">
+<div aria-label="Vanilla harvest season time series chart" id="vanilla-chart"></div>
+</div>
+<div class="flex flex-wrap gap-6 text-sm text-white/60 justify-center">
+<div class="flex items-center"><span class="inline-block w-4 h-4 rounded mr-2" style="background:rgba(46,160,67,0.22);border:1.5px solid rgba(46,160,67,0.65)"></span>Main Harvest Window (Jun–Jul)</div>
+<div class="flex items-center"><span class="inline-block w-4 h-4 rounded mr-2" style="background:rgba(160,110,50,0.22);border:1.5px solid rgba(160,110,50,0.6)"></span>Secondary Harvest (Dec–Jan)</div>
+<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="26"><line stroke="#2eaab8" stroke-width="2.5" x1="0" x2="26" y1="2.5" y2="2.5"/></svg>Pollination Activity</div>
+<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="26"><line stroke="#d4861a" stroke-dasharray="7,3" stroke-width="2.5" x1="0" x2="26" y1="2.5" y2="2.5"/></svg>Projected Harvest (t+9 mo)</div>
+</div>
+</div>
+</section>
+<!-- SKILLS -->
+<section class="py-24 px-6 bg-white/[0.02]" id="skills">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Expertise</span>
+<h2 class="text-4xl font-headline-lg text-white">Skills &amp; Technologies</h2>
+</div>
+<div class="grid lg:grid-cols-2 gap-16">
+<div class="space-y-8" id="skill-bars">
+<div>
+<h3 class="text-xl font-headline-md text-white mb-6">Programming &amp; Data Science</h3>
+<div class="space-y-4">
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Python (TensorFlow, PyTorch, Scikit-Learn)</span><span class="text-primary">90%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="90" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">R Programming (Statsmodels, Prophet)</span><span class="text-primary">88%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="88" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">SQL &amp; Database Management</span><span class="text-primary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="85" style="width:0%"></div></div></div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-headline-md text-white mb-6">Analytics &amp; Engineering</h3>
+<div class="space-y-4">
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Tableau / Power BI</span><span class="text-secondary">92%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="92" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">ETL Pipelines / Airflow</span><span class="text-secondary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="85" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">NLP &amp; Time-Series Forecasting</span><span class="text-secondary">82%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="82" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">MLOps &amp; Model Deployment</span><span class="text-secondary">80%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="80" style="width:0%"></div></div></div>
+</div>
+</div>
+</div>
+<div class="space-y-6 glass-card p-8">
+<div><div class="text-sm text-white/50 mb-3">Languages</div><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Python</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">R</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">SQL</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Java</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Bash / Batch</span></div></div>
+<div><div class="text-sm text-white/50 mb-3">ML / AI Frameworks</div><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">TensorFlow</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">PyTorch</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Scikit-Learn</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Statsmodels</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Prophet</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">XGBoost</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Keras</span></div></div>
+<div><div class="text-sm text-white/50 mb-3">Visualisation &amp; BI</div><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Tableau</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Power BI</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Looker Studio</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">ArcGIS</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Plotly</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">D3.js</span></div></div>
+<div><div class="text-sm text-white/50 mb-3">Data Engineering &amp; MLOps</div><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Airflow</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Spark</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Hadoop</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Docker</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Git</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">PostgreSQL</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">MongoDB</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">API Integration</span></div></div>
+<div><div class="text-sm text-white/50 mb-3">Cloud &amp; Tools</div><div class="flex flex-wrap gap-2"><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">AWS</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Azure</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Google Cloud</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">Jupyter</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">VS Code</span><span class="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-white/80">RStudio</span></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- CONTACT -->
+<section class="py-24 px-6 relative" id="contact">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Get in touch</span>
+<h2 class="text-4xl font-headline-lg text-white">Let's work together</h2>
+</div>
+<div class="grid lg:grid-cols-2 gap-16">
+<div class="space-y-6">
+<p class="text-lg text-white/70 font-body-lg">Open to Data Science roles, ML/AI projects, research collaborations, consulting engagements, and conversations about predictive analytics, impact evaluation, and development data. Based in Kampala — available remotely worldwide.</p>
+<div class="space-y-4">
+<a class="flex items-center p-4 glass-card hover:bg-white/10 transition-colors group" href="mailto:johnsonmugarra@yahoo.com">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors mr-4 text-lg">✉</div>
+<div><div class="text-sm text-white/50">Email</div><div class="text-white font-medium">johnsonmugarra@yahoo.com</div></div>
+</a>
+<a class="flex items-center p-4 glass-card hover:bg-white/10 transition-colors group" href="tel:+256777108405">
+<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-[#06091A] transition-colors mr-4 text-lg">📞</div>
+<div><div class="text-sm text-white/50">Phone</div><div class="text-white font-medium">+256 777 108 405</div></div>
+</a>
+<a class="flex items-center p-4 glass-card hover:bg-white/10 transition-colors group" href="https://linkedin.com/in/johnsonmugarra" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-[#06091A] transition-colors mr-4 font-bold">in</div>
+<div><div class="text-sm text-white/50">LinkedIn</div><div class="text-white font-medium">linkedin.com/in/johnsonmugarra</div></div>
+</a>
+<a class="flex items-center p-4 glass-card hover:bg-white/10 transition-colors group" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">
+<div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#06091A] transition-colors mr-4">
+<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+</div>
+<div><div class="text-sm text-white/50">GitHub</div><div class="text-white font-medium">github.com/MugarraJohnson</div></div>
+</a>
+<div class="flex items-center p-4 glass-card">
+<div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white/60 mr-4 text-lg">📍</div>
+<div><div class="text-sm text-white/50">Location</div><div class="text-white font-medium">Kampala, Central Region, Uganda</div></div>
+</div>
+</div>
+<!-- QR Code -->
+<div class="glass-card p-6 text-center mt-4">
+<p class="text-sm text-white/50 mb-4">Scan to connect</p>
+<img alt="QR Code to contact Johnson Mugarra" class="h-28 mx-auto rounded-lg" loading="lazy" src="img/adobe-express-qr-code.jpeg"/>
+</div>
+</div>
+<form class="glass-card p-8 space-y-6" id="contact-form" novalidate="">
+<div class="grid grid-cols-2 gap-6">
+<div><label class="block text-sm text-white/60 mb-2" for="fname">Name *</label><input autocomplete="name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fname" name="name" placeholder="Your name" required="" type="text"/></div>
+<div><label class="block text-sm text-white/60 mb-2" for="femail">Email *</label><input autocomplete="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="femail" name="email" placeholder="your@email.com" required="" type="email"/></div>
+</div>
+<div><label class="block text-sm text-white/60 mb-2" for="fsubject">Subject</label><input autocomplete="off" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fsubject" name="subject" placeholder="Project idea, job opportunity…" type="text"/></div>
+<div><label class="block text-sm text-white/60 mb-2" for="fmessage">Message *</label><textarea class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fmessage" name="message" placeholder="Tell me about what you're working on…" required="" rows="5"></textarea></div>
+<div class="f-msg" id="f-msg"></div>
+<button class="w-full btn-primary py-4" id="send-btn" type="submit">Send message →</button>
+</form>
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="py-24 px-6" id="testimonials">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">What people say</span>
+<h2 class="text-4xl font-headline-lg text-white">Testimonials</h2>
+</div>
+<div class="grid lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 testimonial-card">
+<p class="text-white/70 font-body-lg mb-6 italic">"Johnson's predictive models transformed our approach to agricultural planning. His ability to integrate satellite data with ground measurements delivered actionable insights that drove policy decisions at the highest levels."</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold mr-3">M</div>
+<div><div class="text-white font-medium text-sm">Senior Research Lead</div><div class="text-white/40 text-xs">MAAIF / Makerere University</div></div>
+</div>
+</div>
+<div class="glass-card p-8 testimonial-card">
+<p class="text-white/70 font-body-lg mb-6 italic">"The automated evaluation pipeline Johnson built compressed our 6-week process to under 10 days. The data quality and reporting consistency was a game changer for our USAID reporting."</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold mr-3">U</div>
+<div><div class="text-white font-medium text-sm">Director of Research</div><div class="text-white/40 text-xs">Center for Research &amp; Communication</div></div>
+</div>
+</div>
+<div class="glass-card p-8 testimonial-card">
+<p class="text-white/70 font-body-lg mb-6 italic">"A rare combination of deep technical ML expertise and policy-level communication. Johnson's work was presented to the highest level of government — that speaks for itself."</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary font-bold mr-3">R</div>
+<div><div class="text-white font-medium text-sm">Research Supervisor</div><div class="text-white/40 text-xs">Makerere University</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PUBLICATIONS -->
+<section class="py-24 px-6 bg-white/[0.02]" id="publications">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Research &amp; Presentations</span>
+<h2 class="text-4xl font-headline-lg text-white">Publications &amp; Key Presentations</h2>
+</div>
+<div class="space-y-6">
+<div class="glass-card p-8 flex gap-6 pub-item">
+<div class="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+<svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="28"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+</div>
+<div>
+<h3 class="text-xl font-headline-md text-white mb-2">Presidential Presentation on Agricultural Analytics</h3>
+<p class="text-sm text-primary mb-3">Presented to H.E. President Yoweri Kaguta Museveni · April 2025 · Makerere University</p>
+<p class="text-white/60 mb-4">Research findings and policy recommendations on Vanilla supply chain forecasting using ML and satellite data integration. Demonstrated 30% improvement in forecast accuracy and presented actionable insights for agricultural policy.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 rounded bg-primary/10 border border-primary/20 text-xs text-primary">ML/AI</span>
+<span class="px-2 py-1 rounded bg-primary/10 border border-primary/20 text-xs text-primary">Policy Impact</span>
+<span class="px-2 py-1 rounded bg-primary/10 border border-primary/20 text-xs text-primary">Agriculture</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 flex gap-6 pub-item">
+<div class="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary flex-shrink-0">
+<svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="28"><path d="M2 3h20v13H2z"/><path d="M8 21l4-5 4 5"/><path d="M12 16v2"/><path d="M7 8h10M7 11h6"/></svg>
+</div>
+<div>
+<h3 class="text-xl font-headline-md text-white mb-2">Impact Evaluation Methodologies Workshop</h3>
+<p class="text-sm text-secondary mb-3">CRC Studies · 2025 · Multiple Stakeholder Sessions</p>
+<p class="text-white/60 mb-4">Led technical training workshops on advanced statistical modeling, causal inference, and automated analytics for program evaluation teams across East Africa.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 rounded bg-secondary/10 border border-secondary/20 text-xs text-secondary">Training</span>
+<span class="px-2 py-1 rounded bg-secondary/10 border border-secondary/20 text-xs text-secondary">Impact Evaluation</span>
+<span class="px-2 py-1 rounded bg-secondary/10 border border-secondary/20 text-xs text-secondary">Capacity Building</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- EDUCATION -->
+<section class="py-24 px-6" id="Education">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Credentials</span>
+<h2 class="text-4xl font-headline-lg text-white">Education &amp; Certifications</h2>
+</div>
+<div class="grid lg:grid-cols-2 gap-12">
+<div class="space-y-6">
+<h3 class="text-sm font-label-mono text-white/40 uppercase tracking-widest">Education</h3>
+<div class="glass-card p-6 flex items-start gap-4 highlight-card">
+<img alt="MAHE" class="h-12 w-12 object-contain rounded flex-shrink-0" src="img/mahe-logo.png"/>
+<div>
+<div class="text-white font-headline-md font-bold">M.Sc. Data Science</div>
+<div class="text-primary text-sm"><a class="hover:underline" href="https://manipal.edu" rel="noopener noreferrer" target="_blank">Manipal Academy of Higher Education (MAHE), India</a></div>
+<div class="text-white/40 text-xs mt-1">2022 – 2024</div>
+</div>
+</div>
+<div class="glass-card p-6 flex items-start gap-4 highlight-card">
+<img alt="Makerere University" class="h-12 w-12 object-contain rounded flex-shrink-0" src="img/Mak-Logo.png"/>
+<div>
+<div class="text-white font-headline-md font-bold">B.Sc. Agriculture Science</div>
+<div class="text-primary text-sm"><a class="hover:underline" href="https://mak.ac.ug" rel="noopener noreferrer" target="_blank">Makerere University, Kampala, Uganda</a></div>
+<div class="text-white/40 text-xs mt-1">2016 – 2021</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h3 class="text-sm font-label-mono text-white/40 uppercase tracking-widest">Certifications</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card p-5 cert-card">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-3">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+</div>
+<div class="text-secondary font-bold text-sm">PMP</div>
+<div class="text-white/40 text-xs mt-1">Google Certified</div>
+<div class="text-white/30 text-xs">Project Management</div>
+</div>
+<div class="glass-card p-5 cert-card">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-3">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><rect height="18" rx="1" width="4" x="18" y="3"/><rect height="13" rx="1" width="4" x="10" y="8"/><rect height="8" rx="1" width="4" x="2" y="13"/></svg>
+</div>
+<div class="text-primary font-bold text-sm">Power BI</div>
+<div class="text-white/40 text-xs mt-1">Microsoft Certified</div>
+<div class="text-white/30 text-xs">Data Analyst Associate</div>
+</div>
+<div class="glass-card p-5 cert-card">
+<div class="w-10 h-10 rounded-lg bg-tertiary/20 flex items-center justify-center text-tertiary mb-3">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+</div>
+<div class="text-tertiary font-bold text-sm">SAS Statistics</div>
+<div class="text-white/40 text-xs mt-1">SAS Institute</div>
+<div class="text-white/30 text-xs">Statistical Business Analyst</div>
+</div>
+<div class="glass-card p-5 cert-card">
+<div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary mb-3">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><rect height="9" rx="1" width="7" x="3" y="3"/><rect height="5" rx="1" width="7" x="14" y="3"/><rect height="9" rx="1" width="7" x="14" y="12"/><rect height="5" rx="1" width="7" x="3" y="16"/></svg>
+</div>
+<div class="text-secondary font-bold text-sm">Tableau</div>
+<div class="text-white/40 text-xs mt-1">Tableau / Salesforce</div>
+<div class="text-white/30 text-xs">Desktop Specialist</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="py-8 px-6 border-t border-white/10 bg-[#06091A] relative z-10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
+<div class="font-headline-md text-white/60">JM<span class="text-primary">.</span></div>
+<div>© Johnson Mugarra 2026. All rights reserved.</div>
+<div class="flex space-x-6">
+<a class="hover:text-white transition-colors" href="#hero">Top ↑</a>
+<a class="hover:text-white transition-colors" href="mailto:johnsonmugarra@yahoo.com">Email</a>
+<a class="hover:text-white transition-colors" href="https://linkedin.com/in/johnsonmugarra" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+<a class="hover:text-white transition-colors" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">GitHub</a>
+<a class="hover:text-white transition-colors" download="" href="CV_Johnson_Mugarra.pdf">Download CV</a>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Nav -->
+<nav aria-label="Mobile navigation" class="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+<div class="flex gap-2 border-t border-white/10 bg-[#06091A]/90 backdrop-blur-xl px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#hero"><span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1">house</span><p class="text-xs font-medium">Home</p></a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-white/50 hover:text-white transition-colors" href="#projects"><span class="material-symbols-outlined text-2xl">work</span><p class="text-xs font-medium">Projects</p></a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-white/50 hover:text-white transition-colors" href="#skills"><span class="material-symbols-outlined text-2xl">star</span><p class="text-xs font-medium">Skills</p></a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-white/50 hover:text-white transition-colors" href="#contact"><span class="material-symbols-outlined text-2xl">mail</span><p class="text-xs font-medium">Contact</p></a>
+</div>
+</nav>
+<!-- Fraud Detection D3 Chart -->
+<script>
+(function initFraudChart() {
+  if (!window.d3) return;
+  var textColor = 'rgba(255,255,255,0.7)', axisColor = 'rgba(255,255,255,0.1)';
+  var gridColor = 'rgba(255,255,255,0.05)', threshColor = 'rgba(255,69,58,0.5)';
+  var zoneColor = 'rgba(255,69,58,0.04)';
+  function mkRNG(seed) { var s = seed >>> 0; return function() { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; }; }
+  var rng = mkRNG(20240201);
+  function gauss(mean, std) { var u1 = Math.max(1e-10, rng()), u2 = rng(); return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std; }
+  function logUniform(lo, hi) { return Math.exp(Math.log(lo) + rng() * (Math.log(hi) - Math.log(lo))); }
+  var AMOUNT = { Online:{leg:[8,900],susp:[300,5000],fraud:[600,22000]}, ATM:{leg:[20,500],susp:[200,2000],fraud:[400,6000]}, POS:{leg:[4,400],susp:[150,3000],fraud:[800,15000]}, Wire:{leg:[150,9000],susp:[3000,30000],fraud:[9000,95000]} };
+  var txns = [];
+  for (var i = 0; i < 2000; i++) {
+    var cr = rng(); var cat = cr < 0.40 ? 'Online' : cr < 0.60 ? 'ATM' : cr < 0.90 ? 'POS' : 'Wire';
+    var sr = rng(); var status, risk, amount;
+    if (sr < 0.83) { status='Legitimate'; risk=Math.max(0.004,Math.min(0.94,gauss(0.11,0.08))); amount=logUniform(AMOUNT[cat].leg[0],AMOUNT[cat].leg[1]); if(rng()<0.04) amount*=(1.8+rng()*3.5); }
+    else if (sr < 0.93) { status='Suspicious'; risk=Math.max(0.22,Math.min(0.89,gauss(0.50,0.14))); amount=logUniform(AMOUNT[cat].susp[0],AMOUNT[cat].susp[1]); }
+    else { status='Fraud'; risk=Math.max(0.36,Math.min(0.998,gauss(0.77,0.13))); amount=logUniform(AMOUNT[cat].fraud[0],AMOUNT[cat].fraud[1]); }
+    txns.push({id:i,cat:cat,status:status,risk:+risk.toFixed(4),amount:+amount.toFixed(2)});
+  }
+  var STATUS_COL = {Legitimate:'#30D158',Suspicious:'#FF9F0A',Fraud:'#FF453A'};
+  var STATUS_OPA = {Legitimate:0.48,Suspicious:0.75,Fraud:0.92};
+  var STATUS_R = {Legitimate:3.5,Suspicious:4.5,Fraud:5.5};
+  var ORDER = ['Legitimate','Suspicious','Fraud'];
+  var container = document.getElementById('fraud-chart');
+  if (!container) return;
+  var WT=960, HT=480, M={top:30,right:28,bottom:58,left:84};
+  var W=WT-M.left-M.right, H=HT-M.top-M.bottom;
+  var svg = d3.select('#fraud-chart').append('svg').attr('viewBox','0 0 '+WT+' '+HT).style('width','100%').style('height','100%').style('overflow','visible');
+  var g = svg.append('g').attr('transform','translate('+M.left+','+M.top+')');
+  var xSc = d3.scaleLinear().domain([0,1]).range([0,W]);
+  var ySc = d3.scaleLog().domain([3.5,130000]).range([H,0]).nice();
+  g.append('g').call(d3.axisLeft(ySc).ticks(6).tickSize(-W).tickFormat('')).call(function(el){el.select('.domain').remove();el.selectAll('line').attr('stroke',gridColor).attr('stroke-dasharray','3,5');});
+  g.append('rect').attr('x',xSc(0.5)).attr('y',0).attr('width',W-xSc(0.5)).attr('height',H).attr('fill',zoneColor);
+  var tx=xSc(0.5);
+  g.append('line').attr('x1',tx).attr('x2',tx).attr('y1',0).attr('y2',H).attr('stroke',threshColor).attr('stroke-width',1.5).attr('stroke-dasharray','7,4');
+  g.append('text').attr('x',tx+6).attr('y',18).attr('fill',threshColor).attr('font-size','9px').attr('font-weight','700').attr('letter-spacing','0.06em').text('RISK THRESHOLD');
+  var xAx = g.append('g').attr('transform','translate(0,'+H+')').call(d3.axisBottom(xSc).ticks(10).tickFormat(d3.format('.1f')).tickSizeOuter(0));
+  xAx.selectAll('text').style('fill',textColor).style('font-size','10px');
+  xAx.select('.domain').style('stroke',axisColor);
+  xAx.selectAll('.tick line').style('stroke',axisColor);
+  g.append('text').attr('x',W/2).attr('y',H+46).attr('text-anchor','middle').attr('fill','rgba(195,195,195,0.52)').attr('font-size','10.5px').text('Predicted Risk Score');
+  var yAx = g.append('g').call(d3.axisLeft(ySc).ticks(6).tickFormat(function(d){return d>=1000?'$'+(d/1000).toFixed(0)+'k':'$'+d;}).tickSizeOuter(0));
+  yAx.selectAll('text').style('fill',textColor).style('font-size','10px');
+  yAx.select('.domain').style('stroke',axisColor);
+  yAx.selectAll('.tick line').style('stroke',axisColor);
+  g.append('text').attr('transform','rotate(-90)').attr('x',-H/2).attr('y',-68).attr('text-anchor','middle').attr('fill','rgba(195,195,195,0.52)').attr('font-size','10.5px').text('Transaction Amount (USD)');
+  var sortedTxns = txns.slice().sort(function(a,b){return ORDER.indexOf(a.status)-ORDER.indexOf(b.status);});
+  var dots = g.append('g').selectAll('circle').data(sortedTxns).enter().append('circle')
+    .attr('cx',function(d){return xSc(d.risk);}).attr('cy',function(d){return ySc(Math.max(3.5,d.amount));})
+    .attr('r',function(d){return STATUS_R[d.status];}).attr('fill',function(d){return STATUS_COL[d.status];})
+    .attr('fill-opacity',function(d){return STATUS_OPA[d.status];}).style('cursor','crosshair');
+  var tip = d3.select('#fraud-chart').append('div').attr('class','fraud-tooltip');
+  dots.on('mouseover',function(event,d){
+    d3.select(this).raise().transition().duration(80).attr('r',STATUS_R[d.status]+2.5).attr('fill-opacity',1);
+    var sc='rgba(185,185,185,0.55)', tc='rgba(255,255,255,0.92)';
+    var html='<strong style="color:'+STATUS_COL[d.status]+'">'+d.status+'</strong> <span style="color:'+sc+';font-size:10px">· '+d.cat+'</span><br>'
+      +'<span style="color:'+sc+'">Amount: </span><strong style="color:'+tc+'">$'+d.amount.toLocaleString('en',{maximumFractionDigits:0})+'</strong><br>'
+      +'<span style="color:'+sc+'">Risk Score: </span><strong style="color:'+STATUS_COL[d.status]+'">'+(d.risk*100).toFixed(1)+'%</strong>';
+    if(d.risk>=0.5&&d.status==='Legitimate') html+='<br><span style="color:#FF9F0A;font-size:10px">⚠ False positive</span>';
+    if(d.risk<0.5&&d.status==='Fraud') html+='<br><span style="color:#FF453A;font-size:10px">⚠ Undetected fraud</span>';
+    var cR=container.getBoundingClientRect(), lx=event.clientX-cR.left+14, ty=event.clientY-cR.top-62;
+    if(lx+240>cR.width) lx=event.clientX-cR.left-224;
+    tip.style('display','block').style('left',lx+'px').style('top',ty+'px').html(html);
+  }).on('mouseleave',function(event,d){
+    tip.style('display','none');
+    d3.select(this).transition().duration(80).attr('r',STATUS_R[d.status]).attr('fill-opacity',STATUS_OPA[d.status]);
+  });
+  var statsEl = document.getElementById('fraud-stats');
+  var activeCat = 'All';
+  function updateStats(cat) {
+    var vis = cat==='All'?txns:txns.filter(function(t){return t.cat===cat;});
+    var total=vis.length, fCnt=vis.filter(function(t){return t.status==='Fraud';}).length, sCnt=vis.filter(function(t){return t.status==='Suspicious';}).length;
+    if(statsEl) statsEl.innerHTML='<strong>'+total.toLocaleString()+'</strong> transactions &nbsp;·&nbsp; <span style="color:#FF453A"><strong>'+fCnt+'</strong> fraud ('+(fCnt/total*100).toFixed(1)+'%)</span> &nbsp;·&nbsp; <span style="color:#FF9F0A"><strong>'+sCnt+'</strong> suspicious ('+(sCnt/total*100).toFixed(1)+'%)</span>';
+  }
+  function filterDots(cat) {
+    dots.transition().duration(380).attr('fill-opacity',function(d){return(cat==='All'||d.cat===cat)?STATUS_OPA[d.status]:0;}).attr('r',function(d){return(cat==='All'||d.cat===cat)?STATUS_R[d.status]:0;});
+    updateStats(cat);
+  }
+  document.querySelectorAll('.fraud-btn[data-cat]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var cat=btn.dataset.cat; if(cat===activeCat) return; activeCat=cat;
+      document.querySelectorAll('.fraud-btn[data-cat]').forEach(function(b){b.classList.toggle('active',b.dataset.cat===cat); b.classList.toggle('bg-white/10',b.dataset.cat===cat);});
+      filterDots(cat);
     });
-
-    var dots = g.append('g').selectAll('circle')
-      .data(sortedTxns)
-      .enter().append('circle')
-      .attr('cx', function(d) { return xSc(d.risk); })
-      .attr('cy', function(d) { return ySc(Math.max(3.5, d.amount)); })
-      .attr('r',  function(d) { return STATUS_R[d.status]; })
-      .attr('fill', function(d) { return STATUS_COL[d.status]; })
-      .attr('fill-opacity', function(d) { return STATUS_OPA[d.status]; })
-      .style('cursor', 'crosshair');
-
-    // ── Tooltip ─────────────────────────────────────────────
-    var tip = d3.select('#fraud-chart').append('div').attr('class', 'fraud-tooltip');
-    var tc = isLight ? '#0a0a0a' : 'rgba(255,255,255,0.92)';
-    var sc = isLight ? 'rgba(50,50,50,0.55)' : 'rgba(185,185,185,0.55)';
-
-    dots.on('mouseover', function(event, d) {
-      d3.select(this).raise().transition().duration(80)
-        .attr('r', STATUS_R[d.status] + 2.5).attr('fill-opacity', 1);
-
-      var html =
-        '<strong style="color:' + STATUS_COL[d.status] + '">' + d.status + '</strong>'
-        + ' <span style="color:' + sc + ';font-size:10px">· ' + d.cat + '</span><br>'
-        + '<span style="color:' + sc + '">Amount: </span>'
-        + '<strong style="color:' + tc + '">$' + d.amount.toLocaleString('en', {maximumFractionDigits:0}) + '</strong><br>'
-        + '<span style="color:' + sc + '">Risk Score: </span>'
-        + '<strong style="color:' + STATUS_COL[d.status] + '">' + (d.risk * 100).toFixed(1) + '%</strong>';
-      if (d.risk >= 0.5 && d.status === 'Legitimate')
-        html += '<br><span style="color:#FF9F0A;font-size:10px">&#9888; False positive</span>';
-      if (d.risk < 0.5 && d.status === 'Fraud')
-        html += '<br><span style="color:#FF453A;font-size:10px">&#9888; Undetected fraud</span>';
-
-      var cR = container.getBoundingClientRect();
-      var lx = event.clientX - cR.left + 14, ty = event.clientY - cR.top - 62;
-      if (lx + 240 > cR.width) lx = event.clientX - cR.left - 224;
-      tip.style('display','block').style('left', lx+'px').style('top', ty+'px').html(html);
-    })
-    .on('mouseleave', function(event, d) {
-      tip.style('display','none');
-      d3.select(this).transition().duration(80)
-        .attr('r', STATUS_R[d.status]).attr('fill-opacity', STATUS_OPA[d.status]);
+  });
+  updateStats('All');
+})();
+</script>
+<!-- Vanilla Harvest D3 Chart -->
+<script>
+(function initVanillaChart() {
+  if (!window.d3) return;
+  var textColor='rgba(232,232,232,0.92)', axisColor='rgba(255,255,255,0.20)', gridColor='rgba(255,255,255,0.06)', hLineColor='rgba(255,255,255,0.25)', labelDimColor='rgba(195,195,195,0.58)';
+  function makePRNG(seed) { var s=seed>>>0; return function(){s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296;}; }
+  var rng=makePRNG(20240315);
+  function gauss(mean,std){var u1=Math.max(1e-10,rng()),u2=rng();return mean+Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2)*std;}
+  var PROFILES={West:{mean:608,std:25},Central:{mean:400,std:10},East:{mean:100,std:6}};
+  var farmers=[];
+  for(var i=0;i<1000;i++){var r=rng();var region=r<0.60?'West':r<0.90?'Central':'East';farmers.push({region:region,basePeak:Math.max(18,gauss(PROFILES[region].mean,PROFILES[region].std))});}
+  var SF=[0.10,0.44,0.80,1.00,0.82,0.06,0.05,0.14,0.54,0.94,0.69,0.07];
+  var genData=[]; var gmo=3,gyr=2023;
+  for(var gi=0;gi<39;gi++){
+    var yf=1+(gyr-2022)*0.055, sf=SF[gmo];
+    var sums={West:0,Central:0,East:0},cnts={West:0,Central:0,East:0};
+    farmers.forEach(function(f){var exp=f.basePeak*sf*yf*26;var val=Math.max(0,exp+(rng()-0.5)*exp*0.30);sums[f.region]+=val;cnts[f.region]++;});
+    genData.push({date:new Date(gyr,gmo,15),West:cnts.West?sums.West/cnts.West:0,Central:cnts.Central?sums.Central/cnts.Central:0,East:cnts.East?sums.East/cnts.East:0,All:(sums.West+sums.Central+sums.East)/1000});
+    gmo++;if(gmo>11){gmo=0;gyr++;}
+  }
+  var pollBase=genData.slice(9,39), harvBase=genData.slice(0,30);
+  function getLines(reg){return{poll:pollBase.map(function(d){return{date:d.date,value:d[reg]};}),harv:harvBase.map(function(d,j){return{date:pollBase[j].date,value:d[reg]};})};}
+  var allVals=[];
+  ['All','West','Central','East'].forEach(function(reg){var L=getLines(reg);L.poll.concat(L.harv).forEach(function(d){allVals.push(d.value);});});
+  var globalYMax=d3.max(allVals);
+  var container=document.getElementById('vanilla-chart');
+  if(!container) return;
+  var WT=960,HT=490,M={top:40,right:22,bottom:64,left:74};
+  var W=WT-M.left-M.right,H=HT-M.top-M.bottom;
+  var svg=d3.select('#vanilla-chart').append('svg').attr('viewBox','0 0 '+WT+' '+HT).attr('style','max-width:100%;height:auto;display:block;overflow:visible');
+  var g=svg.append('g').attr('transform','translate('+M.left+','+M.top+')');
+  var xScale=d3.scaleTime().domain([new Date(2024,0,1),new Date(2026,6,15)]).range([0,W]);
+  var yScale=d3.scaleLinear().domain([0,globalYMax*1.12]).range([H,0]).nice();
+  var BSTYLE={main:{fill:'rgba(46,160,67,0.13)',stroke:'rgba(46,160,67,0.45)',lbl:'#1e7a32',txt:'Main Harvest'},secondary:{fill:'rgba(160,110,50,0.13)',stroke:'rgba(160,110,50,0.40)',lbl:'#7a5020',txt:'2nd Harvest'}};
+  var bands=[{s:new Date(2024,5,1),e:new Date(2024,7,1),t:'main'},{s:new Date(2024,11,1),e:new Date(2025,1,1),t:'secondary'},{s:new Date(2025,5,1),e:new Date(2025,7,1),t:'main'},{s:new Date(2025,11,1),e:new Date(2026,1,1),t:'secondary'},{s:new Date(2026,5,1),e:new Date(2026,7,1),t:'main'}];
+  var bandsG=g.append('g');
+  bands.forEach(function(b){var x1=Math.max(0,xScale(b.s)),x2=Math.min(W,xScale(b.e));if(x2<=x1)return;var c=BSTYLE[b.t];bandsG.append('rect').attr('x',x1).attr('y',0).attr('width',x2-x1).attr('height',H).attr('fill',c.fill).attr('stroke',c.stroke).attr('stroke-width',1).attr('stroke-dasharray','3,3');bandsG.append('text').attr('x',(x1+x2)/2).attr('y',-10).attr('text-anchor','middle').attr('fill',c.lbl).attr('font-size','9px').attr('font-weight','700').text(c.txt);});
+  g.append('g').call(d3.axisLeft(yScale).ticks(6).tickSize(-W).tickFormat('')).call(function(gEl){gEl.select('.domain').remove();gEl.selectAll('line').attr('stroke',gridColor).attr('stroke-dasharray','3,5');});
+  var xAx=g.append('g').attr('transform','translate(0,'+H+')').call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(2)).tickFormat(d3.timeFormat('%b %Y')).tickSizeOuter(0));
+  xAx.selectAll('text').style('fill',textColor).style('font-size','10px').attr('transform','rotate(-38)').attr('text-anchor','end').attr('dx','-0.4em').attr('dy','0.15em');
+  xAx.select('.domain').style('stroke',axisColor); xAx.selectAll('.tick line').style('stroke',axisColor);
+  var yAx=g.append('g').call(d3.axisLeft(yScale).ticks(6).tickFormat(function(d){return d>=1000?(d/1000).toFixed(1)+'k':d;}).tickSizeOuter(0));
+  yAx.selectAll('text').style('fill',textColor).style('font-size','10px');
+  yAx.select('.domain').style('stroke',axisColor); yAx.selectAll('.tick line').style('stroke',axisColor);
+  g.append('text').attr('transform','rotate(-90)').attr('x',-H/2).attr('y',-60).attr('text-anchor','middle').attr('fill',labelDimColor).attr('font-size','10.5px').text('Avg. Flowers / Farmer / Month');
+  var PCOL='#2eaab8', HCOL='#d4861a';
+  var lineGen=d3.line().x(function(d){return xScale(d.date);}).y(function(d){return yScale(d.value);}).curve(d3.curveCatmullRom.alpha(0.5));
+  var pollPath=g.append('path').attr('fill','none').attr('stroke',PCOL).attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round');
+  var harvPath=g.append('path').attr('fill','none').attr('stroke',HCOL).attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round').attr('stroke-dasharray','7,3');
+  var activeRegion='All';
+  function updateChart(reg,animate){var L=getLines(reg);if(animate){pollPath.transition().duration(450).attr('d',lineGen(L.poll));harvPath.transition().duration(450).attr('d',lineGen(L.harv));}else{pollPath.attr('d',lineGen(L.poll));harvPath.attr('d',lineGen(L.harv));}}
+  updateChart('All',false);
+  var tooltip=d3.select('#vanilla-chart').append('div').attr('class','vanilla-tooltip');
+  var MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var bisect=d3.bisector(function(d){return d.date;}).left;
+  var hLine=g.append('line').attr('y1',0).attr('y2',H).attr('stroke',hLineColor).attr('stroke-width',1).attr('stroke-dasharray','4,4').style('display','none');
+  g.append('rect').attr('width',W).attr('height',H).attr('fill','none').attr('pointer-events','all')
+    .on('mousemove',function(ev){
+      var L=getLines(activeRegion), mx=d3.pointer(ev)[0];
+      var idx=Math.min(bisect(L.poll,xScale.invert(mx),1),L.poll.length-1);
+      var pd=L.poll[idx],hd=L.harv[idx]; if(!pd) return;
+      hLine.attr('x1',xScale(pd.date)).attr('x2',xScale(pd.date)).style('display',null);
+      var mo=pd.date.getMonth(),yr=pd.date.getFullYear();
+      var pDate=new Date(yr,mo-9,1), pStr=MN[pDate.getMonth()]+' '+pDate.getFullYear();
+      var sc='rgba(185,185,185,0.55)', tc='rgba(255,255,255,0.92)';
+      var html='<strong style="color:'+tc+'">'+MN[mo]+' '+yr+'</strong> <span style="color:'+sc+';font-size:10px">('+activeRegion+' Uganda)</span><br>'
+        +'<span style="color:'+PCOL+'">Pollination: </span><strong>'+Math.round(pd.value).toLocaleString()+'</strong> flowers<br>'
+        +'<span style="color:'+HCOL+'">Harvest: </span><strong>'+Math.round(hd.value/5.6).toLocaleString()+'</strong> Kgs <span style="color:'+sc+';font-size:10px">(from '+pStr+')</span>';
+      if(mo===5||mo===6) html+='<br><span style="color:#2a9d5c;font-size:10px;font-weight:600">Main Harvest Period</span>';
+      if(mo===11||mo===0) html+='<br><span style="color:#c4821a;font-size:10px;font-weight:600">Secondary Harvest Period</span>';
+      var cR=container.getBoundingClientRect(), ttL=ev.clientX-cR.left+14, ttT=ev.clientY-cR.top-52;
+      if(ttL+240>cR.width) ttL=ev.clientX-cR.left-215;
+      tooltip.style('display','block').style('left',ttL+'px').style('top',ttT+'px').html(html);
+    }).on('mouseleave',function(){hLine.style('display','none');tooltip.style('display','none');});
+  document.querySelectorAll('.vanilla-btn[data-region]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var reg=btn.dataset.region; if(reg===activeRegion) return; activeRegion=reg;
+      document.querySelectorAll('.vanilla-btn[data-region]').forEach(function(b){b.classList.toggle('active',b.dataset.region===reg);b.classList.toggle('bg-white/10',b.dataset.region===reg);});
+      updateChart(reg,true);
     });
-
-    // ── Stats bar ────────────────────────────────────────────
-    var statsEl = document.getElementById('fraud-stats');
-    function updateStats(cat) {
-      var vis   = cat === 'All' ? txns : txns.filter(function(t) { return t.cat === cat; });
-      var total = vis.length;
-      var fCnt  = vis.filter(function(t) { return t.status === 'Fraud'; }).length;
-      var sCnt  = vis.filter(function(t) { return t.status === 'Suspicious'; }).length;
-      if (statsEl) statsEl.innerHTML =
-        '<strong>' + total.toLocaleString() + '</strong> transactions'
-        + ' <span class="fstat-sep">&#183;</span> '
-        + '<span style="color:#FF453A"><strong>' + fCnt + '</strong> fraud ('
-        + (fCnt / total * 100).toFixed(1) + '%)</span>'
-        + ' <span class="fstat-sep">&#183;</span> '
-        + '<span style="color:#FF9F0A"><strong>' + sCnt + '</strong> suspicious ('
-        + (sCnt / total * 100).toFixed(1) + '%)</span>';
-    }
-
-    // ── Category filter ─────────────────────────────────────
-    var activeCat = 'All';
-    function filterDots(cat) {
-      dots.transition().duration(380)
-        .attr('fill-opacity', function(d) {
-          return (cat === 'All' || d.cat === cat) ? STATUS_OPA[d.status] : 0;
-        })
-        .attr('r', function(d) {
-          return (cat === 'All' || d.cat === cat) ? STATUS_R[d.status] : 0;
-        });
-      updateStats(cat);
-    }
-
-    document.querySelectorAll('.fraud-btn[data-cat]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var cat = btn.dataset.cat;
-        if (cat === activeCat) return;
-        activeCat = cat;
-        document.querySelectorAll('.fraud-btn[data-cat]').forEach(function(b) {
-          b.classList.toggle('active', b.dataset.cat === cat);
-        });
-        filterDots(cat);
-      });
-    });
-
-    updateStats('All');
-  })();
-  </script>
-
-  <!-- Vanilla Harvest D3 Chart -->
-  <script>
-  (function initVanillaChart() {
-    if (!window.d3) { console.warn('D3 not loaded'); return; }
-
-    // ── Theme-aware colours ───────────────────────────────────
-    var savedTheme = localStorage.getItem('jm-theme');
-    var osDark     = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var isLight    = savedTheme ? savedTheme === 'light' : !osDark;
-    var textColor  = isLight ? 'rgba(18,18,18,0.92)'  : 'rgba(232,232,232,0.92)';
-    var axisColor  = isLight ? 'rgba(0,0,0,0.25)'     : 'rgba(255,255,255,0.20)';
-    var gridColor  = isLight ? 'rgba(0,0,0,0.07)'     : 'rgba(255,255,255,0.06)';
-    var hLineColor = isLight ? 'rgba(0,0,0,0.25)'     : 'rgba(255,255,255,0.25)';
-    var labelDimColor = isLight ? 'rgba(40,40,40,0.58)' : 'rgba(195,195,195,0.58)';
-
-    // ── Seeded PRNG (LCG) ────────────────────────────────────
-    function makePRNG(seed) {
-      var s = seed >>> 0;
-      return function () {
-        s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
-        return s / 4294967296;
-      };
-    }
-    var rng = makePRNG(20240315);
-
-    // ── Gaussian sample via Box-Muller ───────────────────────
-    function gauss(mean, std) {
-      var u1 = Math.max(1e-10, rng()), u2 = rng();
-      return mean + Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2) * std;
-    }
-
-    // ── Farmers (15,000) ──────────────────────────────────────
-    var PROFILES = { West:{mean:608,std:25}, Central:{mean:400,std:10}, East:{mean:100,std:6} };
-    var farmers = [];
-    for (var i = 0; i < 1000; i++) {
-      var r = rng();
-      var region = r < 0.60 ? 'West' : r < 0.90 ? 'Central' : 'East';
-      farmers.push({ region: region, basePeak: Math.max(18, gauss(PROFILES[region].mean, PROFILES[region].std)) });
-    }
-
-    // ── Seasonal factors (Jan=0 … Dec=11) ────────────────────
-    var SF = [0.10, 0.44, 0.80, 1.00, 0.82, 0.06, 0.05, 0.14, 0.54, 0.94, 0.69, 0.07];
-
-    // ── Generate monthly data: Apr 2023 → Jun 2026 (39 mo) ──
-    // genData index 0 = Apr 2023 … index 38 = Jun 2026
-    // Harvest for display month j = genData[j]     (9 months before the display date)
-    // Pollination for display month j = genData[9+j] (Jan 2024 + j months)
-    var genData = [];
-    var gmo = 3, gyr = 2023;
-    for (var gi = 0; gi < 39; gi++) {
-      var yf = 1 + (gyr - 2022) * 0.055;
-      var sf = SF[gmo];
-      var sums = {West:0, Central:0, East:0};
-      var cnts = {West:0, Central:0, East:0};
-      farmers.forEach(function(f) {
-        var exp = f.basePeak * sf * yf * 26;
-        var val = Math.max(0, exp + (rng() - 0.5) * exp * 0.30);
-        sums[f.region] += val; cnts[f.region]++;
-      });
-      genData.push({
-        date:    new Date(gyr, gmo, 15),
-        West:    cnts.West    ? sums.West    / cnts.West    : 0,
-        Central: cnts.Central ? sums.Central / cnts.Central : 0,
-        East:    cnts.East    ? sums.East    / cnts.East    : 0,
-        All:     (sums.West + sums.Central + sums.East) / 1000
-      });
-      gmo++; if (gmo > 11) { gmo = 0; gyr++; }
-    }
-
-    // Display slices — both cover Jan 2024 → Jun 2026 (30 months)
-    var pollBase = genData.slice(9, 39); // pollination values, Jan 2024–Jun 2026
-    var harvBase = genData.slice(0, 30); // harvest source values (Apr 2023–Sep 2025), mapped to same display dates
-
-    function getLines(reg) {
-      return {
-        poll: pollBase.map(function(d)    { return {date: d.date, value: d[reg]}; }),
-        harv: harvBase.map(function(d, j) { return {date: pollBase[j].date, value: d[reg]}; })
-      };
-    }
-
-    // Y-max computed across all region selections so axis stays stable
-    var allVals = [];
-    ['All', 'West', 'Central', 'East'].forEach(function(reg) {
-      var L = getLines(reg);
-      L.poll.concat(L.harv).forEach(function(d) { allVals.push(d.value); });
-    });
-    var globalYMax = d3.max(allVals);
-
-    // ── Chart geometry ───────────────────────────────────────
-    var container = document.getElementById('vanilla-chart');
-    if (!container) return;
-
-    var WT = 960, HT = 490, M = {top:40, right:22, bottom:64, left:74};
-    var W = WT - M.left - M.right, H = HT - M.top - M.bottom;
-
-    var svg = d3.select('#vanilla-chart')
-      .append('svg')
-      .attr('viewBox', '0 0 ' + WT + ' ' + HT)
-      .attr('style', 'max-width:100%;height:auto;display:block;overflow:visible');
-    var g = svg.append('g').attr('transform', 'translate(' + M.left + ',' + M.top + ')');
-
-    // ── Scales ───────────────────────────────────────────────
-    var xScale = d3.scaleTime()
-      .domain([new Date(2024, 0, 1), new Date(2026, 6, 15)])
-      .range([0, W]);
-
-    var yScale = d3.scaleLinear()
-      .domain([0, globalYMax * 1.12])
-      .range([H, 0]).nice();
-
-    // ── Harvest shading ──────────────────────────────────────
-    var BSTYLE = {
-      main:      {fill:'rgba(46,160,67,0.13)',  stroke:'rgba(46,160,67,0.45)',  lbl:'#1e7a32', txt:'Main Harvest'},
-      secondary: {fill:'rgba(160,110,50,0.13)', stroke:'rgba(160,110,50,0.40)', lbl:'#7a5020', txt:'2nd Harvest'}
-    };
-    var bands = [
-      {s:new Date(2024, 5,1), e:new Date(2024, 7,1), t:'main'},
-      {s:new Date(2024,11,1), e:new Date(2025, 1,1), t:'secondary'},
-      {s:new Date(2025, 5,1), e:new Date(2025, 7,1), t:'main'},
-      {s:new Date(2025,11,1), e:new Date(2026, 1,1), t:'secondary'},
-      {s:new Date(2026, 5,1), e:new Date(2026, 7,1), t:'main'}
-    ];
-    var bandsG = g.append('g');
-    bands.forEach(function(b) {
-      var x1 = Math.max(0, xScale(b.s)), x2 = Math.min(W, xScale(b.e));
-      if (x2 <= x1) return;
-      var c = BSTYLE[b.t];
-      bandsG.append('rect').attr('x',x1).attr('y',0).attr('width',x2-x1).attr('height',H)
-        .attr('fill',c.fill).attr('stroke',c.stroke).attr('stroke-width',1).attr('stroke-dasharray','3,3');
-      bandsG.append('text').attr('x',(x1+x2)/2).attr('y',-10).attr('text-anchor','middle')
-        .attr('fill',c.lbl).attr('font-size','9px').attr('font-weight','700').text(c.txt);
-    });
-
-    // ── Grid ─────────────────────────────────────────────────
-    g.append('g').call(d3.axisLeft(yScale).ticks(6).tickSize(-W).tickFormat(''))
-      .call(function(gEl) {
-        gEl.select('.domain').remove();
-        gEl.selectAll('line').attr('stroke', gridColor).attr('stroke-dasharray','3,5');
-      });
-
-    // ── X axis ───────────────────────────────────────────────
-    var xAx = g.append('g').attr('transform','translate(0,'+H+')')
-      .call(d3.axisBottom(xScale).ticks(d3.timeMonth.every(2))
-        .tickFormat(d3.timeFormat('%b %Y')).tickSizeOuter(0));
-    xAx.selectAll('text').style('fill', textColor).style('font-size','10px')
-      .attr('transform','rotate(-38)').attr('text-anchor','end').attr('dx','-0.4em').attr('dy','0.15em');
-    xAx.select('.domain').style('stroke', axisColor);
-    xAx.selectAll('.tick line').style('stroke', axisColor);
-
-    // ── Y axis ───────────────────────────────────────────────
-    var yAx = g.append('g').call(d3.axisLeft(yScale).ticks(6)
-      .tickFormat(function(d){ return d >= 1000 ? (d/1000).toFixed(1)+'k' : d; }).tickSizeOuter(0));
-    yAx.selectAll('text').style('fill', textColor).style('font-size','10px');
-    yAx.select('.domain').style('stroke', axisColor);
-    yAx.selectAll('.tick line').style('stroke', axisColor);
-
-    g.append('text').attr('transform','rotate(-90)').attr('x',-H/2).attr('y',-60)
-      .attr('text-anchor','middle').attr('fill', labelDimColor).attr('font-size','10.5px')
-      .text('Avg. Flowers / Farmer / Month');
-
-    // ── Two line paths: Pollination & Harvest ─────────────────
-    var PCOL = '#2eaab8';  // teal  — pollination
-    var HCOL = '#d4861a';  // amber — harvest (t+9 mo)
-    var lineGen = d3.line()
-      .x(function(d){ return xScale(d.date); }).y(function(d){ return yScale(d.value); })
-      .curve(d3.curveCatmullRom.alpha(0.5));
-
-    var pollPath = g.append('path').attr('fill','none').attr('stroke',PCOL)
-      .attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round');
-    var harvPath = g.append('path').attr('fill','none').attr('stroke',HCOL)
-      .attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round')
-      .attr('stroke-dasharray','7,3');
-
-    var activeRegion = 'All';
-
-    function updateChart(reg, animate) {
-      var L = getLines(reg);
-      if (animate) {
-        pollPath.transition().duration(450).attr('d', lineGen(L.poll));
-        harvPath.transition().duration(450).attr('d', lineGen(L.harv));
-      } else {
-        pollPath.attr('d', lineGen(L.poll));
-        harvPath.attr('d', lineGen(L.harv));
-      }
-    }
-    updateChart('All', false);
-
-    // ── Tooltip ──────────────────────────────────────────────
-    var tooltip = d3.select('#vanilla-chart').append('div').attr('class','vanilla-tooltip');
-    var MN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var bisect = d3.bisector(function(d){ return d.date; }).left;
-
-    var hLine = g.append('line').attr('y1',0).attr('y2',H)
-      .attr('stroke', hLineColor).attr('stroke-width',1).attr('stroke-dasharray','4,4').style('display','none');
-
-    g.append('rect').attr('width',W).attr('height',H).attr('fill','none').attr('pointer-events','all')
-      .on('mousemove', function(ev) {
-        var L = getLines(activeRegion);
-        var mx = d3.pointer(ev)[0];
-        var idx = Math.min(bisect(L.poll, xScale.invert(mx), 1), L.poll.length - 1);
-        var pd = L.poll[idx], hd = L.harv[idx];
-        if (!pd) return;
-
-        hLine.attr('x1', xScale(pd.date)).attr('x2', xScale(pd.date)).style('display', null);
-
-        var mo = pd.date.getMonth(), yr = pd.date.getFullYear();
-        var pDate = new Date(yr, mo - 9, 1); // pollination month that produced this harvest
-        var pStr = MN[pDate.getMonth()] + ' ' + pDate.getFullYear();
-
-        var tc = isLight ? '#0a0a0a' : 'rgba(255,255,255,0.92)';
-        var sc = isLight ? 'rgba(50,50,50,0.55)' : 'rgba(185,185,185,0.55)';
-        var html = '<strong style="color:' + tc + '">' + MN[mo] + ' ' + yr + '</strong>'
-                 + ' <span style="color:' + sc + ';font-size:10px">(' + activeRegion + ' Uganda)</span><br>'
-                 + '<span style="color:' + PCOL + '">Pollination: </span><strong>' + Math.round(pd.value).toLocaleString() + '</strong> flowers<br>'
-                 + '<span style="color:' + HCOL + '">Harvest: </span><strong>' + Math.round(hd.value/5.6).toLocaleString() + '</strong> Kgs'
-                 + ' <span style="color:' + sc + ';font-size:10px">(from ' + pStr + ')</span><br>';
-        if (mo === 5 || mo === 6)  html += '<span style="color:#2a9d5c;font-size:10px;font-weight:600">Main Harvest Period</span>';
-        if (mo === 11 || mo === 0) html += '<span style="color:#c4821a;font-size:10px;font-weight:600">Secondary Harvest Period</span>';
-
-        var cR = container.getBoundingClientRect();
-        var ttL = ev.clientX - cR.left + 14, ttT = ev.clientY - cR.top - 52;
-        if (ttL + 240 > cR.width) ttL = ev.clientX - cR.left - 215;
-        tooltip.style('display','block').style('left', ttL+'px').style('top', ttT+'px').html(html);
-      })
-      .on('mouseleave', function() { hLine.style('display','none'); tooltip.style('display','none'); });
-
-    // ── Region toggle (radio-style) ───────────────────────────
-    document.querySelectorAll('.vanilla-btn[data-region]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var reg = btn.dataset.region;
-        if (reg === activeRegion) return;
-        activeRegion = reg;
-        document.querySelectorAll('.vanilla-btn[data-region]').forEach(function(b) {
-          b.classList.toggle('active', b.dataset.region === reg);
-        });
-        updateChart(reg, true);
-      });
-    });
-
-  })();
-  </script>
-
-  <!-- Main JavaScript (includes SW registration) -->
-  <script src="script.js" defer></script>
-
+  });
+})();
+</script>
+<script src="script.js"></script>
 </body>
 </html>
