@@ -42,23 +42,23 @@ tailwind.config = {
         "surface": "#10131b",
         "surface-container-highest": "#31353d",
         "surface-variant": "#31353d",
-        "on-secondary-container": "#004a46",
+        "on-secondary-container": "#2a1600",
         "primary-fixed": "#d6e3ff",
         "outline": "#8b91a0",
-        "tertiary": "#e9b3ff",
+        "tertiary": "#D4870A",
         "error": "#ffb4ab",
-        "tertiary-container": "#c863fb",
+        "tertiary-container": "#b8720a",
         "error-container": "#93000a",
-        "on-primary": "#003064",
+        "on-primary": "#001240",
         "on-background": "#e0e2ed",
         "background": "#06091A",
-        "on-secondary": "#003734",
-        "secondary": "#32D3C8",
-        "secondary-container": "#03c2b8",
+        "on-secondary": "#1a0800",
+        "secondary": "#E8A020",
+        "secondary-container": "#b8720a",
         "surface-container-low": "#181c23",
-        "primary-container": "#3e90ff",
+        "primary-container": "#4a8bff",
         "on-surface": "#e0e2ed",
-        "primary": "#0A84FF",
+        "primary": "#1C6EF2",
         "surface-container": "#1c2027",
         "surface-dim": "#10131b",
         "on-surface-variant": "#c0c6d6",
@@ -102,10 +102,10 @@ tailwind.config = {
 html { scroll-behavior: smooth; }
 body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-hidden; }
 .bg-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; }
-.orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5; }
-.orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #0A84FF, transparent 70%); animation: blob 20s infinite; }
-.orb-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #32D3C8, transparent 70%); animation: blob-delayed 25s infinite; }
-.orb-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: radial-gradient(circle, #BF5AF2, transparent 70%); animation: blob-slow 22s infinite; }
+.orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.28; }
+.orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #1C6EF2, transparent 70%); animation: blob 36s infinite; }
+.orb-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #E8A020, transparent 70%); animation: blob-delayed 48s infinite; }
+.orb-3 { top: 40%; left: 30%; width: 35vw; height: 35vw; background: radial-gradient(circle, #D4870A, transparent 70%); animation: blob-slow 60s infinite; opacity: 0.16; }
 .btn-primary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(10,132,255,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background; }
 .btn-secondary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full glass-card text-on-background font-medium transition-all hover:bg-white/10 focus:outline-none; }
 .btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-on-background/70 font-medium transition-all hover:text-on-background hover:bg-white/5 focus:outline-none; }
@@ -113,7 +113,7 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 ::-webkit-scrollbar-track { background: #06091A; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
-#progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(to right, #0A84FF, #32D3C8); z-index: 9999; transition: width 0.1s linear; }
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(to right, #1C6EF2, #E8A020); z-index: 9999; transition: width 0.1s linear; }
 #mob-menu.open { display: flex !important; opacity: 1 !important; }
 .fade-in-up { animation: fadeInUp 0.6s ease-out calc(var(--stagger, 0) * 80ms) both; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -122,16 +122,126 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 .f-msg.success { background: rgba(48,209,88,0.15); color: #30D158; border: 1px solid rgba(48,209,88,0.3); }
 .f-msg.error { background: rgba(255,69,58,0.15); color: #FF453A; border: 1px solid rgba(255,69,58,0.3); }
 #page-loader { position: fixed; inset: 0; z-index: 9999; background: #06091A; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
-.loader-spinner { width: 40px; height: 40px; border: 3px solid rgba(10,132,255,0.2); border-top-color: #0A84FF; border-radius: 50%; animation: spin 0.8s linear infinite; }
+.loader-spinner { width: 40px; height: 40px; border: 3px solid rgba(28,110,242,0.2); border-top-color: #1C6EF2; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .proj-card.hidden { display: none; }
 .proj-card.hiding { opacity: 0; transform: scale(0.95); transition: opacity 0.36s, transform 0.36s; }
 .filt.active { @apply bg-primary/20 text-primary border-primary/30 border; }
 .fraud-tooltip, .vanilla-tooltip { position: absolute; pointer-events: none; display: none; background: rgba(15,18,28,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 13px; font-size: 12px; line-height: 1.55; color: rgba(232,232,232,0.92); min-width: 180px; max-width: 240px; z-index: 10; }
 .vanilla-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
-.vdot-west { background: #2eaab8; }
-.vdot-central { background: #BF5AF2; }
-.vdot-east { background: #FF9F0A; }
+.vdot-west { background: #1C6EF2; }
+.vdot-central { background: #E8A020; }
+.vdot-east { background: #D4870A; }
+</style>
+<style>
+/* ── Theme transitions ─────────────────────────────────────── */
+body, nav, footer, section, .glass-card, input, textarea, button {
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+              color 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* ── Nav active link indicator ─────────────────────────────── */
+.nav-links a { position: relative; }
+.nav-links a.active { color: #ffffff; }
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 2px;
+  background: #1C6EF2;
+  border-radius: 9999px;
+}
+
+/* ═══════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES  [data-theme="light"]
+═══════════════════════════════════════════════════ */
+[data-theme="light"] body { background-color: #f4f7ff !important; color: #0d1126 !important; }
+[data-theme="light"] #page-loader { background-color: #f4f7ff !important; }
+[data-theme="light"] .orb-1 { background: radial-gradient(circle, rgba(28,110,242,0.18), transparent 70%) !important; }
+[data-theme="light"] .orb-2 { background: radial-gradient(circle, rgba(232,160,32,0.13), transparent 70%) !important; }
+[data-theme="light"] .orb-3 { background: radial-gradient(circle, rgba(212,135,10,0.08), transparent 70%) !important; }
+
+/* Nav */
+[data-theme="light"] nav#navbar { background: rgba(244,247,255,0.92) !important; border-bottom-color: rgba(0,0,0,0.07) !important; }
+[data-theme="light"] #ham, [data-theme="light"] #mob-close { color: #0d1126 !important; }
+[data-theme="light"] #theme-toggle { background-color: rgba(0,0,0,0.06) !important; color: #0d1126 !important; }
+[data-theme="light"] #theme-toggle:hover { background-color: rgba(0,0,0,0.11) !important; }
+[data-theme="light"] .nav-links a.active { color: #0d1126 !important; }
+
+/* Mobile menu */
+[data-theme="light"] #mob-menu { background-color: rgba(244,247,255,0.98) !important; }
+[data-theme="light"] #mob-menu a { color: #0d1126 !important; }
+[data-theme="light"] #mob-menu a.text-primary { color: #1C6EF2 !important; }
+
+/* Mobile bottom nav */
+[data-theme="light"] nav[aria-label="Mobile navigation"] > div {
+  background-color: rgba(244,247,255,0.95) !important;
+  border-top-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Cards */
+[data-theme="light"] .glass-card {
+  background: rgba(255,255,255,0.88) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+  box-shadow: 0 2px 20px rgba(13,17,38,0.07), 0 1px 4px rgba(13,17,38,0.04) !important;
+}
+
+/* Footer */
+[data-theme="light"] footer { background-color: #e8ecf8 !important; border-top-color: rgba(0,0,0,0.08) !important; }
+
+/* Text colors */
+[data-theme="light"] .text-white    { color: #0d1126 !important; }
+[data-theme="light"] .text-white\/80 { color: rgba(13,17,38,0.8) !important; }
+[data-theme="light"] .text-white\/70 { color: rgba(13,17,38,0.7) !important; }
+[data-theme="light"] .text-white\/60 { color: rgba(13,17,38,0.6) !important; }
+[data-theme="light"] .text-white\/50 { color: rgba(13,17,38,0.5) !important; }
+[data-theme="light"] .text-white\/40 { color: rgba(13,17,38,0.4) !important; }
+[data-theme="light"] .text-white\/30 { color: rgba(13,17,38,0.3) !important; }
+[data-theme="light"] .text-on-background { color: #0d1126 !important; }
+[data-theme="light"] .hover\:text-white:hover { color: #0d1126 !important; }
+
+/* Background colors */
+[data-theme="light"] .bg-\[\#06091A\]    { background-color: #f4f7ff !important; }
+[data-theme="light"] .bg-\[\#0b0e15\]   { background-color: #e8ecf8 !important; }
+[data-theme="light"] .bg-\[\#10131b\]   { background-color: #eef1fb !important; }
+[data-theme="light"] .bg-white\/5       { background-color: rgba(0,0,0,0.04) !important; }
+[data-theme="light"] .bg-white\/10      { background-color: rgba(0,0,0,0.07) !important; }
+[data-theme="light"] .bg-white\/\[0\.045\] { background-color: rgba(255,255,255,0.9) !important; }
+[data-theme="light"] .bg-white\/\[0\.02\]  { background-color: rgba(0,0,0,0.02) !important; }
+[data-theme="light"] .bg-\[\#06091A\]\/95 { background-color: rgba(244,247,255,0.97) !important; }
+[data-theme="light"] .bg-\[\#06091A\]\/90 { background-color: rgba(244,247,255,0.92) !important; }
+/* Keep chart areas dark so D3 text remains legible */
+[data-theme="light"] .bg-\[\#0b0e15\]\/50 { background-color: rgba(16,20,36,0.90) !important; }
+[data-theme="light"] .hover\:bg-white\/10:hover { background-color: rgba(0,0,0,0.06) !important; }
+[data-theme="light"] .hover\:bg-white\/5:hover  { background-color: rgba(0,0,0,0.04) !important; }
+
+/* Border colors */
+[data-theme="light"] .border-white\/10  { border-color: rgba(0,0,0,0.08) !important; }
+[data-theme="light"] .border-white\/5   { border-color: rgba(0,0,0,0.05) !important; }
+[data-theme="light"] .divide-white\/5 > * + * { border-color: rgba(0,0,0,0.05) !important; }
+
+/* Filter buttons */
+[data-theme="light"] .filt { color: rgba(13,17,38,0.6) !important; border-color: rgba(0,0,0,0.1) !important; }
+[data-theme="light"] .filt.active { color: #1C6EF2 !important; background-color: rgba(28,110,242,0.1) !important; border-color: rgba(28,110,242,0.3) !important; }
+
+/* Form inputs */
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] textarea {
+  background-color: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.10) !important;
+  color: #0d1126 !important;
+}
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder { color: rgba(13,17,38,0.35) !important; }
+
+/* Scrollbar */
+[data-theme="light"] ::-webkit-scrollbar-track { background: #f4f7ff !important; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15) !important; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25) !important; }
 </style>
 <link as="image" href="img/photo.jpg" rel="preload"/>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -186,6 +296,10 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 <a class="text-white hover:text-primary transition-colors" href="#testimonials">Testimonials</a>
 <a class="text-white hover:text-primary transition-colors" href="#Education">Education</a>
 <a class="text-primary mt-4" href="#contact">Contact</a>
+<button aria-label="Toggle theme" class="mt-4 flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors text-base font-medium" id="mob-theme-toggle">
+<svg fill="none" height="18" id="mob-theme-icon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+<span id="mob-theme-label">Light mode</span>
+</button>
 </div>
 </div>
 <!-- HERO -->
@@ -303,7 +417,7 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 <span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Projects</span>
 <h2 class="text-4xl font-headline-lg text-white mb-6">Featured Projects</h2>
 <div class="flex flex-wrap gap-3" id="filter-row">
-<button aria-pressed="true" class="filt px-4 py-2 rounded-full text-sm font-medium" data-f="all">All Projects</button>
+<button aria-pressed="true" class="filt active px-4 py-2 rounded-full text-sm font-medium" data-f="all">All Projects</button>
 <button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="ml">ML / AI</button>
 <button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="forecasting">Forecasting</button>
 <button aria-pressed="false" class="filt px-4 py-2 rounded-full border border-white/10 text-sm text-white/60 hover:bg-white/5 font-medium" data-f="dashboard">Dashboards</button>
@@ -431,7 +545,7 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 <div class="glass-card p-8 mt-10 text-center">
 <h3 class="text-xl font-headline-md text-white mb-2">GitHub Activity</h3>
 <p class="text-white/50 text-sm mb-6">Active development and open-source contributions</p>
-<div class="overflow-x-auto"><img alt="GitHub contribution chart" class="mx-auto rounded-lg max-w-full" loading="lazy" src="https://ghchart.rshah.org/0A84FF/MugarraJohnson"/></div>
+<div class="overflow-x-auto"><img alt="GitHub contribution chart" class="mx-auto rounded-lg max-w-full" loading="lazy" src="https://ghchart.rshah.org/1C6EF2/MugarraJohnson"/></div>
 <a class="btn-ghost mt-6 inline-flex" href="https://github.com/MugarraJohnson" rel="noopener noreferrer" target="_blank">View GitHub Profile →</a>
 </div>
 </div>
@@ -447,9 +561,9 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 <div class="flex flex-wrap items-center gap-4 mb-8">
 <span class="text-sm text-white/50">Channel:</span>
 <button class="fraud-btn active px-4 py-2 rounded-full bg-white/10 text-white text-sm" data-cat="All">All Channels</button>
-<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="Online"><span class="w-2 h-2 rounded-full bg-[#0A84FF] mr-2"></span>Online</button>
-<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="ATM"><span class="w-2 h-2 rounded-full bg-[#BF5AF2] mr-2"></span>ATM</button>
-<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="POS"><span class="w-2 h-2 rounded-full bg-[#32D3C8] mr-2"></span>Point of Sale</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="Online"><span class="w-2 h-2 rounded-full bg-[#1C6EF2] mr-2"></span>Online</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="ATM"><span class="w-2 h-2 rounded-full bg-[#E8A020] mr-2"></span>ATM</button>
+<button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="POS"><span class="w-2 h-2 rounded-full bg-[#D4870A] mr-2"></span>Point of Sale</button>
 <button class="fraud-btn px-4 py-2 rounded-full border border-white/10 text-white/70 hover:bg-white/5 text-sm flex items-center" data-cat="Wire"><span class="w-2 h-2 rounded-full bg-[#FF9F0A] mr-2"></span>Wire Transfer</button>
 </div>
 <div class="text-sm text-white/60 mb-6" id="fraud-stats"></div>
@@ -485,8 +599,8 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 <div class="flex flex-wrap gap-6 text-sm text-white/60 justify-center">
 <div class="flex items-center"><span class="inline-block w-4 h-4 rounded mr-2" style="background:rgba(46,160,67,0.22);border:1.5px solid rgba(46,160,67,0.65)"></span>Main Harvest Window (Jun–Jul)</div>
 <div class="flex items-center"><span class="inline-block w-4 h-4 rounded mr-2" style="background:rgba(160,110,50,0.22);border:1.5px solid rgba(160,110,50,0.6)"></span>Secondary Harvest (Dec–Jan)</div>
-<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="26"><line stroke="#2eaab8" stroke-width="2.5" x1="0" x2="26" y1="2.5" y2="2.5"/></svg>Pollination Activity</div>
-<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="26"><line stroke="#d4861a" stroke-dasharray="7,3" stroke-width="2.5" x1="0" x2="26" y1="2.5" y2="2.5"/></svg>Projected Harvest (t+9 mo)</div>
+<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="26"><line stroke="#1C6EF2" stroke-width="2.5" x1="0" x2="26" y1="2.5" y2="2.5"/></svg>Pollination Activity</div>
+<div class="flex items-center"><svg height="5" style="flex-shrink:0;margin-right:6px" width="26"><line stroke="#E8A020" stroke-dasharray="7,3" stroke-width="2.5" x1="0" x2="26" y1="2.5" y2="2.5"/></svg>Projected Harvest (t+9 mo)</div>
 </div>
 </div>
 </section>
@@ -879,7 +993,7 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
   yAx.selectAll('text').style('fill',textColor).style('font-size','10px');
   yAx.select('.domain').style('stroke',axisColor); yAx.selectAll('.tick line').style('stroke',axisColor);
   g.append('text').attr('transform','rotate(-90)').attr('x',-H/2).attr('y',-60).attr('text-anchor','middle').attr('fill',labelDimColor).attr('font-size','10.5px').text('Avg. Flowers / Farmer / Month');
-  var PCOL='#2eaab8', HCOL='#d4861a';
+  var PCOL='#1C6EF2', HCOL='#E8A020';
   var lineGen=d3.line().x(function(d){return xScale(d.date);}).y(function(d){return yScale(d.value);}).curve(d3.curveCatmullRom.alpha(0.5));
   var pollPath=g.append('path').attr('fill','none').attr('stroke',PCOL).attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round');
   var harvPath=g.append('path').attr('fill','none').attr('stroke',HCOL).attr('stroke-width',2.4).attr('stroke-linejoin','round').attr('stroke-linecap','round').attr('stroke-dasharray','7,3');

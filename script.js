@@ -32,13 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
     + '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
 
   const applyTheme = (theme) => {
+    root.classList.toggle('dark', theme === 'dark');
     root.setAttribute('data-theme', theme);
+    const isLight = theme === 'light';
     if (toggleBtn) {
       const icon = document.getElementById('theme-icon');
-      if (icon) icon.innerHTML = theme === 'light' ? ICON_MOON : ICON_SUN;
-      toggleBtn.setAttribute('aria-label',
-        theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+      if (icon) icon.innerHTML = isLight ? ICON_MOON : ICON_SUN;
+      toggleBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
+    const mobIcon  = document.getElementById('mob-theme-icon');
+    const mobLabel = document.getElementById('mob-theme-label');
+    if (mobIcon)  mobIcon.innerHTML = isLight ? ICON_MOON : ICON_SUN;
+    if (mobLabel) mobLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
     if (typeof dataLayer !== 'undefined') {
       dataLayer.push({ event: 'theme_change', theme });
     }
@@ -49,11 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const osDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
   applyTheme(saved || (osDark ? 'dark' : 'light'));
 
-  toggleBtn?.addEventListener('click', () => {
+  const doToggle = () => {
     const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(next);
     localStorage.setItem(STORAGE_KEY, next);
-  });
+  };
+  toggleBtn?.addEventListener('click', doToggle);
+  document.getElementById('mob-theme-toggle')?.addEventListener('click', doToggle);
 
   window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem(STORAGE_KEY)) applyTheme(e.matches ? 'dark' : 'light');
