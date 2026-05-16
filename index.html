@@ -244,8 +244,8 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 [data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15) !important; }
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25) !important; }
 
-/* ── Skill bars (GPU-safe: transform instead of width) ──────── */
-.sk-fill { transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); transform-origin: left; }
+/* ── Skill bars ─────────────────────────────────────────────── */
+.sk-fill { width: 0%; transition: width 0.7s cubic-bezier(0.23, 1, 0.32, 1); }
 
 /* ── Animation system ──────────────────────────────────────── */
 :root {
@@ -705,18 +705,18 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div>
 <h3 class="text-xl font-headline-md text-white mb-6">Programming &amp; Data Science</h3>
 <div class="space-y-4">
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Python (TensorFlow, PyTorch, Scikit-Learn)</span><span class="text-primary">90%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="90" style="transform:scaleX(0);transform-origin:left"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">R Programming (Statsmodels, Prophet)</span><span class="text-primary">88%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="88" style="transform:scaleX(0);transform-origin:left"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">SQL &amp; Database Management</span><span class="text-primary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="85" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Python (TensorFlow, PyTorch, Scikit-Learn)</span><span class="text-primary">90%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="90" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">R Programming (Statsmodels, Prophet)</span><span class="text-primary">88%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="88" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">SQL &amp; Database Management</span><span class="text-primary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="85" style="width:0%"></div></div></div>
 </div>
 </div>
 <div>
 <h3 class="text-xl font-headline-md text-white mb-6">Analytics &amp; Engineering</h3>
 <div class="space-y-4">
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Tableau / Power BI</span><span class="text-secondary">92%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="92" style="transform:scaleX(0);transform-origin:left"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">ETL Pipelines / Airflow</span><span class="text-secondary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="85" style="transform:scaleX(0);transform-origin:left"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">NLP &amp; Time-Series Forecasting</span><span class="text-secondary">82%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="82" style="transform:scaleX(0);transform-origin:left"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">MLOps &amp; Model Deployment</span><span class="text-secondary">80%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="80" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Tableau / Power BI</span><span class="text-secondary">92%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="92" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">ETL Pipelines / Airflow</span><span class="text-secondary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="85" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">NLP &amp; Time-Series Forecasting</span><span class="text-secondary">82%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="82" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">MLOps &amp; Model Deployment</span><span class="text-secondary">80%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="80" style="width:0%"></div></div></div>
 </div>
 </div>
 </div>

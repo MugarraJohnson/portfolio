@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skillSection) {
     const animateBars = () => {
       skillSection.querySelectorAll('.sk-fill').forEach((fill) => {
-        fill.style.transform = `scaleX(${(fill.dataset.w || 0) / 100})`;
+        fill.style.width = `${fill.dataset.w || 0}%`;
       });
     };
     if ('IntersectionObserver' in window) {
