@@ -8,9 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Page Loader ─────────────────────────────────────── */
   window.addEventListener('load', () => {
     const loader = document.getElementById('page-loader');
+    const heroEl = document.getElementById('hero');
+    if (heroEl) heroEl.classList.add('js-anim');
     if (loader) {
       loader.style.opacity = '0';
-      setTimeout(() => { loader.style.display = 'none'; }, 300);
+      setTimeout(() => {
+        loader.style.display = 'none';
+        if (heroEl) {
+          heroEl.classList.remove('js-anim');
+          heroEl.classList.add('hero-ready');
+        }
+      }, 300);
     }
   });
 
@@ -108,14 +116,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const mclose = document.getElementById('mob-close');
 
   const openMenu = () => {
-    mmenu?.classList.add('open');
+    if (!mmenu) return;
+    mmenu.classList.remove('hidden');
+    requestAnimationFrame(() => mmenu.classList.add('open'));
     ham?.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   };
   const closeMenu = () => {
-    mmenu?.classList.remove('open');
+    if (!mmenu) return;
+    mmenu.classList.remove('open');
     ham?.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    setTimeout(() => { if (!mmenu.classList.contains('open')) mmenu.classList.add('hidden'); }, 260);
   };
 
   ham?.addEventListener('click', openMenu);

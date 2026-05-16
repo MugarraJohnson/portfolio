@@ -114,9 +114,9 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 #progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(to right, #1C6EF2, #E8A020); z-index: 9999; transition: width 0.1s linear; }
-#mob-menu.open { display: flex !important; opacity: 1 !important; }
-.fade-in-up { animation: fadeInUp 0.6s ease-out calc(var(--stagger, 0) * 80ms) both; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+#mob-menu.open { opacity: 1 !important; }
+.fade-in-up { animation: fadeInUp 0.38s cubic-bezier(0.23, 1, 0.32, 1) calc(var(--stagger, 0) * 60ms) both; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .f-msg { display: none; padding: 0.75rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; }
 .f-msg.show { display: block; }
 .f-msg.success { background: rgba(48,209,88,0.15); color: #30D158; border: 1px solid rgba(48,209,88,0.3); }
@@ -125,7 +125,7 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 .loader-spinner { width: 40px; height: 40px; border: 3px solid rgba(28,110,242,0.2); border-top-color: #1C6EF2; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .proj-card.hidden { display: none; }
-.proj-card.hiding { opacity: 0; transform: scale(0.95); transition: opacity 0.36s, transform 0.36s; }
+.proj-card.hiding { opacity: 0; transform: scale(0.96); transition: opacity 0.22s ease-out, transform 0.22s ease-out; }
 .filt.active { @apply bg-primary/20 text-primary border-primary/30 border; }
 .fraud-tooltip, .vanilla-tooltip { position: absolute; pointer-events: none; display: none; background: rgba(15,18,28,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 10px 13px; font-size: 12px; line-height: 1.55; color: rgba(232,232,232,0.92); min-width: 180px; max-width: 240px; z-index: 10; }
 .vanilla-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
@@ -242,6 +242,91 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 [data-theme="light"] ::-webkit-scrollbar-track { background: #f4f7ff !important; }
 [data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15) !important; }
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25) !important; }
+
+/* ── Animation system ──────────────────────────────────────── */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Button press feedback */
+.btn-primary:active, .btn-secondary:active, .btn-ghost:active { transform: scale(0.97) !important; transition-duration: 100ms !important; }
+.filt:active { transform: scale(0.97) !important; }
+
+/* Override transition-all on buttons with specific properties */
+.btn-primary, .btn-secondary, .btn-ghost {
+  transition: transform 160ms var(--ease-spring), background-color 160ms ease-out,
+              box-shadow 160ms ease-out, color 160ms ease-out,
+              border-color 160ms ease-out, opacity 160ms ease-out !important;
+}
+
+/* Mobile menu slide-in animation */
+#mob-menu {
+  transform: translateY(-12px);
+  transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out) !important;
+}
+#mob-menu.open { transform: translateY(0) !important; }
+
+/* Mobile menu link stagger on open */
+#mob-menu .flex-col > * {
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 260ms ease-out, transform 260ms var(--ease-out);
+}
+#mob-menu.open .flex-col > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 50ms; }
+#mob-menu.open .flex-col > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 90ms; }
+#mob-menu.open .flex-col > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 130ms; }
+#mob-menu.open .flex-col > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 170ms; }
+#mob-menu.open .flex-col > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 210ms; }
+#mob-menu.open .flex-col > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 250ms; }
+#mob-menu.open .flex-col > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 290ms; }
+
+/* Hero entrance animation (triggered by JS class) */
+@keyframes heroEntry {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#hero.js-anim .space-y-8 > * { opacity: 0; }
+#hero.js-anim .relative.max-w-md { opacity: 0; }
+#hero.hero-ready .space-y-8 > *:nth-child(1) { animation: heroEntry 0.45s var(--ease-out) 0ms both; }
+#hero.hero-ready .space-y-8 > *:nth-child(2) { animation: heroEntry 0.45s var(--ease-out) 80ms both; }
+#hero.hero-ready .space-y-8 > *:nth-child(3) { animation: heroEntry 0.45s var(--ease-out) 160ms both; }
+#hero.hero-ready .space-y-8 > *:nth-child(4) { animation: heroEntry 0.45s var(--ease-out) 240ms both; }
+#hero.hero-ready .space-y-8 > *:nth-child(5) { animation: heroEntry 0.45s var(--ease-out) 320ms both; }
+#hero.hero-ready .relative.max-w-md { animation: heroEntry 0.55s var(--ease-out) 120ms both; }
+
+/* Profile card hover lift */
+@media (hover: hover) and (pointer: fine) {
+  #hero .relative.max-w-md .glass-card { transition: transform 250ms var(--ease-out), box-shadow 250ms ease-out; }
+  #hero .relative.max-w-md .glass-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+}
+
+/* Form message fade-in */
+@keyframes msgFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.f-msg.show { animation: msgFadeIn 0.22s var(--ease-out) both; }
+
+/* Nav "Hire me" button press */
+nav .btn-primary:active { transform: scale(0.97) !important; }
+
+/* Highlight card hover — pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .highlight-card { transition: transform 220ms var(--ease-out), box-shadow 220ms ease-out !important; }
+  .highlight-card:hover { transform: translateY(-3px); }
+}
+
+/* Skip transform-based hover on pure touch devices */
+@media (hover: none) {
+  .btn-primary:hover, .btn-secondary:hover, .btn-ghost:hover { transform: none !important; box-shadow: none !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up { animation: none !important; opacity: 1 !important; transform: none !important; }
+  #hero.hero-ready .space-y-8 > *, #hero.hero-ready .relative.max-w-md { animation: none !important; opacity: 1 !important; }
+  #mob-menu, #mob-menu .flex-col > * { transition: opacity 0ms !important; transform: none !important; }
+}
 </style>
 <link as="image" href="img/photo.jpg" rel="preload"/>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
