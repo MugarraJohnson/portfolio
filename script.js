@@ -93,9 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ── 2. Nav glass + active section highlight ─────────── */
-  const navbar   = document.getElementById('navbar');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('section[id]');
+  const navbar      = document.getElementById('navbar');
+  const navLinks    = document.querySelectorAll('.nav-links a');
+  const mobNavLinks = document.querySelectorAll('nav[aria-label="Mobile navigation"] a');
+  const sections    = document.querySelectorAll('section[id]');
 
   window.addEventListener('scroll', () => {
     navbar?.classList.toggle('scrolled', window.scrollY > 50);
@@ -107,6 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
     });
+    mobNavLinks.forEach((link) => {
+      const href   = link.getAttribute('href');
+      const isHome = href === '#hero';
+      const match  = isHome ? (current === 'hero' || current === '') : href === `#${current}`;
+      link.classList.toggle('text-primary', match);
+      link.classList.toggle('text-white/50', !match);
+    });
   }, { passive: true });
 
 
@@ -115,19 +123,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const mmenu  = document.getElementById('mob-menu');
   const mclose = document.getElementById('mob-close');
 
+  const getFocusable = () => Array.from(
+    mmenu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+  );
+
+  const trapFocus = (e) => {
+    if (e.key !== 'Tab') return;
+    const focusable = getFocusable();
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  };
+
   const openMenu = () => {
     if (!mmenu) return;
     mmenu.classList.remove('hidden');
-    requestAnimationFrame(() => mmenu.classList.add('open'));
+    requestAnimationFrame(() => {
+      mmenu.classList.add('open');
+      mmenu.addEventListener('keydown', trapFocus);
+      getFocusable()[0]?.focus();
+    });
     ham?.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   };
   const closeMenu = () => {
     if (!mmenu) return;
     mmenu.classList.remove('open');
+    mmenu.removeEventListener('keydown', trapFocus);
     ham?.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     setTimeout(() => { if (!mmenu.classList.contains('open')) mmenu.classList.add('hidden'); }, 260);
+    ham?.focus();
   };
 
   ham?.addEventListener('click', openMenu);
@@ -140,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skillSection) {
     const animateBars = () => {
       skillSection.querySelectorAll('.sk-fill').forEach((fill) => {
-        fill.style.width = `${fill.dataset.w || 0}%`;
+        fill.style.transform = `scaleX(${(fill.dataset.w || 0) / 100})`;
       });
     };
     if ('IntersectionObserver' in window) {
@@ -249,11 +279,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const subject = form.querySelector('[name="subject"]').value.trim() || 'Portfolio enquiry';
       const message = form.querySelector('[name="message"]').value.trim();
 
+      const nameEl  = form.querySelector('[name="name"]');
+      const emailEl = form.querySelector('[name="email"]');
+      const msgEl   = form.querySelector('[name="message"]');
+      [nameEl, emailEl, msgEl].forEach((el) => el?.removeAttribute('aria-invalid'));
+
       if (!name || !email || !message) {
+        if (!name)    nameEl?.setAttribute('aria-invalid', 'true');
+        if (!email)   emailEl?.setAttribute('aria-invalid', 'true');
+        if (!message) msgEl?.setAttribute('aria-invalid', 'true');
         showMsg('error', '&#x26A0; Please fill in your name, email and message.');
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailEl?.setAttribute('aria-invalid', 'true');
         showMsg('error', '&#x26A0; Please enter a valid email address.');
         return;
       }

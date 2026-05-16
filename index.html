@@ -106,8 +106,8 @@ body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-h
 .orb-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #E8A020, transparent 70%); animation: blob-delayed 48s infinite; }
 .orb-3 { top: 40%; left: 30%; width: 35vw; height: 35vw; background: radial-gradient(circle, #D4870A, transparent 70%); animation: blob-slow 60s infinite; opacity: 0.16; }
 .btn-primary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(10,132,255,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background; }
-.btn-secondary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full glass-card text-on-background font-medium transition-all hover:bg-white/10 focus:outline-none; }
-.btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-on-background/70 font-medium transition-all hover:text-on-background hover:bg-white/5 focus:outline-none; }
+.btn-secondary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full glass-card text-on-background font-medium transition-all hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background; }
+.btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-on-background/70 font-medium transition-all hover:text-on-background hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 focus:ring-offset-background; }
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #06091A; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
@@ -140,7 +140,8 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 }
 
 /* ── Nav active link indicator ─────────────────────────────── */
-.nav-links a { position: relative; }
+.nav-links a { position: relative; border-radius: 4px; }
+.nav-links a:focus-visible { outline: 2px solid #1C6EF2; outline-offset: 4px; }
 .nav-links a.active { color: #ffffff; }
 .nav-links a.active::after {
   content: '';
@@ -197,6 +198,7 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 [data-theme="light"] .text-white\/70 { color: rgba(13,17,38,0.7) !important; }
 [data-theme="light"] .text-white\/60 { color: rgba(13,17,38,0.6) !important; }
 [data-theme="light"] .text-white\/50 { color: rgba(13,17,38,0.5) !important; }
+[data-theme="light"] .text-white\/55 { color: rgba(13,17,38,0.55) !important; }
 [data-theme="light"] .text-white\/40 { color: rgba(13,17,38,0.4) !important; }
 [data-theme="light"] .text-white\/30 { color: rgba(13,17,38,0.3) !important; }
 [data-theme="light"] .text-on-background { color: #0d1126 !important; }
@@ -241,6 +243,9 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 [data-theme="light"] ::-webkit-scrollbar-track { background: #f4f7ff !important; }
 [data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15) !important; }
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25) !important; }
+
+/* ── Skill bars (GPU-safe: transform instead of width) ──────── */
+.sk-fill { transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); transform-origin: left; }
 
 /* ── Animation system ──────────────────────────────────────── */
 :root {
@@ -368,7 +373,8 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </div>
 </nav>
 <!-- Mobile Menu -->
-<div class="fixed inset-0 z-50 bg-[#06091A]/95 backdrop-blur-xl flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-300" id="mob-menu">
+<div aria-labelledby="mob-menu-title" aria-modal="true" class="fixed inset-0 z-50 bg-[#06091A]/95 backdrop-blur-xl flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-300" id="mob-menu" role="dialog">
+<span class="sr-only" id="mob-menu-title">Navigation menu</span>
 <button aria-label="Close menu" class="absolute top-6 right-6 text-white p-2" id="mob-close">
 <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
 </button>
@@ -699,18 +705,18 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div>
 <h3 class="text-xl font-headline-md text-white mb-6">Programming &amp; Data Science</h3>
 <div class="space-y-4">
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Python (TensorFlow, PyTorch, Scikit-Learn)</span><span class="text-primary">90%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="90" style="width:0%"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">R Programming (Statsmodels, Prophet)</span><span class="text-primary">88%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="88" style="width:0%"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">SQL &amp; Database Management</span><span class="text-primary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="85" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Python (TensorFlow, PyTorch, Scikit-Learn)</span><span class="text-primary">90%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="90" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">R Programming (Statsmodels, Prophet)</span><span class="text-primary">88%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="88" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">SQL &amp; Database Management</span><span class="text-primary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-primary sk-fill" data-w="85" style="transform:scaleX(0);transform-origin:left"></div></div></div>
 </div>
 </div>
 <div>
 <h3 class="text-xl font-headline-md text-white mb-6">Analytics &amp; Engineering</h3>
 <div class="space-y-4">
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Tableau / Power BI</span><span class="text-secondary">92%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="92" style="width:0%"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">ETL Pipelines / Airflow</span><span class="text-secondary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="85" style="width:0%"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">NLP &amp; Time-Series Forecasting</span><span class="text-secondary">82%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="82" style="width:0%"></div></div></div>
-<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">MLOps &amp; Model Deployment</span><span class="text-secondary">80%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="80" style="width:0%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">Tableau / Power BI</span><span class="text-secondary">92%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="92" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">ETL Pipelines / Airflow</span><span class="text-secondary">85%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="85" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">NLP &amp; Time-Series Forecasting</span><span class="text-secondary">82%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="82" style="transform:scaleX(0);transform-origin:left"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span class="text-white/80">MLOps &amp; Model Deployment</span><span class="text-secondary">80%</span></div><div class="h-2 w-full bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-secondary sk-fill" data-w="80" style="transform:scaleX(0);transform-origin:left"></div></div></div>
 </div>
 </div>
 </div>
@@ -765,12 +771,12 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </div>
 </div>
 <form class="glass-card p-8 space-y-6" id="contact-form" novalidate="">
-<div class="grid grid-cols-2 gap-6">
-<div><label class="block text-sm text-white/60 mb-2" for="fname">Name *</label><input autocomplete="name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fname" name="name" placeholder="Your name" required="" type="text"/></div>
-<div><label class="block text-sm text-white/60 mb-2" for="femail">Email *</label><input autocomplete="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="femail" name="email" placeholder="your@email.com" required="" type="email"/></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div><label class="block text-sm text-white/60 mb-2" for="fname">Name *</label><input aria-required="true" autocomplete="name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fname" name="name" placeholder="Your name" required="" type="text"/></div>
+<div><label class="block text-sm text-white/60 mb-2" for="femail">Email *</label><input aria-required="true" autocomplete="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="femail" name="email" placeholder="your@email.com" required="" type="email"/></div>
 </div>
 <div><label class="block text-sm text-white/60 mb-2" for="fsubject">Subject</label><input autocomplete="off" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fsubject" name="subject" placeholder="Project idea, job opportunity…" type="text"/></div>
-<div><label class="block text-sm text-white/60 mb-2" for="fmessage">Message *</label><textarea class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fmessage" name="message" placeholder="Tell me about what you're working on…" required="" rows="5"></textarea></div>
+<div><label class="block text-sm text-white/60 mb-2" for="fmessage">Message *</label><textarea aria-required="true" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" id="fmessage" name="message" placeholder="Tell me about what you're working on…" required="" rows="5"></textarea></div>
 <div class="f-msg" id="f-msg"></div>
 <button class="w-full btn-primary py-4" id="send-btn" type="submit">Send message →</button>
 </form>
@@ -789,21 +795,21 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <p class="text-white/70 font-body-lg mb-6 italic">"Johnson's predictive models transformed our approach to agricultural planning. His ability to integrate satellite data with ground measurements delivered actionable insights that drove policy decisions at the highest levels."</p>
 <div class="flex items-center">
 <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold mr-3">M</div>
-<div><div class="text-white font-medium text-sm">Senior Research Lead</div><div class="text-white/40 text-xs">MAAIF / Makerere University</div></div>
+<div><div class="text-white font-medium text-sm">Senior Research Lead</div><div class="text-white/55 text-xs">MAAIF / Makerere University</div></div>
 </div>
 </div>
 <div class="glass-card p-8 testimonial-card">
 <p class="text-white/70 font-body-lg mb-6 italic">"The automated evaluation pipeline Johnson built compressed our 6-week process to under 10 days. The data quality and reporting consistency was a game changer for our USAID reporting."</p>
 <div class="flex items-center">
 <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold mr-3">U</div>
-<div><div class="text-white font-medium text-sm">Director of Research</div><div class="text-white/40 text-xs">Center for Research &amp; Communication</div></div>
+<div><div class="text-white font-medium text-sm">Director of Research</div><div class="text-white/55 text-xs">Center for Research &amp; Communication</div></div>
 </div>
 </div>
 <div class="glass-card p-8 testimonial-card">
 <p class="text-white/70 font-body-lg mb-6 italic">"A rare combination of deep technical ML expertise and policy-level communication. Johnson's work was presented to the highest level of government. That speaks for itself."</p>
 <div class="flex items-center">
 <div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary font-bold mr-3">R</div>
-<div><div class="text-white font-medium text-sm">Research Supervisor</div><div class="text-white/40 text-xs">Makerere University</div></div>
+<div><div class="text-white font-medium text-sm">Research Supervisor</div><div class="text-white/55 text-xs">Makerere University</div></div>
 </div>
 </div>
 </div>
@@ -865,7 +871,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div>
 <div class="text-white font-headline-md font-bold">M.Sc. Data Science</div>
 <div class="text-primary text-sm"><a class="hover:underline" href="https://manipal.edu" rel="noopener noreferrer" target="_blank">Manipal Academy of Higher Education (MAHE), India</a></div>
-<div class="text-white/40 text-xs mt-1">2022 – 2024</div>
+<div class="text-white/55 text-xs mt-1">2022 – 2024</div>
 </div>
 </div>
 <div class="glass-card p-6 flex items-start gap-4 highlight-card">
@@ -873,7 +879,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div>
 <div class="text-white font-headline-md font-bold">B.Sc. Agriculture Science</div>
 <div class="text-primary text-sm"><a class="hover:underline" href="https://mak.ac.ug" rel="noopener noreferrer" target="_blank">Makerere University, Kampala, Uganda</a></div>
-<div class="text-white/40 text-xs mt-1">2016 – 2021</div>
+<div class="text-white/55 text-xs mt-1">2016 – 2021</div>
 </div>
 </div>
 </div>
@@ -885,32 +891,32 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
 </div>
 <div class="text-secondary font-bold text-sm">PMP</div>
-<div class="text-white/40 text-xs mt-1">Google Certified</div>
-<div class="text-white/30 text-xs">Project Management</div>
+<div class="text-white/55 text-xs mt-1">Google Certified</div>
+<div class="text-white/50 text-xs">Project Management</div>
 </div>
 <div class="glass-card p-5 cert-card">
 <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-3">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><rect height="18" rx="1" width="4" x="18" y="3"/><rect height="13" rx="1" width="4" x="10" y="8"/><rect height="8" rx="1" width="4" x="2" y="13"/></svg>
 </div>
 <div class="text-primary font-bold text-sm">Power BI</div>
-<div class="text-white/40 text-xs mt-1">Microsoft Certified</div>
-<div class="text-white/30 text-xs">Data Analyst Associate</div>
+<div class="text-white/55 text-xs mt-1">Microsoft Certified</div>
+<div class="text-white/50 text-xs">Data Analyst Associate</div>
 </div>
 <div class="glass-card p-5 cert-card">
 <div class="w-10 h-10 rounded-lg bg-tertiary/20 flex items-center justify-center text-tertiary mb-3">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
 </div>
 <div class="text-tertiary font-bold text-sm">SAS Statistics</div>
-<div class="text-white/40 text-xs mt-1">SAS Institute</div>
-<div class="text-white/30 text-xs">Statistical Business Analyst</div>
+<div class="text-white/55 text-xs mt-1">SAS Institute</div>
+<div class="text-white/50 text-xs">Statistical Business Analyst</div>
 </div>
 <div class="glass-card p-5 cert-card">
 <div class="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary mb-3">
 <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><rect height="9" rx="1" width="7" x="3" y="3"/><rect height="5" rx="1" width="7" x="14" y="3"/><rect height="9" rx="1" width="7" x="14" y="12"/><rect height="5" rx="1" width="7" x="3" y="16"/></svg>
 </div>
 <div class="text-secondary font-bold text-sm">Tableau</div>
-<div class="text-white/40 text-xs mt-1">Tableau / Salesforce</div>
-<div class="text-white/30 text-xs">Desktop Specialist</div>
+<div class="text-white/55 text-xs mt-1">Tableau / Salesforce</div>
+<div class="text-white/50 text-xs">Desktop Specialist</div>
 </div>
 </div>
 </div>
