@@ -7,7 +7,31 @@
       "PowerShell(Get-Command *)",
       "PowerShell(Get-ChildItem \"C:\\\\Program Files\" -Directory | Where-Object {$_.Name -match \"git\"})",
       "PowerShell(Get-ChildItem *)",
-      "PowerShell(\\(Get-Item \"D:\\\\Portfolio\\\\index.html\"\\).Length; Select-String -Path \"D:\\\\Portfolio\\\\index.html\" -Pattern \"nav-links|skill-bars|vanilla-btn|Wire Transfer|Vanilla Workshop|adobe-express-qr|Publications|MAAIF|bronkar\" | Select-Object -First 20 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })"
+      "PowerShell(\\(Get-Item \"D:\\\\Portfolio\\\\index.html\"\\).Length; Select-String -Path \"D:\\\\Portfolio\\\\index.html\" -Pattern \"nav-links|skill-bars|vanilla-btn|Wire Transfer|Vanilla Workshop|adobe-express-qr|Publications|MAAIF|bronkar\" | Select-Object -First 20 | ForEach-Object { \"$\\($_.LineNumber\\): $\\($_.Line.Trim\\(\\)\\)\" })",
+      "PowerShell(npx skills add emilkowalski/skill)",
+      "PowerShell(npm *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\npx.cmd\" skills add emilkowalski/skill)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; npx skills add emilkowalski/skill)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\\" -ErrorAction SilentlyContinue -Depth 3 | Where-Object { $_.Name -eq \"git.exe\" } | Select-Object FullName -First 3)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitKrakenCLI\\\\\" -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq \"git.exe\" } | Select-Object FullName -First 3)",
+      "PowerShell(cmd /c \"where git 2>nul\")",
+      "PowerShell(cmd /c \"dir /s /b C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\git.exe 2>nul | head\")",
+      "PowerShell(cmd /c \"dir /s /b C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\git.exe 2>nul\")",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; npx skills add emilkowalski/skill)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; cd D:\\\\Portfolio; npx --yes serve -l 3456 . 2>&1 | Select-Object -First 5)",
+      "PowerShell(Out-Null *)",
+      "PowerShell(Start-Process \"http://localhost:3456\")",
+      "PowerShell(Start-Process \"D:\\\\Portfolio\\\\index.html\")",
+      "PowerShell(git add *)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; npx skills add pbakaus/impeccable)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; cd D:\\\\Portfolio; node .agents/skills/impeccable/scripts/load-context.mjs)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(git commit *)",
+      "PowerShell(git push *)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; cd D:\\\\Portfolio; npx skills add taste)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; cd D:\\\\Portfolio; npx skills search taste)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; cd D:\\\\Portfolio; npx skills add leonxlnx/taste-skill)"
     ]
   }
 }
