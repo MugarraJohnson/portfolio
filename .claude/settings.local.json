@@ -38,7 +38,9 @@
       "WebFetch(domain:vercel.com)",
       "WebFetch(domain:leerob.io)",
       "WebFetch(domain:rauchg.com)",
-      "WebFetch(domain:leerob.com)"
+      "WebFetch(domain:leerob.com)",
+      "Bash(git *)",
+      "PowerShell(head *)"
     ]
   }
 }
