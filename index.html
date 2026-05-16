@@ -97,7 +97,6 @@ tailwind.config = {
 @layer utilities {
   .glass-card { @apply bg-white/[0.045] backdrop-blur-[24px] border border-white/10 rounded-2xl; }
   .glass-nav { @apply bg-[#06091A]/60 backdrop-blur-md border-b border-white/10; }
-  .text-gradient { @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary; }
 }
 html { scroll-behavior: smooth; }
 body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-hidden; }
@@ -348,7 +347,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </div>
 <a class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 btn-primary" href="#main-content">Skip to main content</a>
 <!-- NAV -->
-<nav aria-label="Main navigation" class="fixed top-0 w-full z-40 glass-nav transition-all duration-300" id="navbar">
+<nav aria-label="Main navigation" class="fixed top-0 w-full z-40 glass-nav transition-[background-color,border-color] duration-300" id="navbar">
 <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 <a class="text-xl font-headline-md text-white font-bold tracking-tight" href="#hero">JM<span class="text-primary">.</span></a>
 <ul class="hidden md:flex space-x-8 items-center nav-links">
@@ -396,7 +395,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <span class="w-2 h-2 rounded-full bg-secondary mr-2 animate-pulse"></span>Available for opportunities
 </div>
 <div class="space-y-4">
-<h1 class="text-5xl lg:text-7xl font-headline-xl text-white">Johnson <br/><span class="text-gradient">Mugarra</span></h1>
+<h1 class="text-5xl lg:text-7xl font-headline-xl text-white">Johnson <br/><span class="text-primary">Mugarra</span></h1>
 <p class="text-xl lg:text-2xl font-medium text-white/80">Data Scientist <span class="text-white/30 mx-2">/</span> AI/ML Specialist <span class="text-white/30 mx-2">/</span> Research &amp; MEAL Expert</p>
 </div>
 <p class="text-lg text-white/60 leading-relaxed max-w-xl font-body-lg">Results-driven Data Scientist with <strong class="text-white">6+ years</strong> deploying ML solutions, predictive models, and automated ETL pipelines across agriculture, finance, health and climate resilience initiatives in East Africa. Turning complex data into strategies that move governments and international partners to act.</p>
@@ -482,8 +481,8 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div class="lg:col-span-7 space-y-6 text-lg text-white/70 font-body-lg">
 <h2 class="text-4xl font-headline-lg text-white mb-8">Bridging Data Science &amp; Policy Impact</h2>
 <p>I work at the intersection of <strong class="text-white">predictive modelling, impact evaluation, research and development</strong>. Over the last <strong class="text-white">6 years</strong>, I've designed and deployed production-grade ML systems, automated ETL pipelines, and interactive dashboards used by stakeholders including government ministries (<a class="text-primary hover:underline" href="https://agriculture.go.ug/" target="_blank"><strong>MAAIF</strong></a>), international NGOs, and research institutions across East Africa.</p>
-<p>At <a class="text-primary hover:underline" href="https://agriculture.go.ug/" target="_blank"><strong>MAAIF</strong></a> / <a class="text-primary hover:underline" href="https://mak.ac.ug" target="_blank"><strong>Makerere University</strong></a>, I developed prediction models for the Vanilla value chain that integrated NASA POWER satellite data with local ground-truth measurements — achieving a <strong class="text-white">30% improvement</strong> in forecast accuracy. I presented these findings to MAAIF and stakeholders across public and private sectors.</p>
-<p>At <a class="text-primary hover:underline" href="https://www.usaid.gov" target="_blank"><strong>USAID SITES</strong></a> (DLH Corp &amp; SSS Inc.), I led impact evaluations and built automated analytics systems that compressed evaluation cycles from 6 weeks to under 10 days — a <strong class="text-white">85% efficiency gain</strong>.</p>
+<p>At <a class="text-primary hover:underline" href="https://agriculture.go.ug/" target="_blank"><strong>MAAIF</strong></a> / <a class="text-primary hover:underline" href="https://mak.ac.ug" target="_blank"><strong>Makerere University</strong></a>, I developed prediction models for the Vanilla value chain that integrated NASA POWER satellite data with local ground-truth measurements, achieving a <strong class="text-white">30% improvement</strong> in forecast accuracy. I presented these findings to MAAIF and stakeholders across public and private sectors.</p>
+<p>At <a class="text-primary hover:underline" href="https://www.usaid.gov" target="_blank"><strong>USAID SITES</strong></a> (DLH Corp &amp; SSS Inc.), I led impact evaluations and built automated analytics systems that compressed evaluation cycles from 6 weeks to under 10 days, achieving an <strong class="text-white">85% efficiency gain</strong>.</p>
 <p>I hold an <strong class="text-white">M.Sc. in Data Science</strong> from MAHE India and am certified in PMP, Power BI, SAS Statistics, and Tableau. Based in Kampala and available for remote and international roles.</p>
 <div class="pt-6"><a class="btn-primary" href="#contact">Let's connect →</a></div>
 </div>
@@ -641,7 +640,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div class="mb-8 max-w-3xl">
 <span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Financial Analytics · Predictive Modelling</span>
 <h2 class="text-3xl lg:text-4xl font-headline-lg text-white mb-6">Transaction Fraud Detection Model</h2>
-<p class="text-white/70 font-body-lg">Gradient-boosted risk scores across <strong class="text-white">2,000 synthetic bank transactions</strong>. Each point is plotted by predicted risk score vs. transaction amount (log scale) — the clustering reveals how the model separates legitimate behaviour from suspicious and confirmed fraud. The dashed vertical line marks the 0.50 classification threshold.</p>
+<p class="text-white/70 font-body-lg">Gradient-boosted risk scores across <strong class="text-white">2,000 synthetic bank transactions</strong>. Each point is plotted by predicted risk score vs. transaction amount (log scale); the clustering reveals how the model separates legitimate behaviour from suspicious and confirmed fraud. The dashed vertical line marks the 0.50 classification threshold.</p>
 </div>
 <div class="flex flex-wrap items-center gap-4 mb-8">
 <span class="text-sm text-white/50">Channel:</span>
@@ -669,7 +668,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div class="mb-8 max-w-3xl">
 <span class="text-primary font-label-mono text-sm uppercase tracking-widest mb-2 block">Agricultural Analytics · Jan 2024 – Jun 2026</span>
 <h2 class="text-3xl lg:text-4xl font-headline-lg text-white mb-6">Vanilla Harvest Season Analysis</h2>
-<p class="text-white/70 font-body-lg">Pollination activity and projected harvest output across <strong class="text-white">1,000 Ugandan vanilla farmers</strong> (January 2024 – June 2026). Vanilla beans take approximately <strong class="text-white">9 months</strong> to mature after hand-pollination — the harvest line is the pollination curve shifted forward by 9 months. The main pollination season (<strong class="text-white">September–November</strong>) drives the June–July main harvest; the secondary season (<strong class="text-white">February–May</strong>) drives the December–January harvest.</p>
+<p class="text-white/70 font-body-lg">Pollination activity and projected harvest output across <strong class="text-white">1,000 Ugandan vanilla farmers</strong> (January 2024 – June 2026). Vanilla beans take approximately <strong class="text-white">9 months</strong> to mature after hand-pollination: the harvest line is the pollination curve shifted forward by 9 months. The main pollination season (<strong class="text-white">September–November</strong>) drives the June–July main harvest; the secondary season (<strong class="text-white">February–May</strong>) drives the December–January harvest.</p>
 </div>
 <div class="flex flex-wrap items-center gap-4 mb-8">
 <span class="text-sm text-white/50">Region:</span>
@@ -735,7 +734,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </div>
 <div class="grid lg:grid-cols-2 gap-16">
 <div class="space-y-6">
-<p class="text-lg text-white/70 font-body-lg">Open to Data Science roles, ML/AI projects, research collaborations, consulting engagements, and conversations about predictive analytics, impact evaluation, and development data. Based in Kampala — available remotely worldwide.</p>
+<p class="text-lg text-white/70 font-body-lg">Open to Data Science roles, ML/AI projects, research collaborations, consulting engagements, and conversations about predictive analytics, impact evaluation, and development data. Based in Kampala, available remotely worldwide.</p>
 <div class="space-y-4">
 <a class="flex items-center p-4 glass-card hover:bg-white/10 transition-colors group" href="mailto:johnsonmugarra@yahoo.com">
 <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors mr-4 text-lg">✉</div>
@@ -802,7 +801,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </div>
 </div>
 <div class="glass-card p-8 testimonial-card">
-<p class="text-white/70 font-body-lg mb-6 italic">"A rare combination of deep technical ML expertise and policy-level communication. Johnson's work was presented to the highest level of government — that speaks for itself."</p>
+<p class="text-white/70 font-body-lg mb-6 italic">"A rare combination of deep technical ML expertise and policy-level communication. Johnson's work was presented to the highest level of government. That speaks for itself."</p>
 <div class="flex items-center">
 <div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary font-bold mr-3">R</div>
 <div><div class="text-white font-medium text-sm">Research Supervisor</div><div class="text-white/40 text-xs">Makerere University</div></div>
