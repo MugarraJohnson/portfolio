@@ -95,16 +95,17 @@ tailwind.config = {
 </script>
 <style type="text/tailwindcss">
 @layer utilities {
-  .glass-card { @apply bg-white/[0.08] backdrop-blur-[10px] border border-white/10 rounded-2xl; }
-  .glass-nav { @apply bg-[#06091A]/60 backdrop-blur-md border-b border-white/10; }
+  .glass-card { @apply backdrop-blur-xl backdrop-saturate-[180%] border border-white/[0.18] rounded-[22px]; }
+  .glass-nav { @apply bg-[#06091A]/[0.48] backdrop-blur-2xl backdrop-saturate-[200%] border-b border-white/[0.12]; }
 }
 html { scroll-behavior: smooth; }
 body { @apply bg-[#06091A] text-on-background font-body-md relative overflow-x-hidden; }
 .bg-orbs { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; contain: strict; }
-.orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.28; will-change: transform; }
-.orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, #1C6EF2, transparent 70%); animation: blob 36s infinite; }
-.orb-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, #E8A020, transparent 70%); animation: blob-delayed 48s infinite; }
-.orb-3 { top: 40%; left: 30%; width: 35vw; height: 35vw; background: radial-gradient(circle, #D4870A, transparent 70%); animation: blob-slow 60s infinite; opacity: 0.16; }
+.orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.32; will-change: transform; }
+.orb-1 { top: -10%; left: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, #2070FF, transparent 70%); animation: blob 36s infinite; }
+.orb-2 { bottom: -10%; right: -10%; width: 65vw; height: 65vw; background: radial-gradient(circle, #F0A820, transparent 70%); animation: blob-delayed 48s infinite; }
+.orb-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: radial-gradient(circle, #D4870A, transparent 70%); animation: blob-slow 60s infinite; opacity: 0.20; }
+.orb-4 { top: 15%; right: 10%; width: 45vw; height: 45vw; background: radial-gradient(circle, #7C3AED, transparent 70%); animation: blob-slow 50s infinite 8s; opacity: 0.20; }
 .btn-primary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(10,132,255,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background; }
 .btn-secondary { @apply inline-flex items-center justify-center px-6 py-3 rounded-full glass-card text-on-background font-medium transition-all hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background; }
 .btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-full text-on-background/70 font-medium transition-all hover:text-on-background hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-primary/60 focus:ring-offset-2 focus:ring-offset-background; }
@@ -163,6 +164,7 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 [data-theme="light"] .orb-1 { background: radial-gradient(circle, rgba(28,110,242,0.18), transparent 70%) !important; }
 [data-theme="light"] .orb-2 { background: radial-gradient(circle, rgba(232,160,32,0.13), transparent 70%) !important; }
 [data-theme="light"] .orb-3 { background: radial-gradient(circle, rgba(212,135,10,0.08), transparent 70%) !important; }
+[data-theme="light"] .orb-4 { background: radial-gradient(circle, rgba(124,58,237,0.08), transparent 70%) !important; }
 
 /* Nav */
 [data-theme="light"] nav#navbar { background: rgba(244,247,255,0.92) !important; border-bottom-color: rgba(0,0,0,0.07) !important; }
@@ -184,9 +186,10 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 
 /* Cards */
 [data-theme="light"] .glass-card {
-  background: rgba(255,255,255,0.88) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.90) 0%, rgba(255,255,255,0.74) 100%) !important;
   border-color: rgba(0,0,0,0.07) !important;
-  box-shadow: 0 2px 20px rgba(13,17,38,0.07), 0 1px 4px rgba(13,17,38,0.04) !important;
+  box-shadow: 0 8px 32px rgba(13,17,38,0.08), 0 2px 8px rgba(13,17,38,0.05),
+              inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(0,0,0,0.02) !important;
 }
 
 /* Footer */
@@ -246,6 +249,52 @@ body, nav, footer, section, .glass-card, input, textarea, button {
 
 /* ── Skill bars ─────────────────────────────────────────────── */
 .sk-fill { width: 0%; transition: width 0.7s cubic-bezier(0.23, 1, 0.32, 1); }
+
+/* ── Typography system refinements ─────────────────────────── */
+body {
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  line-height: 1.68;
+  letter-spacing: 0.011em;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p               { text-wrap: pretty; }
+
+/* Hero headline — fluid type + cinematic tight leading */
+#hero h1 {
+  font-size: clamp(2.8rem, 1.8rem + 4.2vw, 4.5rem) !important;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+/* Hero name accent — gradient shimmer on the blue span */
+#hero h1 span {
+  background: linear-gradient(118deg, #1C6EF2 20%, #5BABFF 75%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section H2 — tighter tracking, more premium feel */
+section h2 { letter-spacing: -0.015em; }
+
+/* Long-form prose — comfortable leading on dark ground */
+.font-body-lg { line-height: 1.78; }
+
+/* Tabular numerals for metric, stat, and counter displays */
+#hero .trust-item .text-2xl,
+.metric .text-4xl,
+.proj-card .text-lg.font-bold {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── iOS Glass material ─────────────────────────────────────── */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.07) 100%);
+  box-shadow: 0 8px 32px rgba(10,18,60,0.30), 0 2px 8px rgba(10,18,60,0.14),
+              inset 0 1px 0 rgba(255,255,255,0.24), inset 0 -1px 0 rgba(0,0,0,0.06);
+}
 
 /* ── Animation system ──────────────────────────────────────── */
 :root {
@@ -348,12 +397,25 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
+<div class="orb orb-4"></div>
 </div>
 <a class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 btn-primary" href="#main-content">Skip to main content</a>
 <!-- NAV -->
 <nav aria-label="Main navigation" class="fixed top-0 w-full z-40 glass-nav transition-[background-color,border-color] duration-300" id="navbar">
 <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<a class="text-xl font-headline-md text-white font-bold tracking-tight" href="#hero">JM<span class="text-primary">.</span></a>
+<a class="flex items-center gap-2.5" href="#hero">
+<svg class="w-9 h-9 flex-shrink-0" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+<linearGradient id="logo-bg-n" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1A55D4"/><stop offset="100%" stop-color="#0C3496"/></linearGradient>
+<linearGradient id="logo-bar-n" x1="7" y1="0" x2="33" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#5BABFF"/><stop offset="100%" stop-color="#E8A020"/></linearGradient>
+</defs>
+<rect width="40" height="40" rx="10" fill="url(#logo-bg-n)"/>
+<rect x="0.75" y="0.75" width="38.5" height="38.5" rx="9.25" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" fill="none"/>
+<text x="20" y="25" text-anchor="middle" font-family="Syne, 'Arial Black', sans-serif" font-weight="800" font-size="17" fill="white" letter-spacing="-0.5">JM</text>
+<rect x="7" y="31" width="26" height="2.5" rx="1.25" fill="url(#logo-bar-n)"/>
+</svg>
+<span class="hidden sm:block font-headline-md font-bold text-white text-lg tracking-tight">Johnson <span class="text-primary">Mugarra</span></span>
+</a>
 <ul class="hidden md:flex space-x-8 items-center nav-links">
 <li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#about">About</a></li>
 <li><a class="text-sm font-medium text-white/70 hover:text-white transition-colors" href="#projects">Projects</a></li>
@@ -373,7 +435,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </div>
 </nav>
 <!-- Mobile Menu -->
-<div aria-labelledby="mob-menu-title" aria-modal="true" class="fixed inset-0 z-50 bg-[#06091A]/95 backdrop-blur-xl flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-300" id="mob-menu" role="dialog">
+<div aria-labelledby="mob-menu-title" aria-modal="true" class="fixed inset-0 z-50 bg-[#06091A]/88 backdrop-blur-2xl backdrop-saturate-[180%] flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-300" id="mob-menu" role="dialog">
 <span class="sr-only" id="mob-menu-title">Navigation menu</span>
 <button aria-label="Close menu" class="absolute top-6 right-6 text-white p-2" id="mob-close">
 <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
@@ -930,7 +992,18 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 <!-- FOOTER -->
 <footer class="py-8 px-6 border-t border-white/10 bg-[#06091A] relative z-10">
 <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
-<div class="font-headline-md text-white/60">JM<span class="text-primary">.</span></div>
+<div class="flex items-center gap-2">
+<svg class="w-7 h-7 opacity-60" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs>
+<linearGradient id="logo-bg-f" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1A55D4"/><stop offset="100%" stop-color="#0C3496"/></linearGradient>
+<linearGradient id="logo-bar-f" x1="7" y1="0" x2="33" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#5BABFF"/><stop offset="100%" stop-color="#E8A020"/></linearGradient>
+</defs>
+<rect width="40" height="40" rx="10" fill="url(#logo-bg-f)"/>
+<rect x="0.75" y="0.75" width="38.5" height="38.5" rx="9.25" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" fill="none"/>
+<text x="20" y="25" text-anchor="middle" font-family="Syne, 'Arial Black', sans-serif" font-weight="800" font-size="17" fill="white" letter-spacing="-0.5">JM</text>
+<rect x="7" y="31" width="26" height="2.5" rx="1.25" fill="url(#logo-bar-f)"/>
+</svg>
+</div>
 <div>© Johnson Mugarra 2026. All rights reserved.</div>
 <div class="flex space-x-6">
 <a class="hover:text-white transition-colors" href="#hero">Top ↑</a>
@@ -943,7 +1016,7 @@ nav .btn-primary:active { transform: scale(0.97) !important; }
 </footer>
 <!-- Mobile Bottom Nav -->
 <nav aria-label="Mobile navigation" class="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-<div class="flex gap-2 border-t border-white/10 bg-[#06091A]/90 backdrop-blur-xl px-4 pb-3 pt-2">
+<div class="flex gap-2 border-t border-white/[0.12] bg-[#06091A]/75 backdrop-blur-2xl backdrop-saturate-[180%] px-4 pb-3 pt-2">
 <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#hero"><span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1">house</span><p class="text-xs font-medium">Home</p></a>
 <a class="flex flex-1 flex-col items-center justify-end gap-1 text-white/50 hover:text-white transition-colors" href="#projects"><span class="material-symbols-outlined text-2xl">work</span><p class="text-xs font-medium">Projects</p></a>
 <a class="flex flex-1 flex-col items-center justify-end gap-1 text-white/50 hover:text-white transition-colors" href="#skills"><span class="material-symbols-outlined text-2xl">star</span><p class="text-xs font-medium">Skills</p></a>
