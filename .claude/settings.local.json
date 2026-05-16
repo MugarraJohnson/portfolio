@@ -33,7 +33,12 @@
       "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; cd D:\\\\Portfolio; npx skills search taste)",
       "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;C:\\\\Users\\\\johnson\\\\AppData\\\\Local\\\\GitHubDesktop\\\\app-3.5.8\\\\resources\\\\app\\\\git\\\\cmd;\" + $env:PATH; cd D:\\\\Portfolio; npx skills add leonxlnx/taste-skill)",
       "WebSearch",
-      "WebFetch(domain:unsplash.com)"
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:linear.app)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:leerob.io)",
+      "WebFetch(domain:rauchg.com)",
+      "WebFetch(domain:leerob.com)"
     ]
   }
 }

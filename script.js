@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        window.scrollTo({ top: target.offsetTop - 90, behavior: 'smooth' });
         trackEvent('internal_nav', { href });
       }
     });
