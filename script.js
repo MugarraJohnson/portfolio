@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof dataLayer !== 'undefined') {
       dataLayer.push({ event: 'theme_change', theme });
     }
+    document.dispatchEvent(new CustomEvent('themeChange'));
   };
 
   /* Respect saved preference → OS preference → default dark */
